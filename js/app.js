@@ -1,22 +1,24 @@
-/* WorkForce Pro v2 — App Logic & Animations */
+/* ============================================
+   WorkForce Pro v4 — App Logic & Data
+   ============================================ */
 
 // ---- Mock Data ----
 const employees = [
-  { id:1, name:'Sarah Chen', title:'Operations Director', dept:'Management', initials:'SC', color:'indigo', role:'admin', email:'sarah.chen@company.local', phone:'+65 8123 4567', status:'active' },
-  { id:2, name:'James Okafor', title:'Shift Supervisor', dept:'Operations', initials:'JO', color:'teal', role:'manager', email:'james.okafor@company.local', phone:'+65 8234 5678', status:'active' },
-  { id:3, name:'Mei Ling Tan', title:'Team Lead', dept:'Logistics', initials:'ML', color:'purple', role:'manager', email:'meiling.tan@company.local', phone:'+65 8345 6789', status:'active' },
-  { id:4, name:'David Kim', title:'Warehouse Operative', dept:'Logistics', initials:'DK', color:'blue', role:'employee', email:'david.kim@company.local', phone:'+65 8456 7890', status:'active' },
-  { id:5, name:'Priya Sharma', title:'Customer Service Rep', dept:'Customer Care', initials:'PS', color:'pink', role:'employee', email:'priya.sharma@company.local', phone:'+65 8567 8901', status:'active' },
-  { id:6, name:'Tom Walker', title:'Delivery Driver', dept:'Logistics', initials:'TW', color:'amber', role:'employee', email:'tom.walker@company.local', phone:'+65 8678 9012', status:'leave' },
-  { id:7, name:'Aisha Rahman', title:'HR Coordinator', dept:'Human Resources', initials:'AR', color:'green', role:'manager', email:'aisha.rahman@company.local', phone:'+65 8789 0123', status:'active' },
-  { id:8, name:'Lucas Müller', title:'IT Support Officer', dept:'IT', initials:'LM', color:'blue', role:'employee', email:'lucas.muller@company.local', phone:'+65 8890 1234', status:'active' },
-  { id:9, name:'Emma Rodriguez', title:'Finance Officer', dept:'Finance', initials:'ER', color:'purple', role:'employee', email:'emma.rodriguez@company.local', phone:'+65 8901 2345', status:'active' },
-  { id:10, name:'Kenji Watanabe', title:'Quality Analyst', dept:'Operations', initials:'KW', color:'teal', role:'employee', email:'kenji.watanabe@company.local', phone:'+65 9012 3456', status:'active' },
-  { id:11, name:'Fatima Al-Zahra', title:'Procurement Officer', dept:'Operations', initials:'FA', color:'amber', role:'employee', email:'fatima.zahra@company.local', phone:'+65 9123 4567', status:'active' },
-  { id:12, name:'Daniel Park', title:'Warehouse Operative', dept:'Logistics', initials:'DP', color:'indigo', role:'employee', email:'daniel.park@company.local', phone:'+65 9234 5678', status:'active' },
-  { id:13, name:'Nadia Hassan', title:'Marketing Coordinator', dept:'Marketing', initials:'NH', color:'pink', role:'employee', email:'nadia.hassan@company.local', phone:'+65 9345 6789', status:'active' },
-  { id:14, name:'Oliver Schmidt', title:'Maintenance Tech', dept:'Operations', initials:'OS', color:'green', role:'employee', email:'oliver.schmidt@company.local', phone:'+65 9456 7890', status:'active' },
-  { id:15, name:'Yuki Tanaka', title:'Data Entry Clerk', dept:'Finance', initials:'YT', color:'blue', role:'employee', email:'yuki.tanaka@company.local', phone:'+65 9567 8901', status:'active' }
+  { id:1, name:'Sarah Chen', title:'Operations Director', dept:'Management', initials:'SC', color:'indigo', role:'admin', email:'sarah.chen@company.local', phone:'+65 8123 4567', status:'active', manager:null },
+  { id:2, name:'James Okafor', title:'Shift Supervisor', dept:'Operations', initials:'JO', color:'teal', role:'manager', email:'james.okafor@company.local', phone:'+65 8234 5678', status:'active', manager:1 },
+  { id:3, name:'Mei Ling Tan', title:'Team Lead', dept:'Logistics', initials:'ML', color:'purple', role:'manager', email:'meiling.tan@company.local', phone:'+65 8345 6789', status:'active', manager:1 },
+  { id:4, name:'David Kim', title:'Warehouse Operative', dept:'Logistics', initials:'DK', color:'blue', role:'employee', email:'david.kim@company.local', phone:'+65 8456 7890', status:'active', manager:2 },
+  { id:5, name:'Priya Sharma', title:'Customer Service Rep', dept:'Customer Care', initials:'PS', color:'pink', role:'employee', email:'priya.sharma@company.local', phone:'+65 8567 8901', status:'active', manager:7 },
+  { id:6, name:'Tom Walker', title:'Delivery Driver', dept:'Logistics', initials:'TW', color:'amber', role:'employee', email:'tom.walker@company.local', phone:'+65 8678 9012', status:'leave', manager:2 },
+  { id:7, name:'Aisha Rahman', title:'HR Coordinator', dept:'Human Resources', initials:'AR', color:'green', role:'manager', email:'aisha.rahman@company.local', phone:'+65 8789 0123', status:'active', manager:1 },
+  { id:8, name:'Lucas Müller', title:'IT Support Officer', dept:'IT', initials:'LM', color:'blue', role:'employee', email:'lucas.muller@company.local', phone:'+65 8890 1234', status:'active', manager:7 },
+  { id:9, name:'Emma Rodriguez', title:'Finance Officer', dept:'Finance', initials:'ER', color:'purple', role:'employee', email:'emma.rodriguez@company.local', phone:'+65 8901 2345', status:'active', manager:1 },
+  { id:10, name:'Kenji Watanabe', title:'Quality Analyst', dept:'Operations', initials:'KW', color:'teal', role:'employee', email:'kenji.watanabe@company.local', phone:'+65 9012 3456', status:'active', manager:3 },
+  { id:11, name:'Fatima Al-Zahra', title:'Procurement Officer', dept:'Operations', initials:'FA', color:'amber', role:'employee', email:'fatima.zahra@company.local', phone:'+65 9123 4567', status:'active', manager:3 },
+  { id:12, name:'Daniel Park', title:'Warehouse Operative', dept:'Logistics', initials:'DP', color:'indigo', role:'employee', email:'daniel.park@company.local', phone:'+65 9234 5678', status:'active', manager:2 },
+  { id:13, name:'Nadia Hassan', title:'Marketing Coordinator', dept:'Marketing', initials:'NH', color:'pink', role:'employee', email:'nadia.hassan@company.local', phone:'+65 9345 6789', status:'active', manager:7 },
+  { id:14, name:'Oliver Schmidt', title:'Maintenance Tech', dept:'Operations', initials:'OS', color:'green', role:'employee', email:'oliver.schmidt@company.local', phone:'+65 9456 7890', status:'active', manager:3 },
+  { id:15, name:'Yuki Tanaka', title:'Data Entry Clerk', dept:'Finance', initials:'YT', color:'blue', role:'employee', email:'yuki.tanaka@company.local', phone:'+65 9567 8901', status:'active', manager:9 }
 ];
 
 const tasks = [
@@ -64,352 +66,94 @@ const shifts = {
 };
 
 const shiftTypes = {
-  morning:{label:'06:00-14:00',class:'shift-morning',name:'Morning'},
-  evening:{label:'14:00-22:00',class:'shift-evening',name:'Evening'},
-  night:{label:'22:00-06:00',class:'shift-night',name:'Night'},
-  off:{label:'Off',class:'shift-off',name:'Off'}
+  morning:{label:'06:00-14:00',class:'shift-morning',name:'Morning',short:'M'},
+  evening:{label:'14:00-22:00',class:'shift-evening',name:'Evening',short:'E'},
+  night:{label:'22:00-06:00',class:'shift-night',name:'Night',short:'N'},
+  off:{label:'—',class:'shift-off',name:'Off',short:'—'}
 };
 
 // ---- Helpers ----
-function avatarGradient(c) {
-  const g = {indigo:'linear-gradient(135deg,#6366F1,#818CF8)',teal:'linear-gradient(135deg,#14B8A6,#2DD4BF)',purple:'linear-gradient(135deg,#8B5CF6,#A78BFA)',blue:'linear-gradient(135deg,#3B82F6,#60A5FA)',pink:'linear-gradient(135deg,#EC4899,#F472B6)',amber:'linear-gradient(135deg,#F59E0B,#FBBF24)',green:'linear-gradient(135deg,#10B981,#34D399)'};
-  return g[c]||g.indigo;
-}
+function avatarGradient(c){const g={indigo:'linear-gradient(135deg,#6366F1,#818CF8)',teal:'linear-gradient(135deg,#14B8A6,#2DD4BF)',purple:'linear-gradient(135deg,#8B5CF6,#A78BFA)',blue:'linear-gradient(135deg,#3B82F6,#60A5FA)',pink:'linear-gradient(135deg,#EC4899,#F472B6)',amber:'linear-gradient(135deg,#F59E0B,#FBBF24)',green:'linear-gradient(135deg,#10B981,#34D399)'};return g[c]||g.indigo}
 
-function showToast(msg, type='success') {
-  const toast = document.getElementById('toast');
-  if(!toast) return;
-  const iconSvg = type==='success' ? icons.checkCircle : icons.x;
-  toast.innerHTML = `<span style="color:${type==='success'?'var(--green-500)':'var(--red-500)'}">${iconSvg}</span> ${msg}`;
-  toast.classList.add('show');
-  setTimeout(()=>toast.classList.remove('show'),3000);
-}
+function showToast(msg,type='success'){const t=document.getElementById('toast');if(!t)return;const ic=type==='success'?icons.checkCircle:icons.x;t.innerHTML=`<span style="color:${type==='success'?'var(--success)':'var(--danger)'}">${ic}</span> ${msg}`;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800)}
 
-// ---- Animated Counter ----
-function animateCounter(el, target, duration=1000) {
-  if(!el) return;
-  const start = 0;
-  const startTime = performance.now();
-  function update(now) {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed/duration, 1);
-    const eased = 1 - Math.pow(1-progress, 3);
-    el.textContent = Math.floor(start + (target-start)*eased);
-    if(progress<1) requestAnimationFrame(update);
-    else el.textContent = target;
-  }
-  requestAnimationFrame(update);
-}
-
-function triggerCounters() {
-  document.querySelectorAll('.section.active [data-count]').forEach(el=>{
-    const target = parseInt(el.dataset.count);
-    const current = parseInt(el.textContent) || 0;
-    if(current !== target) animateCounter(el, target, 600);
-  });
-}
+// ---- Counter ----
+function animateCounter(el,target,dur=800){if(!el)return;const s=0,st=performance.now();function u(n){const p=Math.min((n-st)/dur,1);const e=1-Math.pow(1-p,3);el.textContent=Math.floor(s+(target-s)*e);if(p<1)requestAnimationFrame(u);else el.textContent=target}requestAnimationFrame(u)}
+function triggerCounters(){document.querySelectorAll('.section.active [data-count]').forEach(el=>{const t=parseInt(el.dataset.count);const c=parseInt(el.textContent)||0;if(c!==t)animateCounter(el,t,600)})}
 
 // ---- Scroll Animations ----
-function initScrollAnimations() {
-  const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-  },{threshold:0.1});
-  document.querySelectorAll('.fade-in,.fade-in-left,.fade-in-right,.scale-in').forEach(el=>observer.observe(el));
-}
+function initScrollAnimations(){const o=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.1});document.querySelectorAll('.fade-in,.fade-in-left,.fade-in-right,.scale-in').forEach(el=>o.observe(el))}
 
 // ---- Navigation ----
-function initNavigation() {
-  const navItems = document.querySelectorAll('.nav-item');
-  const sections = document.querySelectorAll('.section');
-  navItems.forEach(item=>{
-    item.addEventListener('click',()=>{
-      const target = item.dataset.section;
-      if(!target) return;
-      navItems.forEach(n=>n.classList.remove('active'));
-      item.classList.add('active');
-      sections.forEach(s=>s.classList.toggle('active', s.id===target));
-      const bc = document.querySelector('.breadcrumb span');
-      if(bc) bc.textContent = item.querySelector('.nav-text')?.textContent || item.textContent.trim();
-      closeSidebar();
-      window.scrollTo({top:0,behavior:'smooth'});
-      setTimeout(triggerCounters, 150);
-    });
-  });
-}
+function initNavigation(){const ni=document.querySelectorAll('.nav-item'),sc=document.querySelectorAll('.section');ni.forEach(i=>{i.addEventListener('click',()=>{const t=i.dataset.section;if(!t)return;ni.forEach(n=>n.classList.remove('active'));i.classList.add('active');sc.forEach(s=>s.classList.toggle('active',s.id===t));const bc=document.querySelector('.breadcrumb span');if(bc)bc.textContent=i.querySelector('.nav-text')?.textContent||i.textContent.trim();closeSidebar();window.scrollTo({top:0,behavior:'smooth'});setTimeout(triggerCounters,150)})})}
 
 // ---- Mobile Sidebar ----
-function initMobileSidebar() {
-  const toggle = document.querySelector('.menu-toggle');
-  const sidebar = document.querySelector('.sidebar');
-  const backdrop = document.querySelector('.sidebar-backdrop');
-  if(toggle) toggle.addEventListener('click',()=>{ sidebar.classList.toggle('open'); backdrop.classList.toggle('show'); });
-  if(backdrop) backdrop.addEventListener('click', closeSidebar);
-}
-function closeSidebar() {
-  document.querySelector('.sidebar')?.classList.remove('open');
-  document.querySelector('.sidebar-backdrop')?.classList.remove('show');
-}
+function initMobileSidebar(){const tg=document.querySelector('.menu-toggle'),sb=document.querySelector('.sidebar'),bd=document.querySelector('.sidebar-backdrop');if(tg)tg.addEventListener('click',()=>{sb?.classList.toggle('open');bd?.classList.toggle('show')});if(bd)bd.addEventListener('click',closeSidebar)}
+function closeSidebar(){document.querySelector('.sidebar')?.classList.remove('open');document.querySelector('.sidebar-backdrop')?.classList.remove('show')}
 
-// ---- Dashboard Charts ----
-function renderDashboardCharts() {
-  const c = document.getElementById('attendance-chart');
-  if(!c) return;
-  const data = [{d:'Mon',v:92},{d:'Tue',v:88},{d:'Wed',v:95},{d:'Thu',v:90},{d:'Fri',v:85},{d:'Sat',v:60},{d:'Sun',v:30}];
-  c.innerHTML = data.map((b,i)=>`<div class="chart-bar" style="height:${b.v}%;background:${i<5?'#6366F1':'#14B8A6'};animation-delay:${i*.08}s" title="${b.d}: ${b.v}%"><span class="bar-value">${b.v}%</span><span class="bar-label">${b.d}</span></div>`).join('');
-}
+// ---- Charts ----
+function renderDashboardCharts(){const c=document.getElementById('attendance-chart');if(!c)return;const d=[{d:'Mon',v:92},{d:'Tue',v:88},{d:'Wed',v:95},{d:'Thu',v:90},{d:'Fri',v:85},{d:'Sat',v:60},{d:'Sun',v:30}];c.innerHTML=d.map((b,i)=>`<div class="chart-bar" style="height:${b.v}%;background:${i<5?'#6366F1':'#14B8A6'}" title="${b.d}: ${b.v}%"><span class="bar-value">${b.v}%</span><span class="bar-label">${b.d}</span></div>`).join('')}
 
 // ---- Time Clock ----
-let clockedIn = false;
-function initTimeClock() {
-  const btn = document.getElementById('clock-btn');
-  if(!btn) return;
-  updateClockDisplay();
-  setInterval(updateClockDisplay, 1000);
-  btn.addEventListener('click',()=>{
-    clockedIn = !clockedIn;
-    if(clockedIn) { btn.className='clock-btn clocked-in'; btn.innerHTML=icons.stop+' Clock Out'; showToast('Clocked in at '+new Date().toLocaleTimeString()); }
-    else { btn.className='clock-btn clocked-out'; btn.innerHTML=icons.play+' Clock In'; showToast('Clocked out at '+new Date().toLocaleTimeString()); }
-  });
-}
-function updateClockDisplay() {
-  const t = document.getElementById('clock-time'), d = document.getElementById('clock-date');
-  if(!t) return;
-  const now = new Date();
-  t.textContent = now.toLocaleTimeString('en-SG',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-  if(d) d.textContent = now.toLocaleDateString('en-SG',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-}
+let clockedIn=false;
+function initTimeClock(){const b=document.getElementById('clock-btn');if(!b)return;updateClockDisplay();setInterval(updateClockDisplay,1000);b.addEventListener('click',()=>{clockedIn=!clockedIn;if(clockedIn){b.className='clock-btn clocked-in';b.innerHTML=icons.stop+' Clock Out';showToast('Clocked in at '+new Date().toLocaleTimeString())}else{b.className='clock-btn clocked-out';b.innerHTML=icons.play+' Clock In';showToast('Clocked out at '+new Date().toLocaleTimeString())}})}
+function updateClockDisplay(){const t=document.getElementById('clock-time'),d=document.getElementById('clock-date');if(!t)return;const n=new Date();t.textContent=n.toLocaleTimeString('en-SG',{hour:'2-digit',minute:'2-digit',second:'2-digit'});if(d)d.textContent=n.toLocaleDateString('en-SG',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}
 
 // ---- Kanban ----
-function renderKanban() {
-  const board = document.getElementById('kanban-board');
-  if(!board) return;
-  const cols = [
-    {id:'todo',title:'To Do',color:'var(--slate-400)',items:tasks.filter(t=>t.status==='todo')},
-    {id:'progress',title:'In Progress',color:'var(--blue-500)',items:tasks.filter(t=>t.status==='progress')},
-    {id:'review',title:'In Review',color:'var(--amber-500)',items:tasks.filter(t=>t.status==='review')},
-    {id:'done',title:'Done',color:'var(--green-500)',items:tasks.filter(t=>t.status==='done')}
-  ];
-  board.innerHTML = cols.map(col=>`
-    <div class="kanban-col" data-col="${col.id}">
-      <div class="kanban-col-header"><span class="col-dot" style="background:${col.color}"></span>${col.title}<span class="col-count">${col.items.length}</span></div>
-      ${col.items.map(item=>`
-        <div class="kanban-card" draggable="true" data-id="${item.id}">
-          <div class="kc-title">${item.title}</div>
-          <div class="kc-meta">${renderPriority(item.priority)}<span>${icons.calendar}</span>${item.due}</div>
-          <div class="kc-meta" style="margin-top:6px">
-            ${item.tags.map(tag=>`<span class="kc-tag" style="background:var(--slate-100);color:var(--navy-600)">${tag}</span>`).join('')}
-            <span class="kc-assignee"><span class="avatar-xs" style="background:${avatarGradient(item.color)}">${item.initials}</span></span>
-          </div>
-        </div>`).join('')}
-    </div>`).join('');
-  initKanbanDrag();
-}
+function renderKanban(){const b=document.getElementById('kanban-board');if(!b)return;const cols=[{id:'todo',title:'To Do',color:'#A1A1AA',items:tasks.filter(t=>t.status==='todo')},{id:'progress',title:'In Progress',color:'#3B82F6',items:tasks.filter(t=>t.status==='progress')},{id:'review',title:'In Review',color:'#F59E0B',items:tasks.filter(t=>t.status==='review')},{id:'done',title:'Done',color:'#22C55E',items:tasks.filter(t=>t.status==='done')}];b.innerHTML=cols.map(c=>`<div class="kanban-col" data-col="${c.id}"><div class="kanban-col-header"><span class="col-dot" style="background:${c.color}"></span>${c.title}<span class="col-count">${c.items.length}</span></div>${c.items.map(i=>`<div class="kanban-card" draggable="true" data-id="${i.id}"><div class="kc-title">${i.title}</div><div class="kc-meta">${renderPriority(i.priority)}<span>${icons.calendar}</span>${i.due}</div><div class="kc-meta" style="margin-top:6px">${i.tags.map(t=>`<span class="kc-tag">${t}</span>`).join('')}<span class="kc-assignee"><span class="avatar-xs" style="background:${avatarGradient(i.color)}">${i.initials}</span></span></div></div>`).join('')}</div>`).join('');initKanbanDrag()}
 
-function renderPriority(p) {
-  const colors = {high:'#EF4444',medium:'#F59E0B',low:'#22C55E'};
-  const labels = {high:'High',medium:'Med',low:'Low'};
-  return `<span class="kc-priority" style="color:${colors[p]}"><span style="width:6px;height:6px;border-radius:50%;background:${colors[p]};display:inline-block"></span> ${labels[p]}</span>`;
-}
+function renderPriority(p){const c={high:'#EF4444',medium:'#F59E0B',low:'#22C55E'};const l={high:'High',medium:'Med',low:'Low'};return`<span class="kc-priority" style="color:${c[p]}"><span style="width:6px;height:6px;border-radius:50%;background:${c[p]};display:inline-block"></span> ${l[p]}</span>`}
 
-function initKanbanDrag() {
-  let dragged = null;
-  document.querySelectorAll('.kanban-card').forEach(card=>{
-    card.addEventListener('dragstart',e=>{ dragged=card; card.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; });
-    card.addEventListener('dragend',()=>{ card.classList.remove('dragging'); dragged=null; });
-  });
-  document.querySelectorAll('.kanban-col').forEach(col=>{
-    col.addEventListener('dragover',e=>{ e.preventDefault(); col.classList.add('drag-over'); });
-    col.addEventListener('dragleave',()=>col.classList.remove('drag-over'));
-    col.addEventListener('drop',e=>{
-      e.preventDefault(); col.classList.remove('drag-over');
-      if(!dragged) return;
-      col.appendChild(dragged);
-      document.querySelectorAll('.kanban-col').forEach(c=>{ c.querySelector('.col-count').textContent = c.querySelectorAll('.kanban-card').length; });
-      showToast('Task moved');
-    });
-  });
-}
+function initKanbanDrag(){let d=null;document.querySelectorAll('.kanban-card').forEach(c=>{c.addEventListener('dragstart',e=>{d=c;c.classList.add('dragging');e.dataTransfer.effectAllowed='move'});c.addEventListener('dragend',()=>{c.classList.remove('dragging');d=null})});document.querySelectorAll('.kanban-col').forEach(c=>{c.addEventListener('dragover',e=>{e.preventDefault();c.classList.add('drag-over')});c.addEventListener('dragleave',()=>c.classList.remove('drag-over'));c.addEventListener('drop',e=>{e.preventDefault();c.classList.remove('drag-over');if(!d)return;c.appendChild(d);document.querySelectorAll('.kanban-col').forEach(x=>{x.querySelector('.col-count').textContent=x.querySelectorAll('.kanban-card').length});showToast('Task moved')})})}
 
 // ---- Roster ----
-function renderRoster() {
-  const grid = document.getElementById('roster-grid');
-  if(!grid) return;
-  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  const keys = ['mon','tue','wed','thu','fri','sat','sun'];
-  let html = '<div class="roster-header">Employee</div>';
-  days.forEach(d=>html+=`<div class="roster-header">${d}</div>`);
-  employees.slice(0,12).forEach(emp=>{
-    html += `<div class="roster-cell roster-emp"><span class="avatar-sm" style="background:${avatarGradient(emp.color)}">${emp.initials}</span><span>${emp.name.split(' ').slice(-2).join(' ')}</span></div>`;
-    keys.forEach(day=>{
-      const shift = shifts[emp.id]?.[day]||'off';
-      const st = shiftTypes[shift];
-      if(shift === 'off') {
-        html += `<div class="roster-cell" style="color:var(--text-quaternary);text-align:center;font-size:11px">—</div>`;
-      } else {
-        html += `<div class="roster-cell"><span class="shift-badge ${st.class}" onclick="cycleShift(${emp.id},'${day}',this)">${st.label}</span></div>`;
-      }
-    });
-  });
-  grid.innerHTML = html;
-}
-
-function cycleShift(empId,day,el) {
-  const order = ['morning','evening','night','off'];
-  const current = shifts[empId]?.[day]||'off';
-  const next = order[(order.indexOf(current)+1)%order.length];
-  if(!shifts[empId]) shifts[empId]={};
-  shifts[empId][day] = next;
-  const st = shiftTypes[next];
-  el.className = `shift-badge ${st.class}`;
-  el.textContent = st.label;
-  showToast(`Shift updated: ${st.name}`);
-}
+function renderRoster(){const g=document.getElementById('roster-grid');if(!g)return;const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],keys=['mon','tue','wed','thu','fri','sat','sun'];let h='<div class="roster-header">Employee</div>';days.forEach(d=>h+=`<div class="roster-header">${d}</div>`);employees.slice(0,12).forEach(e=>{h+=`<div class="roster-cell roster-emp"><span class="avatar-sm" style="background:${avatarGradient(e.color)}">${e.initials}</span><span>${e.name.split(' ').slice(-2).join(' ')}</span></div>`;keys.forEach(d=>{const s=shifts[e.id]?.[d]||'off';const st=shiftTypes[s];if(s==='off')h+=`<div class="roster-cell" style="text-align:center;color:var(--text-quaternary)">—</div>`;else h+=`<div class="roster-cell"><span class="shift-badge ${st.class}" onclick="cycleShift(${e.id},'${d}',this)">${st.label}</span></div>`})});g.innerHTML=h}
+function cycleShift(eid,day,el){const o=['morning','evening','night','off'];const c=shifts[eid]?.[day]||'off';const n=o[(o.indexOf(c)+1)%o.length];if(!shifts[eid])shifts[eid]={};shifts[eid][day]=n;const st=shiftTypes[n];if(n==='off'){el.outerHTML=`<span class="shift-badge shift-off" onclick="cycleShift(${eid},'${day}',this)">—</span>`}else{el.className=`shift-badge ${st.class}`;el.textContent=st.label}showToast(`Shift updated: ${st.name}`)}
 
 // ---- Org Chart ----
-function renderOrgChart() {
-  const c = document.getElementById('org-chart');
-  if(!c) return;
-  c.innerHTML = `
-    <div class="org-tree">
-      <div class="org-node ceo" onclick="showOrgDetail(1)">
-        <div class="org-avatar" style="background:${avatarGradient('indigo')}">SC</div>
-        <div class="org-name">Sarah Chen</div><div class="org-title">Operations Director</div>
-      </div>
-      <div class="org-children">
-        <div class="org-branch">
-          <div class="org-node manager" onclick="showOrgDetail(2)">
-            <div class="org-avatar" style="background:${avatarGradient('teal')}">JO</div>
-            <div class="org-name">James Okafor</div><div class="org-title">Shift Supervisor</div>
-          </div>
-          <div class="org-children" style="gap:8px">
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(4)"><div class="org-avatar" style="background:${avatarGradient('blue')}">DK</div><div class="org-name">David Kim</div><div class="org-title">Warehouse</div></div></div>
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(6)"><div class="org-avatar" style="background:${avatarGradient('amber')}">TW</div><div class="org-name">Tom Walker</div><div class="org-title">Driver</div></div></div>
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(12)"><div class="org-avatar" style="background:${avatarGradient('indigo')}">DP</div><div class="org-name">Daniel Park</div><div class="org-title">Warehouse</div></div></div>
-          </div>
-        </div>
-        <div class="org-branch">
-          <div class="org-node manager" onclick="showOrgDetail(3)"><div class="org-avatar" style="background:${avatarGradient('purple')}">ML</div><div class="org-name">Mei Ling Tan</div><div class="org-title">Team Lead</div></div>
-          <div class="org-children" style="gap:8px">
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(10)"><div class="org-avatar" style="background:${avatarGradient('teal')}">KW</div><div class="org-name">Kenji W.</div><div class="org-title">Quality</div></div></div>
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(14)"><div class="org-avatar" style="background:${avatarGradient('green')}">OS</div><div class="org-name">Oliver S.</div><div class="org-title">Maintenance</div></div></div>
-          </div>
-        </div>
-        <div class="org-branch">
-          <div class="org-node manager" onclick="showOrgDetail(7)"><div class="org-avatar" style="background:${avatarGradient('green')}">AR</div><div class="org-name">Aisha Rahman</div><div class="org-title">HR Coordinator</div></div>
-          <div class="org-children" style="gap:8px">
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(5)"><div class="org-avatar" style="background:${avatarGradient('pink')}">PS</div><div class="org-name">Priya S.</div><div class="org-title">Customer Service</div></div></div>
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(8)"><div class="org-avatar" style="background:${avatarGradient('blue')}">LM</div><div class="org-name">Lucas M.</div><div class="org-title">IT Support</div></div></div>
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(13)"><div class="org-avatar" style="background:${avatarGradient('pink')}">NH</div><div class="org-name">Nadia H.</div><div class="org-title">Marketing</div></div></div>
-          </div>
-        </div>
-      </div>
-    </div>`;
-}
-
-function showOrgDetail(id) {
-  const emp = employees.find(e=>e.id===id);
-  if(emp) showToast(`${emp.name} — ${emp.title}`);
-}
+function renderOrgChart(){const c=document.getElementById('org-chart');if(!c)return;c.innerHTML=`<div class="org-tree"><div class="org-node ceo" onclick="showOrgDetail(1)"><div class="org-avatar" style="background:${avatarGradient('indigo')}">SC</div><div class="org-name">Sarah Chen</div><div class="org-title">Director</div></div><div class="org-children"><div class="org-branch"><div class="org-node manager" onclick="showOrgDetail(2)"><div class="org-avatar" style="background:${avatarGradient('teal')}">JO</div><div class="org-name">James Okafor</div><div class="org-title">Supervisor</div></div><div class="org-children" style="gap:6px"><div class="org-branch"><div class="org-node" onclick="showOrgDetail(4)"><div class="org-avatar" style="background:${avatarGradient('blue')}">DK</div><div class="org-name">David Kim</div><div class="org-title">Warehouse</div></div></div><div class="org-branch"><div class="org-node" onclick="showOrgDetail(6)"><div class="org-avatar" style="background:${avatarGradient('amber')}">TW</div><div class="org-name">Tom Walker</div><div class="org-title">Driver</div></div></div><div class="org-branch"><div class="org-node" onclick="showOrgDetail(12)"><div class="org-avatar" style="background:${avatarGradient('indigo')}">DP</div><div class="org-name">Daniel P.</div><div class="org-title">Warehouse</div></div></div></div></div><div class="org-branch"><div class="org-node manager" onclick="showOrgDetail(3)"><div class="org-avatar" style="background:${avatarGradient('purple')}">ML</div><div class="org-name">Mei Ling Tan</div><div class="org-title">Team Lead</div></div><div class="org-children" style="gap:6px"><div class="org-branch"><div class="org-node" onclick="showOrgDetail(10)"><div class="org-avatar" style="background:${avatarGradient('teal')}">KW</div><div class="org-name">Kenji W.</div><div class="org-title">Quality</div></div></div><div class="org-branch"><div class="org-node" onclick="showOrgDetail(14)"><div class="org-avatar" style="background:${avatarGradient('green')}">OS</div><div class="org-name">Oliver S.</div><div class="org-title">Maintenance</div></div></div></div></div><div class="org-branch"><div class="org-node manager" onclick="showOrgDetail(7)"><div class="org-avatar" style="background:${avatarGradient('green')}">AR</div><div class="org-name">Aisha Rahman</div><div class="org-title">HR Coord.</div></div><div class="org-children" style="gap:6px"><div class="org-branch"><div class="org-node" onclick="showOrgDetail(5)"><div class="org-avatar" style="background:${avatarGradient('pink')}">PS</div><div class="org-name">Priya S.</div><div class="org-title">Service</div></div></div><div class="org-branch"><div class="org-node" onclick="showOrgDetail(8)"><div class="org-avatar" style="background:${avatarGradient('blue')}">LM</div><div class="org-name">Lucas M.</div><div class="org-title">IT Support</div></div></div><div class="org-branch"><div class="org-node" onclick="showOrgDetail(13)"><div class="org-avatar" style="background:${avatarGradient('pink')}">NH</div><div class="org-name">Nadia H.</div><div class="org-title">Marketing</div></div></div></div></div></div></div>`}
+function showOrgDetail(id){const e=employees.find(x=>x.id===id);if(e)showToast(`${e.name} — ${e.title}`)}
 
 // ---- Leave ----
-function renderLeaveList() {
-  const c = document.getElementById('leave-list');
-  if(!c) return;
-  // Sort: pending first, then approved, then rejected
-  const sorted = [...leaveRequests].sort((a,b) => {
-    const order = {pending:0, approved:1, rejected:2};
-    return order[a.status] - order[b.status];
-  });
-  c.innerHTML = sorted.map(r=>`
-    <tr>
-      <td><strong>${r.emp}</strong></td><td>${r.type}</td><td>${r.from} to ${r.to}</td>
-      <td class="text-center">${r.days}</td><td>${r.reason}</td>
-      <td>${r.status==='pending'
-        ? `<div class="flex gap-2"><button class="btn btn-sm btn-primary" onclick="approveLeave(${r.id})">Approve</button><button class="btn btn-sm btn-secondary" onclick="rejectLeave(${r.id})">Reject</button></div>`
-        : `<span class="badge ${r.status==='approved'?'badge-green':'badge-red'}">${r.status}</span>`}</td>
-    </tr>`).join('');
-}
+function renderLeaveList(){const c=document.getElementById('leave-list');if(!c)return;const sorted=[...leaveRequests].sort((a,b)=>{const o={pending:0,approved:1,rejected:2};return o[a.status]-o[b.status]});c.innerHTML=sorted.map(r=>`<tr><td><strong>${r.emp}</strong></td><td>${r.type}</td><td>${r.from} to ${r.to}</td><td class="text-center">${r.days}</td><td>${r.reason}</td><td>${r.status==='pending'?`<div class="flex gap-2"><button class="btn btn-sm btn-primary" onclick="approveLeave(${r.id})">Approve</button><button class="btn btn-sm btn-secondary" onclick="rejectLeave(${r.id})">Reject</button></div>`:`<span class="badge ${r.status==='approved'?'badge-green':'badge-red'}">${r.status}</span>`}</td></tr>`).join('')}
+function approveLeave(id){const r=leaveRequests.find(x=>x.id===id);if(r){r.status='approved';renderLeaveList();renderLeaveCalendar();showToast(`Leave approved for ${r.emp}`)}}
+function rejectLeave(id){const r=leaveRequests.find(x=>x.id===id);if(r){r.status='rejected';renderLeaveList();renderLeaveCalendar();showToast(`Leave rejected for ${r.emp}`,'error')}}
 
-function approveLeave(id) { const r=leaveRequests.find(x=>x.id===id); if(r){r.status='approved';renderLeaveList();renderLeaveCalendar();showToast(`Leave approved for ${r.emp}`);} }
-function rejectLeave(id) { const r=leaveRequests.find(x=>x.id===id); if(r){r.status='rejected';renderLeaveList();renderLeaveCalendar();showToast(`Leave rejected for ${r.emp}`,'error');} }
-
-function renderLeaveCalendar() {
-  const c = document.getElementById('leave-calendar');
-  if(!c) return;
-  const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const firstDay=6, daysInMonth=31, today=20;
-  let html = days.map(d=>`<div class="cal-day-header">${d}</div>`).join('');
-  for(let i=0;i<firstDay;i++) html+='<div class="cal-day other-month"></div>';
-  for(let d=1;d<=daysInMonth;d++){
-    let pills='';
-    leaveRequests.forEach(r=>{
-      if(r.status === 'rejected') return; // Hide rejected from calendar
-      const fd=parseInt(r.from.split(' ')[1]), td=parseInt(r.to.split(' ')[1]);
-      if(d>=fd&&d<=td){ const cls=r.status==='approved'?'badge-green':r.status==='pending'?'badge-amber':'badge-red'; pills+=`<span class="leave-pill ${cls}">${r.emp.split(' ')[0]}</span>`; }
-    });
-    html+=`<div class="cal-day ${d===today?'today':''}"><div class="cal-date">${d}</div>${pills}</div>`;
-  }
-  c.innerHTML=html;
-}
+function renderLeaveCalendar(){const c=document.getElementById('leave-calendar');if(!c)return;const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],firstDay=6,daysInMonth=31,today=20;let h=days.map(d=>`<div class="cal-day-header">${d}</div>`).join('');for(let i=0;i<firstDay;i++)h+='<div class="cal-day other-month"></div>';for(let d=1;d<=daysInMonth;d++){let p='';leaveRequests.forEach(r=>{if(r.status==='rejected')return;const fd=parseInt(r.from.split(' ')[1]),td=parseInt(r.to.split(' ')[1]);if(d>=fd&&d<=td){const cl=r.status==='approved'?'badge-green':'badge-amber';p+=`<span class="leave-pill ${cl}">${r.emp.split(' ')[0]}</span>`}});h+=`<div class="cal-day ${d===today?'today':''}"><div class="cal-date">${d}</div>${p}</div>`}c.innerHTML=h}
 
 // ---- Employee Table ----
-function renderEmployeeTable() {
-  const tb = document.getElementById('employee-tbody');
-  if(!tb) return;
-  const rl={admin:'Administrator',manager:'Manager',employee:'Employee'};
-  const sb={active:'badge-green',leave:'badge-amber'};
-  const sl={active:'Active',leave:'On Leave'};
-  tb.innerHTML = employees.map(emp=>`
-    <tr>
-      <td><div class="flex items-center gap-2"><span class="avatar-sm" style="width:32px;height:32px;border-radius:50%;background:${avatarGradient(emp.color)};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff">${emp.initials}</span><div><div style="font-weight:600">${emp.name}</div><div class="text-xs text-muted">${emp.email}</div></div></div></td>
-      <td>${emp.title}</td><td>${emp.dept}</td><td>${emp.phone}</td>
-      <td><span class="badge ${sb[emp.status]}">${sl[emp.status]}</span></td>
-      <td><span class="badge badge-indigo">${rl[emp.role]}</span></td>
-    </tr>`).join('');
-}
+function renderEmployeeTable(){const tb=document.getElementById('employee-tbody');if(!tb)return;const rl={admin:'Administrator',manager:'Manager',employee:'Employee'},sb={active:'badge-green',leave:'badge-amber'},sl={active:'Active',leave:'On Leave'};tb.innerHTML=employees.map(e=>`<tr><td><div class="flex items-center gap-2"><span class="avatar-sm" style="width:30px;height:30px;border-radius:50%;background:${avatarGradient(e.color)};display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#fff">${e.initials}</span><div><div style="font-weight:600">${e.name}</div><div class="text-xs text-muted">${e.email}</div></div></div></td><td>${e.title}</td><td>${e.dept}</td><td>${e.phone}</td><td><span class="badge ${sb[e.status]}">${sl[e.status]}</span></td><td><span class="badge badge-indigo">${rl[e.role]}</span></td></tr>`).join('')}
 
 // ---- Login Tabs ----
-function initLoginTabs() {
-  const tabs = document.querySelectorAll('.login-tab');
-  const panels = document.querySelectorAll('.login-panel');
-  tabs.forEach(tab=>tab.addEventListener('click',()=>{
-    tabs.forEach(t=>t.classList.remove('active'));
-    tab.classList.add('active');
-    panels.forEach(p=>p.classList.toggle('active', p.dataset.panel===tab.dataset.tab));
-  }));
-  document.querySelectorAll('.auth-method-btn').forEach(btn=>btn.addEventListener('click',()=>{
-    document.querySelectorAll('.auth-method-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-  }));
-  const lb = document.getElementById('demo-login');
-  if(lb) lb.addEventListener('click',()=>{ showToast('Demo mode: Navigating to dashboard...'); setTimeout(()=>document.querySelector('[data-section="dashboard"]')?.click(),800); });
-}
+function initLoginTabs(){const t=document.querySelectorAll('.login-tab'),p=document.querySelectorAll('.login-panel');t.forEach(x=>x.addEventListener('click',()=>{t.forEach(y=>y.classList.remove('active'));x.classList.add('active');p.forEach(y=>y.classList.toggle('active',y.dataset.panel===x.dataset.tab))}));document.querySelectorAll('.auth-method-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.auth-method-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active')}));const lb=document.getElementById('demo-login');if(lb)lb.addEventListener('click',()=>{showToast('Demo mode: Navigating to dashboard...');setTimeout(()=>document.querySelector('[data-section="dashboard"]')?.click(),700)})}
 
 // ---- Backlog Filters ----
-function initBacklogFilters() {
-  document.querySelectorAll('.backlog-filter').forEach(f=>f.addEventListener('click',()=>{
-    document.querySelectorAll('.backlog-filter').forEach(x=>x.classList.remove('active'));
-    f.classList.add('active');
-    const t=f.dataset.filter;
-    document.querySelectorAll('.milestone-card').forEach(card=>card.style.display=(!t||card.dataset.milestone===t)?'':'none');
-  }));
-}
+function initBacklogFilters(){document.querySelectorAll('.backlog-filter').forEach(f=>f.addEventListener('click',()=>{document.querySelectorAll('.backlog-filter').forEach(x=>x.classList.remove('active'));f.classList.add('active');const t=f.dataset.filter;document.querySelectorAll('.milestone-card').forEach(c=>c.style.display=(!t||c.dataset.milestone===t)?'':'none')}))}
 
 // ---- Mobile Preview ----
-function initMobilePreview() {
-  const btn=document.getElementById('show-mobile'), ov=document.getElementById('mobile-overlay');
-  if(btn) btn.addEventListener('click',()=>ov?.classList.add('show'));
-  if(ov) ov.addEventListener('click',e=>{ if(e.target===ov) ov.classList.remove('show'); });
-}
+function initMobilePreview(){const b=document.getElementById('show-mobile'),o=document.getElementById('mobile-overlay');if(b)b.addEventListener('click',()=>o?.classList.add('show'));if(o)o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('show')})}
 
 // ---- Inject Icons ----
-function injectIcons() {
-  document.querySelectorAll('[data-icon]').forEach(el=>{ const name=el.dataset.icon; if(icons[name]) el.innerHTML=icons[name]; });
+function injectIcons(){document.querySelectorAll('[data-icon]').forEach(el=>{const n=el.dataset.icon;if(icons[n])el.innerHTML=icons[n]})}
+
+// ---- Inject Tech Logos ----
+function injectTechLogos(){
+  if(typeof techLogos==='undefined')return;
+  // Architecture diagram logos
+  const logoMap={'logo-chrome':'chrome','logo-apple':'apple','logo-android':'android','logo-nginx':'nginx','logo-jwt':'jwt','logo-node':'nodejs','logo-postgres':'postgres','logo-redis':'redis'};
+  Object.entries(logoMap).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&techLogos[key])el.innerHTML=techLogos[key]});
+  // Tech stack pills
+  const pills=document.getElementById('tech-stack-pills');
+  if(pills){
+    const stack=[['react','React Native 0.74'],['expo','Expo SDK 51'],['typescript','TypeScript 5.4'],['nodejs','Node.js 20 LTS'],['express','Express 4.19'],['postgres','PostgreSQL 16'],['prisma','Prisma ORM'],['jwt','JWT + bcrypt'],['redis','Redis 7'],['docker','Docker'],['nginx','Nginx'],['github','Expo EAS']];
+    pills.innerHTML=stack.map(([k,label])=>`<span class="tech-pill">${techLogos[k]||''}<span>${label}</span></span>`).join('');
+  }
 }
 
 // ---- Init ----
 document.addEventListener('DOMContentLoaded',()=>{
   injectIcons();
+  injectTechLogos();
   initNavigation();
   initMobileSidebar();
   initTimeClock();
@@ -424,9 +168,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   initBacklogFilters();
   initMobilePreview();
   initScrollAnimations();
-  setTimeout(triggerCounters, 200);
-  if(window.location.hash) {
-    const target=window.location.hash.substring(1);
-    document.querySelector(`.nav-item[data-section="${target}"]`)?.click();
-  }
+  setTimeout(triggerCounters,200);
+  if(window.location.hash){const t=window.location.hash.substring(1);document.querySelector(`.nav-item[data-section="${t}"]`)?.click()}
 });
