@@ -1,1516 +1,487 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WorkForce Pro — SME Workforce Management Blueprint</title>
-  <meta name="description" content="Complete blueprint for a cross-platform SME Workforce Management system — architecture, prototype, data model, backlog, and deployment guide. No Active Directory dependency.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkForce Pro — SME Workforce Management Blueprint</title>
+<meta name="description" content="Complete blueprint for a cross-platform SME Workforce Management system — architecture, prototype, data model, backlog, and deployment guide. No Active Directory dependency.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="app-shell">
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="logo" data-icon="layers"></div>
+    <div><div class="brand-text">WorkForce Pro</div><div class="brand-sub">SME Management Blueprint</div></div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-label">Proposal</div>
+    <div class="nav-item active" data-section="summary"><span class="nav-icon" data-icon="layout"></span><span class="nav-text">Executive Summary</span></div>
+    <div class="nav-item" data-section="architecture"><span class="nav-icon" data-icon="building"></span><span class="nav-text">System Architecture</span></div>
+    <div class="nav-item" data-section="auth"><span class="nav-icon" data-icon="shield"></span><span class="nav-text">Authentication &amp; Security</span></div>
+    <div class="nav-label">Interactive Prototype</div>
+    <div class="nav-item" data-section="login"><span class="nav-icon" data-icon="key"></span><span class="nav-text">Login / Sign-up</span></div>
+    <div class="nav-item" data-section="dashboard"><span class="nav-icon" data-icon="chart"></span><span class="nav-text">Admin Dashboard</span></div>
+    <div class="nav-item" data-section="scheduling"><span class="nav-icon" data-icon="calendar"></span><span class="nav-text">Scheduling &amp; Roster</span></div>
+    <div class="nav-item" data-section="time-tracking"><span class="nav-icon" data-icon="clock"></span><span class="nav-text">Time Tracking</span></div>
+    <div class="nav-item" data-section="tasks"><span class="nav-icon" data-icon="check"></span><span class="nav-text">Task Management</span></div>
+    <div class="nav-item" data-section="org-chart"><span class="nav-icon" data-icon="tree"></span><span class="nav-text">Organisation Chart</span></div>
+    <div class="nav-item" data-section="leave"><span class="nav-icon" data-icon="calendar"></span><span class="nav-text">Leave Management</span><span class="nav-badge">3</span></div>
+    <div class="nav-item" data-section="employees"><span class="nav-icon" data-icon="users"></span><span class="nav-text">Employee Directory</span></div>
+    <div class="nav-label">Deliverables</div>
+    <div class="nav-item" data-section="data-model"><span class="nav-icon" data-icon="database"></span><span class="nav-text">Data Model (ERD)</span></div>
+    <div class="nav-item" data-section="backlog"><span class="nav-icon" data-icon="package"></span><span class="nav-text">Feature Backlog</span></div>
+    <div class="nav-item" data-section="deployment"><span class="nav-icon" data-icon="rocket"></span><span class="nav-text">Deployment Guide</span></div>
+  </nav>
+  <div class="sidebar-footer">WorkForce Pro v2.0<br>No AD/AAD Required · Self-Hosted</div>
+</aside>
+<div class="sidebar-backdrop"></div>
+<div class="main">
+<header class="topbar">
+  <button class="menu-toggle" data-icon="layout"></button>
+  <div class="breadcrumb">Blueprint / <span>Executive Summary</span></div>
+  <div class="topbar-spacer"></div>
+  <div class="search-box"><span data-icon="search"></span><input type="text" placeholder="Search employees, shifts, tasks..."></div>
+  <button class="icon-btn" title="Notifications"><span data-icon="bell"></span><span class="dot"></span></button>
+  <button class="icon-btn" id="show-mobile" title="Mobile Preview"><span data-icon="smartphone"></span></button>
+  <div class="user-chip"><div class="avatar">SC</div><div><div class="user-name">Sarah Chen</div><div class="user-role">Administrator</div></div></div>
+</header>
+<main class="content">
 
-  <!-- ============ SIDEBAR ============ -->
-  <aside class="sidebar">
-    <div class="sidebar-brand">
-      <div class="logo">W</div>
-      <div>
-        <div class="brand-text">WorkForce Pro</div>
-        <div class="brand-sub">SME Management Blueprint</div>
+<!-- ===== EXECUTIVE SUMMARY ===== -->
+<section id="summary" class="section active">
+  <div class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="live-dot"></span> Live Interactive Prototype</div>
+      <h1>WorkForce Pro — SME Workforce Management</h1>
+      <p>A complete, self-contained workforce management system for small-to-medium enterprises. No Active Directory, no Azure AD, no domain infrastructure required. One codebase for Web, iOS, and Android.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hs-value">15</div><div class="hs-label">Employees</div></div>
+        <div class="hero-stat"><div class="hs-value">3</div><div class="hs-label">Platforms</div></div>
+        <div class="hero-stat"><div class="hs-value">1</div><div class="hs-label">Codebase</div></div>
+        <div class="hero-stat"><div class="hs-value">0</div><div class="hs-label">AD/AAD Deps</div></div>
       </div>
     </div>
-
-    <nav class="sidebar-nav">
-      <div class="nav-label">Proposal</div>
-      <div class="nav-item active" data-section="summary">
-        <span class="nav-icon">📋</span>
-        <span class="nav-text">Executive Summary</span>
-      </div>
-      <div class="nav-item" data-section="architecture">
-        <span class="nav-icon">🏗️</span>
-        <span class="nav-text">System Architecture</span>
-      </div>
-      <div class="nav-item" data-section="auth">
-        <span class="nav-icon">🔐</span>
-        <span class="nav-text">Authentication & Security</span>
-      </div>
-
-      <div class="nav-label">Interactive Prototype</div>
-      <div class="nav-item" data-section="login">
-        <span class="nav-icon">🔑</span>
-        <span class="nav-text">Login / Sign-up</span>
-      </div>
-      <div class="nav-item" data-section="dashboard">
-        <span class="nav-icon">📊</span>
-        <span class="nav-text">Admin Dashboard</span>
-      </div>
-      <div class="nav-item" data-section="scheduling">
-        <span class="nav-icon">📅</span>
-        <span class="nav-text">Scheduling & Roster</span>
-      </div>
-      <div class="nav-item" data-section="time-tracking">
-        <span class="nav-icon">⏰</span>
-        <span class="nav-text">Time Tracking</span>
-      </div>
-      <div class="nav-item" data-section="tasks">
-        <span class="nav-icon">✅</span>
-        <span class="nav-text">Task Management</span>
-      </div>
-      <div class="nav-item" data-section="org-chart">
-        <span class="nav-icon">🌳</span>
-        <span class="nav-text">Organisation Chart</span>
-      </div>
-      <div class="nav-item" data-section="leave">
-        <span class="nav-icon">🏖️</span>
-        <span class="nav-text">Leave Management</span>
-        <span class="nav-badge">3</span>
-      </div>
-      <div class="nav-item" data-section="employees">
-        <span class="nav-icon">👥</span>
-        <span class="nav-text">Employee Directory</span>
-      </div>
-
-      <div class="nav-label">Deliverables</div>
-      <div class="nav-item" data-section="data-model">
-        <span class="nav-icon">🗄️</span>
-        <span class="nav-text">Data Model (ERD)</span>
-      </div>
-      <div class="nav-item" data-section="backlog">
-        <span class="nav-icon">📦</span>
-        <span class="nav-text">Feature Backlog</span>
-      </div>
-      <div class="nav-item" data-section="deployment">
-        <span class="nav-icon">🚀</span>
-        <span class="nav-text">Deployment Guide</span>
-      </div>
-    </nav>
-
-    <div class="sidebar-footer">
-      WorkForce Pro Blueprint v1.0<br>
-      No AD/AAD Required · Self-Hosted
+    <div class="hero-decoration">
+      <div class="hero-float-card"><div class="hfc-icon" style="background:rgba(16,185,129,.2)"><span data-icon="users" style="color:var(--green-500)"></span></div><div><div class="hfc-text">On Duty Now</div><div class="hfc-value">12</div></div></div>
+      <div class="hero-float-card"><div class="hfc-icon" style="background:rgba(99,102,241,.2)"><span data-icon="check" style="color:var(--indigo-400)"></span></div><div><div class="hfc-text">Tasks Done</div><div class="hfc-value">18</div></div></div>
+      <div class="hero-float-card"><div class="hfc-icon" style="background:rgba(245,158,11,.2)"><span data-icon="calendar" style="color:var(--amber-500)"></span></div><div><div class="hfc-text">Shifts This Week</div><div class="hfc-value">56</div></div></div>
     </div>
-  </aside>
+  </div>
 
-  <div class="sidebar-backdrop"></div>
+  <div class="grid grid-4 mb-6">
+    <div class="stat-card sc-indigo fade-in scale-in"><div class="stat-icon" style="background:var(--indigo-100);color:var(--indigo-600)"><span data-icon="users"></span></div><div class="stat-label">Employees Managed</div><div class="stat-value" data-count="15">0</div><div class="stat-trend up"><span data-icon="trending"></span> Scalable to 500+</div></div>
+    <div class="stat-card sc-teal fade-in scale-in stagger-1"><div class="stat-icon" style="background:var(--teal-100);color:var(--teal-600)"><span data-icon="smartphone"></span></div><div class="stat-label">Platforms</div><div class="stat-value" data-count="3">0</div><div class="stat-trend up">Web · iOS · Android</div></div>
+    <div class="stat-card sc-purple fade-in scale-in stagger-2"><div class="stat-icon" style="background:var(--purple-100);color:var(--purple-500)"><span data-icon="layers"></span></div><div class="stat-label">Codebases</div><div class="stat-value" data-count="1">0</div><div class="stat-trend up">React Native + Web</div></div>
+    <div class="stat-card sc-green fade-in scale-in stagger-3"><div class="stat-icon" style="background:var(--green-100);color:var(--green-500)"><span data-icon="lock"></span></div><div class="stat-label">AD/AAD Dependency</div><div class="stat-value" data-count="0">0</div><div class="stat-trend up">Fully self-contained auth</div></div>
+  </div>
 
-  <!-- ============ MAIN ============ -->
-  <div class="main">
-
-    <!-- ===== TOP BAR ===== -->
-    <header class="topbar">
-      <button class="menu-toggle">☰</button>
-      <div class="breadcrumb">Blueprint / <span>Executive Summary</span></div>
-      <div class="topbar-spacer"></div>
-      <div class="search-box">
-        <span>🔍</span>
-        <input type="text" placeholder="Search employees, shifts, tasks…">
+  <div class="grid grid-2 mb-6">
+    <div class="card fade-in-left">
+      <h3 class="card-title">Project Overview</h3>
+      <p class="card-subtitle">What we're building and why</p>
+      <p style="font-size:14px;line-height:1.7;color:var(--navy-600)">WorkForce Pro is a cross-platform workforce management solution designed for SMEs that operate entirely without directory services. Every user authenticates through an in-app local account system — by email, phone number, or trusted-device token — with no dependency on Active Directory, Azure AD, or domain-joined machines.</p>
+      <p style="font-size:14px;line-height:1.7;color:var(--navy-600);margin-top:12px">The system covers five core capabilities: <strong>employee scheduling</strong>, <strong>time tracking</strong>, <strong>task management</strong>, <strong>organisation chart</strong>, and <strong>integrated leave &amp; roster handling</strong>. A single React Native codebase compiles to iOS, Android, and a web app.</p>
+    </div>
+    <div class="card fade-in-right">
+      <h3 class="card-title">Key Design Decisions</h3>
+      <p class="card-subtitle">Rationale for technology choices</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500)"><span data-icon="check"></span></span><div><strong style="font-size:13px">React Native + Expo</strong><br><span class="text-sm text-muted">One codebase to iOS, Android, Web. Reduces maintenance and ensures feature parity.</span></div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500)"><span data-icon="check"></span></span><div><strong style="font-size:13px">Node.js + Express + TypeScript</strong><br><span class="text-sm text-muted">RESTful API with typed safety. Runs on any Windows/Linux server with Node 20+.</span></div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500)"><span data-icon="check"></span></span><div><strong style="font-size:13px">PostgreSQL (or SQLite for &lt;50 staff)</strong><br><span class="text-sm text-muted">Relational integrity for hierarchical employee data. No licensing cost.</span></div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500)"><span data-icon="check"></span></span><div><strong style="font-size:13px">JWT + bcrypt + Device Tokens</strong><br><span class="text-sm text-muted">Industry-standard password hashing, stateless JWT sessions, optional device binding.</span></div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500)"><span data-icon="check"></span></span><div><strong style="font-size:13px">Three-Tier Role System</strong><br><span class="text-sm text-muted">Admin, Manager, Employee — plain-English permissions, no technical jargon.</span></div></div>
       </div>
-      <button class="icon-btn" title="Notifications">
-        🔔<span class="dot"></span>
-      </button>
-      <button class="icon-btn" id="show-mobile" title="Mobile Preview">📱</button>
-      <div class="user-chip">
-        <div class="avatar">SC</div>
-        <div>
-          <div class="user-name">Sarah Chen</div>
-          <div class="user-role">Administrator</div>
-        </div>
+    </div>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card fade-in">
+      <h3 class="card-title">Technology Stack</h3>
+      <div class="tech-pills">
+        <span class="tech-pill"><span class="pill-dot" style="background:var(--blue-500)"></span>React Native 0.74</span>
+        <span class="tech-pill"><span class="pill-dot" style="background:var(--purple-500)"></span>Expo SDK 51</span>
+        <span class="tech-pill"><span class="pill-dot" style="background:var(--green-500)"></span>React Native Web</span>
+        <span class="tech-pill"><span class="pill-dot" style="background:var(--indigo-500)"></span>TypeScript 5.4</span>
+        <span class="tech-pill"><span class="pill-dot" style="background:var(--amber-500)"></span>Node.js 20 LTS</span>
+        <span class="tech-pill"><span class="pill-dot" style="background:var(--teal-500)"></span>Express 4.19</span>
+        <span class="tech-pill"><span class="pill-dot" style="background:var(--blue-500)"></span>PostgreSQL 16</span>
+        <span class="tech-pill"><span class="pill-dot" style="background:var(--navy-500)"></span>SQLite (fallback)</span>
+        <span class="tech-pill"><span class="pill-dot" style="background:var(--pink-500)"></span>Prisma ORM</span>
+        <span class="tech-pill"><span class="pill-dot" style="background:var(--green-500)"></span>JWT + bcrypt</span>
+        <span class="tech-pill"><span class="pill-dot" style="background:var(--indigo-500)"></span>Redis</span>
+        <span class="tech-pill"><span class="pill-dot" style="background:var(--amber-500)"></span>Docker</span>
+        <span class="tech-pill"><span class="pill-dot" style="background:var(--teal-500)"></span>Nginx</span>
+        <span class="tech-pill"><span class="pill-dot" style="background:var(--purple-500)"></span>Expo EAS</span>
       </div>
-    </header>
+    </div>
+    <div class="card fade-in stagger-1">
+      <h3 class="card-title">Deliverables Checklist</h3>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--green-500)"><span data-icon="checkCircle"></span></span><span style="font-size:13px">High-level architecture diagram (backend, database, auth flow)</span></div>
+        <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--green-500)"><span data-icon="checkCircle"></span></span><span style="font-size:13px">Clickable prototype demonstrating full user journey</span></div>
+        <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--green-500)"><span data-icon="checkCircle"></span></span><span style="font-size:13px">Wireframes for both web and mobile interfaces</span></div>
+        <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--green-500)"><span data-icon="checkCircle"></span></span><span style="font-size:13px">Data model covering employees, shifts, tasks, leave, hierarchy</span></div>
+        <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--green-500)"><span data-icon="checkCircle"></span></span><span style="font-size:13px">Feature backlog with prioritised milestones</span></div>
+        <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--green-500)"><span data-icon="checkCircle"></span></span><span style="font-size:13px">Step-by-step deployment guide</span></div>
+        <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--green-500)"><span data-icon="checkCircle"></span></span><span style="font-size:13px">Role &amp; permission matrix for non-technical staff</span></div>
+        <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--green-500)"><span data-icon="checkCircle"></span></span><span style="font-size:13px">No AD/AAD/domain dependency — verified</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- ===== CONTENT ===== -->
-    <main class="content">
+<!-- ===== SYSTEM ARCHITECTURE ===== -->
+<section id="architecture" class="section">
+  <div class="section-header"><h1>System Architecture</h1><p>Three-tier architecture with a shared API backend, single-codebase frontend, and self-hosted database. No external identity providers.</p></div>
 
-      <!-- ============ EXECUTIVE SUMMARY ============ -->
-      <section id="summary" class="section active">
-        <div class="section-header">
-          <h1>Executive Summary</h1>
-          <p>A complete, self-contained Workforce Management system for small-to-medium enterprises — no Active Directory, no Azure AD, no domain infrastructure required.</p>
-        </div>
+  <div class="card mb-6">
+    <h3 class="card-title">High-Level Architecture Diagram</h3>
+    <p class="card-subtitle">Client layer to API layer to Data layer — with animated flow connectors</p>
+    <div class="arch-container">
+      <div class="arch-layer">
+        <div class="arch-box primary"><div class="arch-box-icon"><span data-icon="monitor"></span></div><div class="arch-box-title">Web App</div><div class="arch-box-desc">Chrome / Edge<br>Windows 10+</div></div>
+        <div class="arch-box primary"><div class="arch-box-icon"><span data-icon="smartphone"></span></div><div class="arch-box-title">iOS App</div><div class="arch-box-desc">iPhone / iPad<br>iOS 15+</div></div>
+        <div class="arch-box primary"><div class="arch-box-icon"><span data-icon="smartphone"></span></div><div class="arch-box-title">Android App</div><div class="arch-box-desc">Phone / Tablet<br>Android 8+</div></div>
+      </div>
+      <div class="arch-connector"><div class="connector-line"></div><span class="connector-label">HTTPS / WSS (TLS 1.3)</span></div>
+      <div class="arch-layer">
+        <div class="arch-box secondary"><div class="arch-box-icon"><span data-icon="server"></span></div><div class="arch-box-title">Nginx</div><div class="arch-box-desc">Reverse Proxy<br>TLS Termination</div></div>
+        <div class="arch-box secondary"><div class="arch-box-icon"><span data-icon="key"></span></div><div class="arch-box-title">Auth Service</div><div class="arch-box-desc">JWT Issue/Verify<br>bcrypt + Device Tokens</div></div>
+        <div class="arch-box secondary"><div class="arch-box-icon"><span data-icon="zap"></span></div><div class="arch-box-title">Core API</div><div class="arch-box-desc">Express + TypeScript<br>REST / WebSocket</div></div>
+        <div class="arch-box secondary"><div class="arch-box-icon"><span data-icon="bell"></span></div><div class="arch-box-title">Notification</div><div class="arch-box-desc">Push / Email<br>Background Jobs</div></div>
+      </div>
+      <div class="arch-connector"><div class="connector-line"></div><span class="connector-label">Prisma ORM</span></div>
+      <div class="arch-layer">
+        <div class="arch-box accent"><div class="arch-box-icon"><span data-icon="database"></span></div><div class="arch-box-title">PostgreSQL</div><div class="arch-box-desc">Primary Database<br>Relational Integrity</div></div>
+        <div class="arch-box accent"><div class="arch-box-icon"><span data-icon="database"></span></div><div class="arch-box-title">SQLite</div><div class="arch-box-desc">Offline Cache<br>Small Deployments</div></div>
+        <div class="arch-box accent"><div class="arch-box-icon"><span data-icon="zap"></span></div><div class="arch-box-title">Redis</div><div class="arch-box-desc">Session Cache<br>Job Queue</div></div>
+        <div class="arch-box accent"><div class="arch-box-icon"><span data-icon="folder"></span></div><div class="arch-box-title">File Storage</div><div class="arch-box-desc">Local / S3<br>Avatars, Documents</div></div>
+      </div>
+    </div>
+  </div>
 
-        <div class="grid grid-4 mb-6">
-          <div class="stat-card">
-            <div class="stat-icon" style="background:var(--indigo-100)">👥</div>
-            <div class="stat-label">Employees Managed</div>
-            <div class="stat-value">8</div>
-            <div class="stat-trend up">↑ Scalable to 500+</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:var(--teal-100)">📱</div>
-            <div class="stat-label">Platforms</div>
-            <div class="stat-value">3</div>
-            <div class="stat-trend up">Web · iOS · Android</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:var(--amber-100)">🔗</div>
-            <div class="stat-label">Codebases</div>
-            <div class="stat-value">1</div>
-            <div class="stat-trend up">React Native + Web</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:var(--green-100)">🔒</div>
-            <div class="stat-label">AD/AAD Dependency</div>
-            <div class="stat-value">0</div>
-            <div class="stat-trend up">Fully self-contained auth</div>
-          </div>
-        </div>
-
-        <div class="grid grid-2 mb-6">
-          <div class="card">
-            <h3 class="card-title">🎯 Project Overview</h3>
-            <p class="card-subtitle">What we're building and why</p>
-            <p style="font-size:14px;line-height:1.7;color:var(--navy-600)">
-              WorkForce Pro is a cross-platform workforce management solution designed for SMEs that operate entirely without directory services. Every user authenticates through an in-app local account system — by email, phone number, or trusted-device token — with no dependency on Active Directory, Azure AD, or domain-joined machines.
-            </p>
-            <p style="font-size:14px;line-height:1.7;color:var(--navy-600);margin-top:12px">
-              The system covers five core capabilities: <strong>employee scheduling</strong>, <strong>time tracking</strong>, <strong>task management</strong>, <strong>organisation chart</strong>, and <strong>integrated leave &amp; roster handling</strong>. A single React Native codebase compiles to iOS, Android, and a web app — deployable on Windows PCs via Chrome/Edge and on mobile devices via app stores or MDM.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3 class="card-title">💡 Key Design Decisions</h3>
-            <p class="card-subtitle">Rationale for technology choices</p>
-            <div style="display:flex;flex-direction:column;gap:10px">
-              <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500);font-size:16px">✓</span><div><strong style="font-size:13px">React Native + Expo</strong><br><span class="text-sm text-muted">One codebase → iOS, Android, Web. Reduces maintenance and ensures feature parity.</span></div></div>
-              <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500);font-size:16px">✓</span><div><strong style="font-size:13px">Node.js + Express + TypeScript</strong><br><span class="text-sm text-muted">RESTful API with typed safety. Runs on any Windows/Linux server with Node 20+.</span></div></div>
-              <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500);font-size:16px">✓</span><div><strong style="font-size:13px">PostgreSQL (or SQLite for &lt;50 staff)</strong><br><span class="text-sm text-muted">Relational integrity for hierarchical employee data. No licensing cost.</span></div></div>
-              <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500);font-size:16px">✓</span><div><strong style="font-size:13px">JWT + bcrypt + Device Tokens</strong><br><span class="text-sm text-muted">Industry-standard password hashing, stateless JWT sessions, optional device binding for extra security.</span></div></div>
-              <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500);font-size:16px">✓</span><div><strong style="font-size:13px">Three-Tier Role System</strong><br><span class="text-sm text-muted">Admin, Manager, Employee — plain-English permissions, no technical jargon.</span></div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-2">
-          <div class="card">
-            <h3 class="card-title">🛠️ Technology Stack</h3>
-            <div class="tech-pills">
-              <span class="tech-pill"><span class="pill-dot" style="background:var(--blue-500)"></span>React Native 0.74</span>
-              <span class="tech-pill"><span class="pill-dot" style="background:var(--purple-500)"></span>Expo SDK 51</span>
-              <span class="tech-pill"><span class="pill-dot" style="background:var(--green-500)"></span>React Native Web</span>
-              <span class="tech-pill"><span class="pill-dot" style="background:var(--indigo-500)"></span>TypeScript 5.4</span>
-              <span class="tech-pill"><span class="pill-dot" style="background:var(--amber-500)"></span>Node.js 20 LTS</span>
-              <span class="tech-pill"><span class="pill-dot" style="background:var(--teal-500)"></span>Express 4.19</span>
-              <span class="tech-pill"><span class="pill-dot" style="background:var(--blue-500)"></span>PostgreSQL 16</span>
-              <span class="tech-pill"><span class="pill-dot" style="background:var(--navy-500)"></span>SQLite (fallback)</span>
-              <span class="tech-pill"><span class="pill-dot" style="background:var(--pink-500)"></span>Prisma ORM</span>
-              <span class="tech-pill"><span class="pill-dot" style="background:var(--green-500)"></span>JWT + bcrypt</span>
-              <span class="tech-pill"><span class="pill-dot" style="background:var(--indigo-500)"></span>Redis (sessions)</span>
-              <span class="tech-pill"><span class="pill-dot" style="background:var(--amber-500)"></span>Docker</span>
-              <span class="tech-pill"><span class="pill-dot" style="background:var(--teal-500)"></span>Nginx (reverse proxy)</span>
-              <span class="tech-pill"><span class="pill-dot" style="background:var(--purple-500)"></span>Expo EAS (CI/CD)</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 class="card-title">📋 Deliverables Checklist</h3>
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <div style="display:flex;gap:10px;align-items:center"><span class="badge badge-green">✓</span><span style="font-size:13px">High-level architecture diagram (backend, database, auth flow)</span></div>
-              <div style="display:flex;gap:10px;align-items:center"><span class="badge badge-green">✓</span><span style="font-size:13px">Clickable prototype demonstrating full user journey</span></div>
-              <div style="display:flex;gap:10px;align-items:center"><span class="badge badge-green">✓</span><span style="font-size:13px">Wireframes for both web and mobile interfaces</span></div>
-              <div style="display:flex;gap:10px;align-items:center"><span class="badge badge-green">✓</span><span style="font-size:13px">Data model covering employees, shifts, tasks, leave, hierarchy</span></div>
-              <div style="display:flex;gap:10px;align-items:center"><span class="badge badge-green">✓</span><span style="font-size:13px">Feature backlog with prioritised milestones</span></div>
-              <div style="display:flex;gap:10px;align-items:center"><span class="badge badge-green">✓</span><span style="font-size:13px">Step-by-step deployment guide</span></div>
-              <div style="display:flex;gap:10px;align-items:center"><span class="badge badge-green">✓</span><span style="font-size:13px">Role &amp; permission matrix for non-technical staff</span></div>
-              <div style="display:flex;gap:10px;align-items:center"><span class="badge badge-green">✓</span><span style="font-size:13px">No AD/AAD/domain dependency — verified</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ SYSTEM ARCHITECTURE ============ -->
-      <section id="architecture" class="section">
-        <div class="section-header">
-          <h1>System Architecture</h1>
-          <p>Three-tier architecture with a shared API backend, single codebase frontend, and self-hosted database. No external identity providers.</p>
-        </div>
-
-        <!-- Architecture Diagram -->
-        <div class="card mb-6">
-          <h3 class="card-title">🏗️ High-Level Architecture Diagram</h3>
-          <p class="card-subtitle">Client → API Gateway → Services → Database</p>
-
-          <div class="arch-diagram">
-            <!-- Client Layer -->
-            <div class="arch-layer">
-              <div class="arch-layer-label">Client Layer</div>
-              <div class="arch-box primary">
-                <div class="arch-box-icon">🌐</div>
-                <div class="arch-box-title">Web App</div>
-                <div class="arch-box-desc">Chrome / Edge<br>Windows 10+</div>
-              </div>
-              <div class="arch-box primary">
-                <div class="arch-box-icon">📱</div>
-                <div class="arch-box-title">iOS App</div>
-                <div class="arch-box-desc">iPhone / iPad<br>iOS 15+</div>
-              </div>
-              <div class="arch-box primary">
-                <div class="arch-box-icon">🤖</div>
-                <div class="arch-box-title">Android App</div>
-                <div class="arch-box-desc">Phone / Tablet<br>Android 8+</div>
-              </div>
-            </div>
-
-            <div class="arch-connector">↕ HTTPS / WSS</div>
-
-            <!-- API Layer -->
-            <div class="arch-layer">
-              <div class="arch-layer-label">API Layer</div>
-              <div class="arch-box secondary">
-                <div class="arch-box-icon">🚪</div>
-                <div class="arch-box-title">Nginx</div>
-                <div class="arch-box-desc">Reverse Proxy<br>TLS Termination</div>
-              </div>
-              <div class="arch-box secondary">
-                <div class="arch-box-icon">🔑</div>
-                <div class="arch-box-title">Auth Service</div>
-                <div class="arch-box-desc">JWT Issue/Verify<br>bcrypt + Device Tokens</div>
-              </div>
-              <div class="arch-box secondary">
-                <div class="arch-box-icon">⚙️</div>
-                <div class="arch-box-title">Core API</div>
-                <div class="arch-box-desc">Express + TypeScript<br>REST / WebSocket</div>
-              </div>
-              <div class="arch-box secondary">
-                <div class="arch-box-icon">🔔</div>
-                <div class="arch-box-title">Notification</div>
-                <div class="arch-box-desc">Push / Email<br>Background Jobs</div>
-              </div>
-            </div>
-
-            <div class="arch-connector">↕ Prisma ORM</div>
-
-            <!-- Data Layer -->
-            <div class="arch-layer">
-              <div class="arch-layer-label">Data Layer</div>
-              <div class="arch-box accent">
-                <div class="arch-box-icon">🐘</div>
-                <div class="arch-box-title">PostgreSQL</div>
-                <div class="arch-box-desc">Primary Database<br>Relational Integrity</div>
-              </div>
-              <div class="arch-box accent">
-                <div class="arch-box-icon">📄</div>
-                <div class="arch-box-title">SQLite</div>
-                <div class="arch-box-desc">Offline Cache<br>Small Deployments</div>
-              </div>
-              <div class="arch-box accent">
-                <div class="arch-box-icon">⚡</div>
-                <div class="arch-box-title">Redis</div>
-                <div class="arch-box-desc">Session Cache<br>Job Queue</div>
-              </div>
-              <div class="arch-box accent">
-                <div class="arch-box-icon">💾</div>
-                <div class="arch-box-title">File Storage</div>
-                <div class="arch-box-desc">Local / S3<br>Avatars, Documents</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-2 mb-6">
-          <div class="card">
-            <h3 class="card-title">🔌 API Design</h3>
-            <p class="card-subtitle">RESTful endpoints with versioning</p>
-            <div class="code-block">
-<code><span class="code-comment"># Authentication</span>
+  <div class="grid grid-2 mb-6">
+    <div class="card fade-in-left">
+      <h3 class="card-title">API Design</h3>
+      <p class="card-subtitle">RESTful endpoints with versioning</p>
+      <div class="code-block"><code><span class="code-comment"># Authentication</span>
 POST   <span class="code-func">/api/v1/auth/register</span>     <span class="code-comment"># Sign up (email/phone)</span>
 POST   <span class="code-func">/api/v1/auth/login</span>        <span class="code-comment"># Sign in</span>
 POST   <span class="code-func">/api/v1/auth/refresh</span>      <span class="code-comment"># Refresh JWT</span>
-POST   <span class="code-func">/api/v1/auth/logout</span>       <span class="code-comment"># Revoke session</span>
 POST   <span class="code-func">/api/v1/auth/device</span>      <span class="code-comment"># Register trusted device</span>
 
 <span class="code-comment"># Employees</span>
 GET    <span class="code-func">/api/v1/employees</span>         <span class="code-comment"># List (paginated)</span>
-GET    <span class="code-func">/api/v1/employees/:id</span>    <span class="code-comment"># Detail</span>
 POST   <span class="code-func">/api/v1/employees</span>         <span class="code-comment"># Create (admin)</span>
 PUT    <span class="code-func">/api/v1/employees/:id</span>    <span class="code-comment"># Update</span>
 
-<span class="code-comment"># Shifts & Roster</span>
+<span class="code-comment"># Shifts &amp; Roster</span>
 GET    <span class="code-func">/api/v1/shifts</span>            <span class="code-comment"># By week/month</span>
 POST   <span class="code-func">/api/v1/shifts</span>            <span class="code-comment"># Assign shift</span>
-PUT    <span class="code-func">/api/v1/shifts/:id</span>       <span class="code-comment"># Modify shift</span>
+POST   <span class="code-func">/api/v1/shifts/publish</span>   <span class="code-comment"># Publish roster</span>
 
 <span class="code-comment"># Time Tracking</span>
 POST   <span class="code-func">/api/v1/timesheet/clock-in</span>
 POST   <span class="code-func">/api/v1/timesheet/clock-out</span>
-GET    <span class="code-func">/api/v1/timesheet/:empId</span>
 
 <span class="code-comment"># Tasks</span>
 GET    <span class="code-func">/api/v1/tasks</span>             <span class="code-comment"># By assignee/status</span>
-POST   <span class="code-func">/api/v1/tasks</span>             <span class="code-comment"># Create task</span>
-PUT    <span class="code-func">/api/v1/tasks/:id</span>        <span class="code-comment"># Update status (drag)</span>
+PUT    <span class="code-func">/api/v1/tasks/:id</span>        <span class="code-comment"># Update status</span>
 
 <span class="code-comment"># Leave</span>
-GET    <span class="code-func">/api/v1/leave</span>              <span class="code-comment"># List requests</span>
-POST   <span class="code-func">/api/v1/leave</span>              <span class="code-comment"># Submit request</span>
-PUT    <span class="code-func">/api/v1/leave/:id</span>         <span class="code-comment"># Approve/Reject</span>
+POST   <span class="code-func">/api/v1/leave</span>             <span class="code-comment"># Submit request</span>
+PUT    <span class="code-func">/api/v1/leave/:id/approve</span> <span class="code-comment"># Approve</span>
 
 <span class="code-comment"># Org Chart</span>
-GET    <span class="code-func">/api/v1/org/tree</span>           <span class="code-comment"># Full hierarchy</span></code>
-            </div>
-          </div>
+GET    <span class="code-func">/api/v1/org/tree</span>           <span class="code-comment"># Full hierarchy</span></code></div>
+    </div>
+    <div class="card fade-in-right">
+      <h3 class="card-title">Architectural Principles</h3>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div><h4 style="font-size:14px;margin-bottom:4px">1. Single Codebase, Three Targets</h4><p style="font-size:13px;color:var(--navy-500)">React Native with Expo compiles to native iOS, native Android, and web. One team, one codebase, one set of features.</p></div>
+        <div><h4 style="font-size:14px;margin-bottom:4px">2. Stateful Auth, Stateless API</h4><p style="font-size:13px;color:var(--navy-500)">JWT access tokens (15-min TTL) + refresh tokens (7-day TTL, stored in Redis). Device tokens allow trusted-device login.</p></div>
+        <div><h4 style="font-size:14px;margin-bottom:4px">3. Offline-First Mobile</h4><p style="font-size:13px;color:var(--navy-500)">SQLite local cache on mobile devices. Clock-in/out works offline; data syncs when connectivity returns.</p></div>
+        <div><h4 style="font-size:14px;margin-bottom:4px">4. Horizontal Scalability</h4><p style="font-size:13px;color:var(--navy-500)">Stateless API containers behind Nginx. Redis for shared session state. Docker Compose for single-server deployment.</p></div>
+        <div><h4 style="font-size:14px;margin-bottom:4px">5. Self-Hosted, No Vendor Lock-in</h4><p style="font-size:13px;color:var(--navy-500)">Entire stack runs on a single Windows or Linux server. No cloud subscription required. All data stays on-premises.</p></div>
+      </div>
+    </div>
+  </div>
 
-          <div class="card">
-            <h3 class="card-title">🏗️ Architectural Principles</h3>
-            <div style="display:flex;flex-direction:column;gap:14px">
-              <div>
-                <h4 style="font-size:14px;margin-bottom:4px">1. Single Codebase, Three Targets</h4>
-                <p style="font-size:13px;color:var(--navy-500)">React Native with Expo compiles to native iOS, native Android, and web. One team, one codebase, one set of features — no platform divergence.</p>
-              </div>
-              <div>
-                <h4 style="font-size:14px;margin-bottom:4px">2. Stateful Auth, Stateless API</h4>
-                <p style="font-size:13px;color:var(--navy-500)">JWT access tokens (15-min TTL) + refresh tokens (7-day TTL, stored in Redis). Device tokens allow trusted-device login without repeated password entry.</p>
-              </div>
-              <div>
-                <h4 style="font-size:14px;margin-bottom:4px">3. Offline-First Mobile</h4>
-                <p style="font-size:13px;color:var(--navy-500)">SQLite local cache on mobile devices. Clock-in/out works offline; data syncs when connectivity returns. Critical for warehouse/delivery staff.</p>
-              </div>
-              <div>
-                <h4 style="font-size:14px;margin-bottom:4px">4. Horizontal Scalability</h4>
-                <p style="font-size:13px;color:var(--navy-500)">Stateless API containers behind Nginx. Redis for shared session state. PostgreSQL with read replicas if needed. Docker Compose for single-server, Kubernetes for multi-node.</p>
-              </div>
-              <div>
-                <h4 style="font-size:14px;margin-bottom:4px">5. Self-Hosted, No Vendor Lock-in</h4>
-                <p style="font-size:13px;color:var(--navy-500)">Entire stack runs on a single Windows or Linux server. No cloud subscription required. All data stays on-premises — critical for privacy-conscious SMEs.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 class="card-title">📊 Request Flow — Clock In/Out Example</h3>
-          <div class="code-block">
-<code><span class="code-comment"># 1. Employee taps "Clock In" on mobile app</span>
+  <div class="card fade-in">
+    <h3 class="card-title">Request Flow — Clock In/Out Example</h3>
+    <div class="code-block"><code><span class="code-comment"># 1. Employee taps "Clock In" on mobile app</span>
 <span class="code-keyword">POST</span> <span class="code-func">/api/v1/timesheet/clock-in</span>
 <span class="code-keyword">Headers:</span> { Authorization: <span class="code-string">"Bearer eyJhbG..."</span> }
-<span class="code-keyword">Body:</span> { employeeId: <span class="code-string">4</span>, timestamp: <span class="code-string">"2026-08-20T06:00:12Z"</span>, device: <span class="code-string">"iPhone-AB12"</span>, geo: { lat: 1.352, lng: 103.819 } }
+<span class="code-keyword">Body:</span> { employeeId: <span class="code-string">4</span>, timestamp: <span class="code-string">"2026-08-20T06:00:12Z"</span>, device: <span class="code-string">"iPhone-AB12"</span> }
 
-<span class="code-comment"># 2. Auth middleware verifies JWT → extracts userId, role</span>
-<span class="code-keyword">→</span> JWT verified, userId=<span class="code-string">4</span>, role=<span class="code-string">"employee"</span>
+<span class="code-comment"># 2. Auth middleware verifies JWT</span>
+<span class="code-keyword">-></span> JWT verified, userId=<span class="code-string">4</span>, role=<span class="code-string">"employee"</span>
 
-<span class="code-comment"># 3. Permission check: can this user clock in for employeeId=4?</span>
-<span class="code-keyword">→</span> Yes (self-service) or Admin/Manager override
+<span class="code-comment"># 3. Permission check</span>
+<span class="code-keyword">-></span> Yes (self-service) or Admin/Manager override
 
 <span class="code-comment"># 4. Core API writes to PostgreSQL via Prisma</span>
-<span class="code-keyword">INSERT INTO</span> time_entries (employee_id, clock_in, device_id, geo_lat, geo_lng)
-<span class="code-keyword">VALUES</span> (<span class="code-string">4</span>, <span class="code-string">'2026-08-20T06:00:12Z'</span>, <span class="code-string">'iPhone-AB12'</span>, <span class="code-string">1.352</span>, <span class="code-string">103.819'</span>)
+<span class="code-keyword">INSERT INTO</span> time_entries (employee_id, clock_in, device_id)
+<span class="code-keyword">VALUES</span> (<span class="code-string">4</span>, <span class="code-string">'2026-08-20T06:00:12Z'</span>, <span class="code-string">'iPhone-AB12'</span>)
 
 <span class="code-comment"># 5. WebSocket push to admin dashboard</span>
-<span class="code-keyword">WS</span> → { event: <span class="code-string">"clock_in"</span>, employeeId: <span class="code-string">4</span>, name: <span class="code-string">"David Kim"</span> }
+<span class="code-keyword">WS</span> -> { event: <span class="code-string">"clock_in"</span>, employeeId: <span class="code-string">4</span>, name: <span class="code-string">"David Kim"</span> }
 
 <span class="code-comment"># 6. Response to client</span>
-<span class="code-keyword">200 OK</span> { success: <span class="code-string">true</span>, entryId: <span class="code-string">1042</span>, message: <span class="code-string">"Clocked in at 06:00"</span> }</code>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ AUTHENTICATION & SECURITY ============ -->
-      <section id="auth" class="section">
-        <div class="section-header">
-          <h1>Authentication &amp; Security</h1>
-          <p>Application-native authentication — email, phone, or trusted-device. No Active Directory, no Azure AD, no SSO required.</p>
-        </div>
-
-        <!-- Auth Flow Diagram -->
-        <div class="card mb-6">
-          <h3 class="card-title">🔑 Sign-up &amp; Sign-in Flow</h3>
-          <p class="card-subtitle">Complete authentication journey — from first sign-up to authenticated session</p>
-
-          <div class="auth-flow">
-            <div class="auth-step">
-              <div class="step-num">1</div>
-              <div class="step-title">Register</div>
-              <div class="step-desc">Email or phone number</div>
-            </div>
-            <div class="auth-arrow">→</div>
-            <div class="auth-step">
-              <div class="step-num">2</div>
-              <div class="step-title">Verify</div>
-              <div class="step-desc">OTP via SMS/email</div>
-            </div>
-            <div class="auth-arrow">→</div>
-            <div class="auth-step">
-              <div class="step-num">3</div>
-              <div class="step-title">Set Password</div>
-              <div class="step-desc">bcrypt hash stored</div>
-            </div>
-            <div class="auth-arrow">→</div>
-            <div class="auth-step">
-              <div class="step-num">4</div>
-              <div class="step-title">Admin Approves</div>
-              <div class="step-desc">Role assigned</div>
-            </div>
-            <div class="auth-arrow">→</div>
-            <div class="auth-step">
-              <div class="step-num">5</div>
-              <div class="step-title">JWT Issued</div>
-              <div class="step-desc">Access + Refresh token</div>
-            </div>
-            <div class="auth-arrow">→</div>
-            <div class="auth-step">
-              <div class="step-num">6</div>
-              <div class="step-title">Device Trust</div>
-              <div class="step-desc">Optional biometric</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-2 mb-6">
-          <div class="card">
-            <h3 class="card-title">📧 Email-Based Authentication</h3>
-            <div style="font-size:13px;color:var(--navy-600);line-height:1.7">
-              <p style="margin-bottom:10px">The primary sign-up method. User enters their email address and a password. The system sends a 6-digit verification code to confirm ownership.</p>
-              <div class="info-block info">
-                <span class="info-icon">ℹ️</span>
-                <div class="info-content">
-                  <h4>Password Security</h4>
-                  <p>Passwords are hashed with <strong>bcrypt</strong> (cost factor 12) — never stored in plain text. Minimum 8 characters, enforced by the API.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 class="card-title">📱 Phone-Based Authentication</h3>
-            <div style="font-size:13px;color:var(--navy-600);line-height:1.7">
-              <p style="margin-bottom:10px">For staff without email access (e.g., warehouse workers). Phone number + SMS OTP verification. The system integrates with any SMS gateway (Twilio, Vonage, or local provider).</p>
-              <div class="info-block success">
-                <span class="info-icon">✓</span>
-                <div class="info-content">
-                  <h4>Works Offline Too</h4>
-                  <p>Trusted devices can be pre-registered by an admin, allowing clock-in/out without requiring re-authentication each shift.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 class="card-title">🔓 Device-Based Authentication</h3>
-            <div style="font-size:13px;color:var(--navy-600);line-height:1.7">
-              <p style="margin-bottom:10px">For shared or dedicated devices (e.g., wall-mounted kiosks, tablets). Admin registers a device with a unique token. The device authenticates automatically on launch — no password needed.</p>
-              <div class="info-block warning">
-                <span class="info-icon">⚠️</span>
-                <div class="info-content">
-                  <h4>Security Safeguard</h4>
-                  <p>Device tokens are revocable by admin at any time. Lost device = instant revoke, no data exposure.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 class="card-title">🛡️ Security Measures</h3>
-            <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> bcrypt password hashing (cost 12)</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> JWT access tokens (15-min TTL)</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> Refresh tokens (7-day, Redis-backed)</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> Rate limiting on auth endpoints</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> Account lockout after 5 failed attempts</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> Optional 2FA via TOTP (Google Authenticator)</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> TLS 1.3 for all transport</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> CORS allowlist (no wildcard)</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> SQL injection protection (Prisma parameterised queries)</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> Audit log for all admin actions</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Role Permission Matrix -->
-        <div class="card">
-          <h3 class="card-title">👥 Role &amp; Permission Matrix</h3>
-          <p class="card-subtitle">Three roles — plain English, no technical jargon. Administrators can customise permissions per role.</p>
-          <div style="overflow-x:auto">
-            <table class="permission-matrix">
-              <thead>
-                <tr>
-                  <th>Capability</th>
-                  <th>Admin</th>
-                  <th>Manager</th>
-                  <th>Employee</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>View own schedule</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td></tr>
-                <tr><td>Clock in / out</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td></tr>
-                <tr><td>View own timesheet</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td></tr>
-                <tr><td>Submit leave request</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td></tr>
-                <tr><td>View own tasks</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td></tr>
-                <tr><td>View team schedule</td><td class="perm-yes">✓</td><td class="perm-own">Team</td><td class="perm-no">✕</td></tr>
-                <tr><td>Assign shifts</td><td class="perm-yes">✓</td><td class="perm-own">Team</td><td class="perm-no">✕</td></tr>
-                <tr><td>Approve / reject leave</td><td class="perm-yes">✓</td><td class="perm-own">Team</td><td class="perm-no">✕</td></tr>
-                <tr><td>Create / assign tasks</td><td class="perm-yes">✓</td><td class="perm-own">Team</td><td class="perm-no">✕</td></tr>
-                <tr><td>View org chart</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td></tr>
-                <tr><td>Add / edit employees</td><td class="perm-yes">✓</td><td class="perm-no">✕</td><td class="perm-no">✕</td></tr>
-                <tr><td>Manage roles &amp; permissions</td><td class="perm-yes">✓</td><td class="perm-no">✕</td><td class="perm-no">✕</td></tr>
-                <tr><td>Configure system settings</td><td class="perm-yes">✓</td><td class="perm-no">✕</td><td class="perm-no">✕</td></tr>
-                <tr><td>View reports &amp; analytics</td><td class="perm-yes">✓</td><td class="perm-own">Team</td><td class="perm-own">Self</td></tr>
-                <tr><td>Export data (CSV/PDF)</td><td class="perm-yes">✓</td><td class="perm-own">Team</td><td class="perm-no">✕</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="flex gap-3 mt-4" style="font-size:12px;color:var(--navy-500)">
-            <span><span class="perm-yes">✓</span> = Full access</span>
-            <span><span class="perm-own">Team</span> = Own team/department only</span>
-            <span><span class="perm-no">✕</span> = No access</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ LOGIN / SIGN-UP (Prototype) ============ -->
-      <section id="login" class="section">
-        <div class="section-header">
-          <h1>Prototype: Login / Sign-up</h1>
-          <p>Application-native authentication screen — choose email, phone, or device-based sign-in.</p>
-        </div>
-
-        <div class="login-screen">
-          <div class="login-header">
-            <div class="login-logo">W</div>
-            <h3>WorkForce Pro</h3>
-            <p>Sign in to your workspace</p>
-          </div>
-          <div class="login-body">
-            <div class="login-tabs">
-              <div class="login-tab active" data-tab="signin">Sign In</div>
-              <div class="login-tab" data-tab="signup">Sign Up</div>
-            </div>
-
-            <!-- Sign In Panel -->
-            <div class="login-panel active" data-panel="signin">
-              <div class="auth-method-toggle">
-                <div class="auth-method-btn active">📧 Email</div>
-                <div class="auth-method-btn">📱 Phone</div>
-                <div class="auth-method-btn">💻 Device</div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label">Email Address</label>
-                <input type="email" class="form-input" placeholder="you@company.local" value="sarah.chen@company.local">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-input" placeholder="••••••••" value="demo1234">
-              </div>
-              <div class="flex items-center justify-between mb-4">
-                <label style="font-size:12px;display:flex;align-items:center;gap:6px;color:var(--navy-600)">
-                  <input type="checkbox" checked> Remember this device
-                </label>
-                <a href="#" style="font-size:12px">Forgot password?</a>
-              </div>
-              <button class="btn btn-primary w-full" id="demo-login">Sign In →</button>
-
-              <div style="text-align:center;margin-top:16px;font-size:12px;color:var(--slate-400)">
-                Protected by bcrypt + JWT · No password stored in plain text
-              </div>
-            </div>
-
-            <!-- Sign Up Panel -->
-            <div class="login-panel" data-panel="signup">
-              <div class="auth-method-toggle">
-                <div class="auth-method-btn active">📧 Email</div>
-                <div class="auth-method-btn">📱 Phone</div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label">Full Name</label>
-                <input type="text" class="form-input" placeholder="John Smith">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Email Address</label>
-                <input type="email" class="form-input" placeholder="you@company.local">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Phone Number</label>
-                <input type="tel" class="form-input" placeholder="+65 8123 4567">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Password (min 8 characters)</label>
-                <input type="password" class="form-input" placeholder="••••••••">
-              </div>
-              <div class="info-block info" style="margin-bottom:16px">
-                <span class="info-icon">ℹ️</span>
-                <div class="info-content">
-                  <h4>Admin Approval Required</h4>
-                  <p>New accounts must be approved by an administrator before activation.</p>
-                </div>
-              </div>
-              <button class="btn btn-primary w-full" onclick="showToast('Verification code sent to your email/phone')">Create Account →</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ DASHBOARD (Prototype) ============ -->
-      <section id="dashboard" class="section">
-        <div class="section-header">
-          <h1>Prototype: Admin Dashboard</h1>
-          <p>Real-time overview — staff on duty, shift coverage, pending approvals, and task progress.</p>
-        </div>
-
-        <div class="grid grid-4 mb-6">
-          <div class="stat-card">
-            <div class="stat-icon" style="background:var(--green-100)">🟢</div>
-            <div class="stat-label">Currently On Duty</div>
-            <div class="stat-value">6</div>
-            <div class="stat-trend up">↑ 2 more than yesterday</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:var(--amber-100)">📅</div>
-            <div class="stat-label">Shifts This Week</div>
-            <div class="stat-value">42</div>
-            <div class="stat-trend up">96% coverage</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:var(--indigo-100)">✅</div>
-            <div class="stat-label">Open Tasks</div>
-            <div class="stat-value">7</div>
-            <div class="stat-trend up">3 completed this week</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:var(--red-100)">🏖️</div>
-            <div class="stat-label">Pending Leave Requests</div>
-            <div class="stat-value">3</div>
-            <div class="stat-trend down">Needs attention</div>
-          </div>
-        </div>
-
-        <div class="grid grid-2 mb-6">
-          <div class="card">
-            <h3 class="card-title">📊 Weekly Attendance Rate</h3>
-            <p class="card-subtitle">Percentage of scheduled staff who clocked in on time</p>
-            <div class="chart-bar-container" id="attendance-chart"></div>
-            <div style="margin-top:28px;display:flex;gap:16px;font-size:12px">
-              <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--indigo-500);margin-right:4px"></span>Weekdays</span>
-              <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--teal-500);margin-right:4px"></span>Weekends</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 class="card-title">🎯 Task Distribution</h3>
-            <p class="card-subtitle">Tasks by status</p>
-            <div style="display:flex;align-items:center;gap:24px;padding:10px 0">
-              <div class="donut-chart" style="background:conic-gradient(var(--slate-400) 0% 20%, var(--blue-500) 20% 40%, var(--amber-500) 40% 60%, var(--green-500) 60% 100%)">
-                <div class="donut-center">
-                  <div class="donut-value">10</div>
-                  <div class="donut-label">Total Tasks</div>
-                </div>
-              </div>
-              <div style="flex:1;display:flex;flex-direction:column;gap:8px;font-size:13px">
-                <div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:2px;background:var(--slate-400)"></span> To Do <span style="margin-left:auto;font-weight:600">2</span></div>
-                <div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:2px;background:var(--blue-500)"></span> In Progress <span style="margin-left:auto;font-weight:600">3</span></div>
-                <div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:2px;background:var(--amber-500)"></span> In Review <span style="margin-left:auto;font-weight:600">2</span></div>
-                <div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:2px;background:var(--green-500)"></span> Done <span style="margin-left:auto;font-weight:600">3</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-2">
-          <div class="card">
-            <h3 class="card-title">⚡ Recent Activity</h3>
-            <div style="display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;gap:12px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid var(--slate-100)">
-                <div style="width:32px;height:32px;border-radius:50%;background:var(--green-100);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">🟢</div>
-                <div>
-                  <div style="font-size:13px;font-weight:600">David Kim clocked in</div>
-                  <div class="text-xs text-muted">Morning shift · 06:02 AM · Zone B</div>
-                </div>
-                <span class="text-xs text-muted" style="margin-left:auto">2m ago</span>
-              </div>
-              <div style="display:flex;gap:12px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid var(--slate-100)">
-                <div style="width:32px;height:32px;border-radius:50%;background:var(--amber-100);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">🏖️</div>
-                <div>
-                  <div style="font-size:13px;font-weight:600">Priya Sharma requested leave</div>
-                  <div class="text-xs text-muted">Medical leave · Aug 23–24 · 2 days</div>
-                </div>
-                <span class="text-xs text-muted" style="margin-left:auto">15m ago</span>
-              </div>
-              <div style="display:flex;gap:12px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid var(--slate-100)">
-                <div style="width:32px;height:32px;border-radius:50%;background:var(--indigo-100);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">✅</div>
-                <div>
-                  <div style="font-size:13px;font-weight:600">Safety inspection marked complete</div>
-                  <div class="text-xs text-muted">By Mei Ling Tan · Warehouse zone</div>
-                </div>
-                <span class="text-xs text-muted" style="margin-left:auto">1h ago</span>
-              </div>
-              <div style="display:flex;gap:12px;align-items:flex-start">
-                <div style="width:32px;height:32px;border-radius:50%;background:var(--blue-100);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">🔄</div>
-                <div>
-                  <div style="font-size:13px;font-weight:600">Shift swapped: Tom ↔ David</div>
-                  <div class="text-xs text-muted">Saturday morning shift · Approved by James</div>
-                </div>
-                <span class="text-xs text-muted" style="margin-left:auto">3h ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 class="card-title">📋 Pending Approvals</h3>
-            <div style="display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--slate-200);border-radius:var(--radius)">
-                <div style="width:36px;height:36px;border-radius:50%;background:var(--pink-100);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#9D174D;flex-shrink:0">PS</div>
-                <div style="flex:1">
-                  <div style="font-size:13px;font-weight:600">Priya Sharma</div>
-                  <div class="text-xs text-muted">Medical Leave · Aug 23–24</div>
-                </div>
-                <button class="btn btn-sm btn-primary" onclick="showToast('Leave approved for Priya Sharma')">Approve</button>
-                <button class="btn btn-sm btn-secondary" onclick="showToast('Leave rejected', '✕')">Reject</button>
-              </div>
-              <div style="display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--slate-200);border-radius:var(--radius)">
-                <div style="width:36px;height:36px;border-radius:50%;background:var(--blue-100);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#1E40AF;flex-shrink:0">DK</div>
-                <div style="flex:1">
-                  <div style="font-size:13px;font-weight:600">David Kim</div>
-                  <div class="text-xs text-muted">Annual Leave · Sep 2–6</div>
-                </div>
-                <button class="btn btn-sm btn-primary" onclick="showToast('Leave approved for David Kim')">Approve</button>
-                <button class="btn btn-sm btn-secondary" onclick="showToast('Leave rejected', '✕')">Reject</button>
-              </div>
-              <div style="display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--slate-200);border-radius:var(--radius)">
-                <div style="width:36px;height:36px;border-radius:50%;background:var(--blue-100);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#1E40AF;flex-shrink:0">LM</div>
-                <div style="flex:1">
-                  <div style="font-size:13px;font-weight:600">Lucas Müller</div>
-                  <div class="text-xs text-muted">Compassionate · Aug 25–26</div>
-                </div>
-                <button class="btn btn-sm btn-primary" onclick="showToast('Leave approved for Lucas Müller')">Approve</button>
-                <button class="btn btn-sm btn-secondary" onclick="showToast('Leave rejected', '✕')">Reject</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ SCHEDULING (Prototype) ============ -->
-      <section id="scheduling" class="section">
-        <div class="section-header">
-          <h1>Prototype: Scheduling &amp; Roster</h1>
-          <p>Weekly roster grid — click any shift badge to cycle through Morning, Evening, Night, and Off. Drag to reassign.</p>
-        </div>
-
-        <div class="flex justify-between items-center mb-4">
-          <div class="flex gap-3">
-            <button class="btn btn-secondary btn-sm">← Previous Week</button>
-            <button class="btn btn-primary btn-sm">Aug 18–24, 2026</button>
-            <button class="btn btn-secondary btn-sm">Next Week →</button>
-          </div>
-          <div class="flex gap-3">
-            <button class="btn btn-secondary btn-sm" onclick="showToast('Roster published — notifications sent to all staff')">📤 Publish Roster</button>
-            <button class="btn btn-primary btn-sm">+ Add Shift</button>
-          </div>
-        </div>
-
-        <div class="card" style="padding:12px">
-          <div class="roster-grid" id="roster-grid"></div>
-        </div>
-
-        <div class="grid grid-4 mt-6">
-          <div class="card" style="text-align:center">
-            <div style="font-size:24px;margin-bottom:4px">🌅</div>
-            <div style="font-weight:600;font-size:14px">Morning Shift</div>
-            <div class="text-sm text-muted">06:00 – 14:00</div>
-            <div class="badge badge-amber mt-4">4 staff assigned</div>
-          </div>
-          <div class="card" style="text-align:center">
-            <div style="font-size:24px;margin-bottom:4px">🌆</div>
-            <div style="font-weight:600;font-size:14px">Evening Shift</div>
-            <div class="text-sm text-muted">14:00 – 22:00</div>
-            <div class="badge badge-indigo mt-4">3 staff assigned</div>
-          </div>
-          <div class="card" style="text-align:center">
-            <div style="font-size:24px;margin-bottom:4px">🌙</div>
-            <div style="font-weight:600;font-size:14px">Night Shift</div>
-            <div class="text-sm text-muted">22:00 – 06:00</div>
-            <div class="badge badge-slate mt-4">0 staff assigned</div>
-          </div>
-          <div class="card" style="text-align:center">
-            <div style="font-size:24px;margin-bottom:4px">🔴</div>
-            <div style="font-weight:600;font-size:14px">Coverage Rate</div>
-            <div class="text-sm text-muted">This week</div>
-            <div class="badge badge-green mt-4">96% covered</div>
-          </div>
-        </div>
-
-        <div class="info-block info mt-6">
-          <span class="info-icon">💡</span>
-          <div class="info-content">
-            <h4>Interactive Prototype</h4>
-            <p>Click any shift badge in the roster grid above to cycle through shift types. This demonstrates the drag-and-drop roster editing capability.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ TIME TRACKING (Prototype) ============ -->
-      <section id="time-tracking" class="section">
-        <div class="section-header">
-          <h1>Prototype: Time Tracking</h1>
-          <p>Digital clock-in/out with live timer, timesheet view, and exportable reports.</p>
-        </div>
-
-        <div class="grid grid-2 mb-6">
-          <div class="card">
-            <h3 class="card-title">⏰ Live Clock</h3>
-            <p class="card-subtitle">Tap to clock in or out</p>
-            <div class="time-clock">
-              <div class="clock-time" id="clock-time">--:--:--</div>
-              <div class="clock-date" id="clock-date">Loading…</div>
-              <button class="clock-btn clocked-out" id="clock-btn">
-                <span class="clock-btn-icon">▶</span>
-                Clock In
-              </button>
-              <div style="margin-top:24px;font-size:13px;color:var(--navy-500)">
-                <div class="flex justify-between" style="padding:4px 0"><span>Today's hours:</span><strong>0h 0m</strong></div>
-                <div class="flex justify-between" style="padding:4px 0"><span>This week:</span><strong>32h 15m</strong></div>
-                <div class="flex justify-between" style="padding:4px 0"><span>Overtime:</span><strong style="color:var(--amber-500)">2h 15m</strong></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 class="card-title">📊 Today's Clock-ins</h3>
-            <p class="card-subtitle">Live staff activity</p>
-            <div style="display:flex;flex-direction:column;gap:0">
-              <div class="timesheet-row">
-                <div class="ts-emp">
-                  <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--blue-500),var(--indigo-400));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff">DK</div>
-                  David Kim
-                </div>
-                <span class="text-sm text-muted">06:02 AM</span>
-                <span class="ts-hours">2h 58m</span>
-                <span class="ts-status"><span class="badge badge-green">🟢 Active</span></span>
-              </div>
-              <div class="timesheet-row">
-                <div class="ts-emp">
-                  <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--teal-500),var(--teal-400));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff">JO</div>
-                  James Okafor
-                </div>
-                <span class="text-sm text-muted">06:00 AM</span>
-                <span class="ts-hours">3h 00m</span>
-                <span class="ts-status"><span class="badge badge-green">🟢 Active</span></span>
-              </div>
-              <div class="timesheet-row">
-                <div class="ts-emp">
-                  <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--purple-500),var(--indigo-400));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff">ML</div>
-                  Mei Ling Tan
-                </div>
-                <span class="text-sm text-muted">06:15 AM</span>
-                <span class="ts-hours">2h 45m</span>
-                <span class="ts-status"><span class="badge badge-green">🟢 Active</span></span>
-              </div>
-              <div class="timesheet-row">
-                <div class="ts-emp">
-                  <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--green-500),var(--teal-500));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff">AR</div>
-                  Aisha Rahman
-                </div>
-                <span class="text-sm text-muted">07:30 AM</span>
-                <span class="ts-hours">1h 30m</span>
-                <span class="ts-status"><span class="badge badge-green">🟢 Active</span></span>
-              </div>
-              <div class="timesheet-row">
-                <div class="ts-emp">
-                  <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--pink-500),var(--purple-500));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff">PS</div>
-                  Priya Sharma
-                </div>
-                <span class="text-sm text-muted">Scheduled 14:00</span>
-                <span class="ts-hours">—</span>
-                <span class="ts-status"><span class="badge badge-slate">⏳ Upcoming</span></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 class="card-title">📅 Weekly Timesheet</h3>
-          <p class="card-subtitle">All employees · Aug 18–24, 2026</p>
-          <div style="overflow-x:auto">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Employee</th>
-                  <th>Mon</th>
-                  <th>Tue</th>
-                  <th>Wed</th>
-                  <th>Thu</th>
-                  <th>Fri</th>
-                  <th>Sat</th>
-                  <th>Sun</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Sarah Chen</strong></td>
-                  <td>8h 00m</td><td>8h 05m</td><td>7h 55m</td><td>8h 00m</td><td>8h 10m</td><td>—</td><td>—</td>
-                  <td><strong>40h 10m</strong></td>
-                </tr>
-                <tr>
-                  <td><strong>James Okafor</strong></td>
-                  <td>8h 02m</td><td>8h 00m</td><td>7h 58m</td><td>8h 01m</td><td>8h 00m</td><td>—</td><td>—</td>
-                  <td><strong>40h 01m</strong></td>
-                </tr>
-                <tr>
-                  <td><strong>David Kim</strong></td>
-                  <td>8h 00m</td><td>7h 45m</td><td>8h 15m</td><td>7h 50m</td><td>8h 05m</td><td>—</td><td>—</td>
-                  <td><strong>39h 55m</strong></td>
-                </tr>
-                <tr>
-                  <td><strong>Priya Sharma</strong></td>
-                  <td>8h 00m</td><td>—</td><td>8h 00m</td><td>8h 00m</td><td>8h 00m</td><td>—</td><td>—</td>
-                  <td><strong>32h 00m</strong></td>
-                </tr>
-                <tr>
-                  <td><strong>Tom Walker</strong></td>
-                  <td>8h 00m</td><td>8h 00m</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
-                  <td><strong>16h 00m</strong></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="flex justify-between items-center mt-4">
-            <div class="text-sm text-muted">Showing 5 of 8 employees</div>
-            <button class="btn btn-secondary btn-sm" onclick="showToast('Timesheet exported as CSV')">📥 Export CSV</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ TASK MANAGEMENT (Prototype) ============ -->
-      <section id="tasks" class="section">
-        <div class="section-header">
-          <h1>Prototype: Task Management</h1>
-          <p>Kanban board — drag cards between columns to update status. Filter by assignee, priority, or tag.</p>
-        </div>
-
-        <div class="flex justify-between items-center mb-4">
-          <div class="flex gap-3">
-            <button class="btn btn-secondary btn-sm">All Assignees</button>
-            <button class="btn btn-secondary btn-sm">All Priorities</button>
-            <button class="btn btn-secondary btn-sm">All Tags</button>
-          </div>
-          <button class="btn btn-primary btn-sm" onclick="showToast('New task form would open here')">+ New Task</button>
-        </div>
-
-        <div class="card" style="padding:16px">
-          <div class="kanban" id="kanban-board"></div>
-        </div>
-
-        <div class="info-block info mt-6">
-          <span class="info-icon">💡</span>
-          <div class="info-content">
-            <h4>Interactive Prototype</h4>
-            <p>Drag any task card between the To Do, In Progress, In Review, and Done columns. The column counts update automatically.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ ORG CHART (Prototype) ============ -->
-      <section id="org-chart" class="section">
-        <div class="section-header">
-          <h1>Prototype: Organisation Chart</h1>
-          <p>Visual hierarchy tree — click any node to view employee details. Auto-generated from manager_id relationships.</p>
-        </div>
-
-        <div class="card" style="overflow-x:auto">
-          <div id="org-chart"></div>
-        </div>
-
-        <div class="grid grid-3 mt-6">
-          <div class="card">
-            <h3 class="card-title">🏢 Departments</h3>
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <div class="flex items-center justify-between"><span class="badge badge-indigo">Management</span><span class="text-sm">1 person</span></div>
-              <div class="flex items-center justify-between"><span class="badge badge-teal">Operations</span><span class="text-sm">1 person</span></div>
-              <div class="flex items-center justify-between"><span class="badge badge-purple">Logistics</span><span class="text-sm">3 people</span></div>
-              <div class="flex items-center justify-between"><span class="badge badge-green">Human Resources</span><span class="text-sm">1 person</span></div>
-              <div class="flex items-center justify-between"><span class="badge badge-blue">Customer Care</span><span class="text-sm">1 person</span></div>
-              <div class="flex items-center justify-between"><span class="badge badge-amber">IT</span><span class="text-sm">1 person</span></div>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 class="card-title">📊 Hierarchy Stats</h3>
-            <div style="display:flex;flex-direction:column;gap:10px">
-              <div class="flex justify-between"><span class="text-sm text-muted">Total Employees</span><strong>8</strong></div>
-              <div class="flex justify-between"><span class="text-sm text-muted">Management Layer</span><strong>3 levels</strong></div>
-              <div class="flex justify-between"><span class="text-sm text-muted">Direct Reports (avg)</span><strong>2.0</strong></div>
-              <div class="flex justify-between"><span class="text-sm text-muted">Managers</span><strong>3</strong></div>
-              <div class="flex justify-between"><span class="text-sm text-muted">Frontline Staff</span><strong>4</strong></div>
-              <div class="flex justify-between"><span class="text-sm text-muted">Vacancies</span><strong>0</strong></div>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 class="card-title">🔄 How It Works</h3>
-            <div style="font-size:13px;color:var(--navy-600);line-height:1.7">
-              <p style="margin-bottom:8px">The org chart is dynamically generated from the <code style="background:var(--slate-100);padding:2px 6px;border-radius:4px;font-size:12px">manager_id</code> field on each employee record.</p>
-              <p style="margin-bottom:8px">When an admin changes someone's manager, the tree redraws instantly — no manual chart editing needed.</p>
-              <p>Click any node in the chart above to see a quick employee summary.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ LEAVE MANAGEMENT (Prototype) ============ -->
-      <section id="leave" class="section">
-        <div class="section-header">
-          <h1>Prototype: Leave Management</h1>
-          <p>Calendar view with leave overlays, plus a sortable approval queue. Integrated with the roster for conflict detection.</p>
-        </div>
-
-        <div class="grid grid-2 mb-6">
-          <div class="card">
-            <h3 class="card-title">🗓️ Leave Calendar — August 2026</h3>
-            <p class="card-subtitle">Colour-coded by status</p>
-            <div class="leave-calendar" id="leave-calendar"></div>
-            <div class="flex gap-3 mt-4" style="font-size:11px">
-              <span><span class="badge badge-green">Approved</span></span>
-              <span><span class="badge badge-amber">Pending</span></span>
-              <span><span class="badge badge-red">Rejected</span></span>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 class="card-title">📋 Leave Balances</h3>
-            <div style="display:flex;flex-direction:column;gap:12px">
-              <div>
-                <div class="flex justify-between mb-2"><span style="font-size:13px;font-weight:600">Sarah Chen</span><span class="text-sm">18 / 21 days</span></div>
-                <div class="progress-bar"><div class="progress-fill" style="width:86%;background:var(--green-500)"></div></div>
-              </div>
-              <div>
-                <div class="flex justify-between mb-2"><span style="font-size:13px;font-weight:600">James Okafor</span><span class="text-sm">14 / 21 days</span></div>
-                <div class="progress-bar"><div class="progress-fill" style="width:67%;background:var(--green-500)"></div></div>
-              </div>
-              <div>
-                <div class="flex justify-between mb-2"><span style="font-size:13px;font-weight:600">David Kim</span><span class="text-sm">10 / 21 days</span></div>
-                <div class="progress-bar"><div class="progress-fill" style="width:48%;background:var(--amber-500)"></div></div>
-              </div>
-              <div>
-                <div class="flex justify-between mb-2"><span style="font-size:13px;font-weight:600">Priya Sharma</span><span class="text-sm">8 / 14 days</span></div>
-                <div class="progress-bar"><div class="progress-fill" style="width:57%;background:var(--amber-500)"></div></div>
-              </div>
-              <div>
-                <div class="flex justify-between mb-2"><span style="font-size:13px;font-weight:600">Tom Walker</span><span class="text-sm">5 / 14 days</span></div>
-                <div class="progress-bar"><div class="progress-fill" style="width:36%;background:var(--red-500)"></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 class="card-title">📝 Leave Requests</h3>
-          <p class="card-subtitle">Approve or reject pending requests — roster conflicts are flagged automatically</p>
-          <div style="overflow-x:auto">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Employee</th>
-                  <th>Type</th>
-                  <th>Dates</th>
-                  <th>Days</th>
-                  <th>Reason</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="leave-list"></tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ EMPLOYEES (Prototype) ============ -->
-      <section id="employees" class="section">
-        <div class="section-header">
-          <h1>Prototype: Employee Directory</h1>
-          <p>Full employee list with contact details, department, status, and role assignment.</p>
-        </div>
-
-        <div class="flex justify-between items-center mb-4">
-          <div class="flex gap-3">
-            <button class="btn btn-secondary btn-sm">All Departments</button>
-            <button class="btn btn-secondary btn-sm">All Status</button>
-          </div>
-          <div class="flex gap-3">
-            <button class="btn btn-secondary btn-sm" onclick="showToast('Employee list exported as CSV')">📥 Export</button>
-            <button class="btn btn-primary btn-sm" onclick="showToast('Add employee form would open here')">+ Add Employee</button>
-          </div>
-        </div>
-
-        <div class="card" style="padding:0;overflow:hidden">
-          <div style="overflow-x:auto">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Employee</th>
-                  <th>Title</th>
-                  <th>Department</th>
-                  <th>Phone</th>
-                  <th>Status</th>
-                  <th>Role</th>
-                </tr>
-              </thead>
-              <tbody id="employee-tbody"></tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ DATA MODEL ============ -->
-      <section id="data-model" class="section">
-        <div class="section-header">
-          <h1>Data Model (ERD)</h1>
-          <p>Relational schema covering employees, shifts, tasks, leave, time entries, and organisational hierarchy.</p>
-        </div>
-
-        <div class="card mb-6">
-          <h3 class="card-title">🗄️ Entity Relationship Diagram</h3>
-          <p class="card-subtitle">8 core tables with foreign key relationships</p>
-
-          <div class="erd-canvas">
-            <!-- Employees -->
-            <div class="erd-table">
-              <div class="erd-header"><span class="erd-icon">👤</span> employees</div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">id</span><span class="field-type">UUID PK</span></div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">manager_id</span><span class="field-type">UUID FK→self</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">full_name</span><span class="field-type">VARCHAR(100)</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">email</span><span class="field-type">VARCHAR(255) U</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">phone</span><span class="field-type">VARCHAR(20)</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">password_hash</span><span class="field-type">VARCHAR(255)</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">title</span><span class="field-type">VARCHAR(100)</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">department_id</span><span class="field-type">UUID FK</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">role</span><span class="field-type">ENUM</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">device_token</span><span class="field-type">VARCHAR(255)</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">avatar_url</span><span class="field-type">VARCHAR(500)</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">status</span><span class="field-type">ENUM</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">created_at</span><span class="field-type">TIMESTAMPTZ</span></div>
-            </div>
-
-            <!-- Departments -->
-            <div class="erd-table">
-              <div class="erd-header"><span class="erd-icon">🏢</span> departments</div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">id</span><span class="field-type">UUID PK</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">name</span><span class="field-type">VARCHAR(100)</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">head_id</span><span class="field-type">UUID FK→emp</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">parent_id</span><span class="field-type">UUID FK→self</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">description</span><span class="field-type">TEXT</span></div>
-            </div>
-
-            <!-- Shifts -->
-            <div class="erd-table">
-              <div class="erd-header"><span class="erd-icon">📅</span> shifts</div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">id</span><span class="field-type">UUID PK</span></div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">employee_id</span><span class="field-type">UUID FK</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">date</span><span class="field-type">DATE</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">shift_type</span><span class="field-type">ENUM</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">start_time</span><span class="field-type">TIME</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">end_time</span><span class="field-type">TIME</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">break_minutes</span><span class="field-type">INT</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">created_by</span><span class="field-type">UUID FK</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">published</span><span class="field-type">BOOLEAN</span></div>
-            </div>
-
-            <!-- Time Entries -->
-            <div class="erd-table">
-              <div class="erd-header"><span class="erd-icon">⏰</span> time_entries</div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">id</span><span class="field-type">UUID PK</span></div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">employee_id</span><span class="field-type">UUID FK</span></div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">shift_id</span><span class="field-type">UUID FK</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">clock_in</span><span class="field-type">TIMESTAMPTZ</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">clock_out</span><span class="field-type">TIMESTAMPTZ</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">duration_min</span><span class="field-type">INT</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">device_id</span><span class="field-type">VARCHAR(100)</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">geo_lat</span><span class="field-type">DECIMAL</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">geo_lng</span><span class="field-type">DECIMAL</span></div>
-            </div>
-
-            <!-- Tasks -->
-            <div class="erd-table">
-              <div class="erd-header"><span class="erd-icon">✅</span> tasks</div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">id</span><span class="field-type">UUID PK</span></div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">assignee_id</span><span class="field-type">UUID FK</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">created_by</span><span class="field-type">UUID FK</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">title</span><span class="field-type">VARCHAR(200)</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">description</span><span class="field-type">TEXT</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">status</span><span class="field-type">ENUM</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">priority</span><span class="field-type">ENUM</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">due_date</span><span class="field-type">DATE</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">tags</span><span class="field-type">TEXT[]</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">sort_order</span><span class="field-type">INT</span></div>
-            </div>
-
-            <!-- Leave Requests -->
-            <div class="erd-table">
-              <div class="erd-header"><span class="erd-icon">🏖️</span> leave_requests</div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">id</span><span class="field-type">UUID PK</span></div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">employee_id</span><span class="field-type">UUID FK</span></div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">approved_by</span><span class="field-type">UUID FK</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">leave_type</span><span class="field-type">ENUM</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">start_date</span><span class="field-type">DATE</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">end_date</span><span class="field-type">DATE</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">days</span><span class="field-type">DECIMAL</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">reason</span><span class="field-type">TEXT</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">status</span><span class="field-type">ENUM</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">conflict_flag</span><span class="field-type">BOOLEAN</span></div>
-            </div>
-
-            <!-- Leave Balances -->
-            <div class="erd-table">
-              <div class="erd-header"><span class="erd-icon">📊</span> leave_balances</div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">id</span><span class="field-type">UUID PK</span></div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">employee_id</span><span class="field-type">UUID FK</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">leave_type</span><span class="field-type">ENUM</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">entitled_days</span><span class="field-type">DECIMAL</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">used_days</span><span class="field-type">DECIMAL</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">year</span><span class="field-type">INT</span></div>
-            </div>
-
-            <!-- Devices -->
-            <div class="erd-table">
-              <div class="erd-header"><span class="erd-icon">💻</span> trusted_devices</div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">id</span><span class="field-type">UUID PK</span></div>
-              <div class="erd-field"><span class="field-key">🔑</span><span class="field-name">employee_id</span><span class="field-type">UUID FK</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">device_token</span><span class="field-type">VARCHAR(255) U</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">platform</span><span class="field-type">ENUM</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">device_name</span><span class="field-type">VARCHAR(100)</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">last_seen</span><span class="field-type">TIMESTAMPTZ</span></div>
-              <div class="erd-field"><span class="field-key"></span><span class="field-name">revoked</span><span class="field-type">BOOLEAN</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 class="card-title">🔗 Key Relationships</h3>
-          <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
-            <div><strong>employees</strong> → <strong>departments</strong>: Many-to-one (department_id FK)</div>
-            <div><strong>employees</strong> → <strong>employees</strong>: Self-referential (manager_id FK — enables org chart)</div>
-            <div><strong>shifts</strong> → <strong>employees</strong>: Many-to-one (employee_id FK)</div>
-            <div><strong>time_entries</strong> → <strong>employees</strong> + <strong>shifts</strong>: Many-to-one (both FKs)</div>
-            <div><strong>tasks</strong> → <strong>employees</strong>: Many-to-one (assignee_id, created_by — both FKs)</div>
-            <div><strong>leave_requests</strong> → <strong>employees</strong>: Many-to-one (employee_id, approved_by — both FKs)</div>
-            <div><strong>leave_balances</strong> → <strong>employees</strong>: Many-to-one (employee_id FK)</div>
-            <div><strong>trusted_devices</strong> → <strong>employees</strong>: Many-to-one (employee_id FK)</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ FEATURE BACKLOG ============ -->
-      <section id="backlog" class="section">
-        <div class="section-header">
-          <h1>Feature Backlog</h1>
-          <p>Prioritised milestones — development can start immediately after approval. Each milestone is independently deployable.</p>
-        </div>
-
-        <div class="flex gap-3 mb-6">
-          <button class="btn btn-primary btn-sm backlog-filter active" data-filter="">All Milestones</button>
-          <button class="btn btn-secondary btn-sm backlog-filter" data-filter="m1">M1: Foundation</button>
-          <button class="btn btn-secondary btn-sm backlog-filter" data-filter="m2">M2: Core Features</button>
-          <button class="btn btn-secondary btn-sm backlog-filter" data-filter="m3">M3: Roster &amp; Leave</button>
-          <button class="btn btn-secondary btn-sm backlog-filter" data-filter="m4">M4: Polish &amp; Mobile</button>
-        </div>
-
-        <div class="grid grid-2">
-          <!-- M1 -->
-          <div class="milestone-card" data-milestone="m1">
-            <div class="milestone-header">
-              <div class="milestone-badge" style="background:var(--indigo-600)">M1</div>
-              <div>
-                <div class="milestone-title">Foundation</div>
-                <div class="milestone-desc">Weeks 1–2 · Infrastructure &amp; Auth</div>
-              </div>
-              <div style="margin-left:auto"><span class="badge badge-indigo">Priority: Critical</span></div>
-            </div>
-            <div class="milestone-body">
-              <div class="backlog-item done"><span class="check-icon">✓</span><div><div class="item-title">Project scaffolding — Expo + Express + Prisma</div><div class="item-meta">Est: 2 days · Dependency: None</div></div></div>
-              <div class="backlog-item done"><span class="check-icon">✓</span><div><div class="item-title">Database schema &amp; migrations (PostgreSQL)</div><div class="item-meta">Est: 2 days · Dependency: Scaffolding</div></div></div>
-              <div class="backlog-item done"><span class="check-icon">✓</span><div><div class="item-title">Auth: email/phone sign-up, OTP verification, JWT</div><div class="item-meta">Est: 3 days · Dependency: DB schema</div></div></div>
-              <div class="backlog-item done"><span class="check-icon">✓</span><div><div class="item-title">Role-based access control (Admin/Manager/Employee)</div><div class="item-meta">Est: 2 days · Dependency: Auth</div></div></div>
-              <div class="backlog-item done"><span class="check-icon">✓</span><div><div class="item-title">Login screen (web + mobile)</div><div class="item-meta">Est: 2 days · Dependency: Auth</div></div></div>
-              <div class="backlog-item done"><span class="check-icon">✓</span><div><div class="item-title">Device registration &amp; trusted-device auth</div><div class="item-meta">Est: 2 days · Dependency: Auth</div></div></div>
-            </div>
-          </div>
-
-          <!-- M2 -->
-          <div class="milestone-card" data-milestone="m2">
-            <div class="milestone-header">
-              <div class="milestone-badge" style="background:var(--teal-600)">M2</div>
-              <div>
-                <div class="milestone-title">Core Features</div>
-                <div class="milestone-desc">Weeks 3–4 · Dashboard, Tasks, Employees</div>
-              </div>
-              <div style="margin-left:auto"><span class="badge badge-teal">Priority: High</span></div>
-            </div>
-            <div class="milestone-body">
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Admin dashboard with live stats &amp; charts</div><div class="item-meta">Est: 3 days · Dependency: M1</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Employee CRUD — add, edit, deactivate</div><div class="item-meta">Est: 2 days · Dependency: M1</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Employee directory with search &amp; filter</div><div class="item-meta">Est: 2 days · Dependency: Employee CRUD</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Task management — Kanban board with drag-drop</div><div class="item-meta">Est: 4 days · Dependency: M1</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Task assignment, priorities, tags, due dates</div><div class="item-meta">Est: 2 days · Dependency: Kanban</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Organisation chart — auto-generated from manager_id</div><div class="item-meta">Est: 3 days · Dependency: Employee CRUD</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Department management</div><div class="item-meta">Est: 1 day · Dependency: Org chart</div></div></div>
-            </div>
-          </div>
-
-          <!-- M3 -->
-          <div class="milestone-card" data-milestone="m3">
-            <div class="milestone-header">
-              <div class="milestone-badge" style="background:var(--amber-500)">M3</div>
-              <div>
-                <div class="milestone-title">Roster &amp; Leave</div>
-                <div class="milestone-desc">Weeks 5–6 · Scheduling, Time, Leave</div>
-              </div>
-              <div style="margin-left:auto"><span class="badge badge-amber">Priority: High</span></div>
-            </div>
-            <div class="milestone-body">
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Shift scheduling — weekly roster grid</div><div class="item-meta">Est: 4 days · Dependency: M2</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Drag-and-drop shift assignment</div><div class="item-meta">Est: 2 days · Dependency: Roster grid</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Roster publish &amp; push notifications</div><div class="item-meta">Est: 2 days · Dependency: Roster grid</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Time tracking — clock in/out with geo-location</div><div class="item-meta">Est: 3 days · Dependency: M1</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Timesheet view &amp; CSV/PDF export</div><div class="item-meta">Est: 2 days · Dependency: Time tracking</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Leave request submission (employee self-service)</div><div class="item-meta">Est: 2 days · Dependency: M1</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Leave approval workflow with conflict detection</div><div class="item-meta">Est: 3 days · Dependency: Leave + Roster</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Leave balance tracking &amp; auto-calculation</div><div class="item-meta">Est: 2 days · Dependency: Leave approval</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Leave calendar view (month/week)</div><div class="item-meta">Est: 2 days · Dependency: Leave approval</div></div></div>
-            </div>
-          </div>
-
-          <!-- M4 -->
-          <div class="milestone-card" data-milestone="m4">
-            <div class="milestone-header">
-              <div class="milestone-badge" style="background:var(--green-500)">M4</div>
-              <div>
-                <div class="milestone-title">Polish &amp; Mobile</div>
-                <div class="milestone-desc">Weeks 7–8 · Mobile apps, reports, deployment</div>
-              </div>
-              <div style="margin-left:auto"><span class="badge badge-green">Priority: Medium</span></div>
-            </div>
-            <div class="milestone-body">
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Native iOS build via Expo EAS</div><div class="item-meta">Est: 2 days · Dependency: M1–M3</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Native Android build via Expo EAS</div><div class="item-meta">Est: 1 day · Dependency: iOS build</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Offline mode — SQLite cache for clock-in/out</div><div class="item-meta">Est: 3 days · Dependency: Time tracking</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Push notifications (Expo Notifications)</div><div class="item-meta">Est: 2 days · Dependency: Mobile builds</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Reports &amp; analytics dashboard</div><div class="item-meta">Est: 3 days · Dependency: M2–M3</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Audit log for admin actions</div><div class="item-meta">Est: 2 days · Dependency: M1</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">2FA — TOTP via authenticator app</div><div class="item-meta">Est: 2 days · Dependency: M1</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Docker Compose deployment package</div><div class="item-meta">Est: 1 day · Dependency: All</div></div></div>
-              <div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">User acceptance testing &amp; handover docs</div><div class="item-meta">Est: 2 days · Dependency: All</div></div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mt-6">
-          <h3 class="card-title">📊 Milestone Summary</h3>
-          <div style="overflow-x:auto">
-            <table class="data-table">
-              <thead>
-                <tr><th>Milestone</th><th>Timeline</th><th>Features</th><th>Effort</th><th>Status</th></tr>
-              </thead>
-              <tbody>
-                <tr><td><strong>M1: Foundation</strong></td><td>Weeks 1–2</td><td>6 items</td><td>13 days</td><td><span class="badge badge-green">Complete (Prototype)</span></td></tr>
-                <tr><td><strong>M2: Core Features</strong></td><td>Weeks 3–4</td><td>7 items</td><td>17 days</td><td><span class="badge badge-blue">Ready to start</span></td></tr>
-                <tr><td><strong>M3: Roster &amp; Leave</strong></td><td>Weeks 5–6</td><td>9 items</td><td>20 days</td><td><span class="badge badge-slate">Blocked by M2</span></td></tr>
-                <tr><td><strong>M4: Polish &amp; Mobile</strong></td><td>Weeks 7–8</td><td>9 items</td><td>18 days</td><td><span class="badge badge-slate">Blocked by M3</span></td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="info-block info mt-4">
-            <span class="info-icon">ℹ️</span>
-            <div class="info-content">
-              <h4>Total Estimated Effort</h4>
-              <p>68 person-days (≈ 14 weeks at 1 developer, or 7 weeks with 2 developers). Each milestone is independently deployable — the system is usable after M1.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ DEPLOYMENT GUIDE ============ -->
-      <section id="deployment" class="section">
-        <div class="section-header">
-          <h1>Deployment Guide</h1>
-          <p>Step-by-step instructions to deploy WorkForce Pro on a single Windows or Linux server.</p>
-        </div>
-
-        <div class="grid grid-2 mb-6">
-          <div class="card">
-            <h3 class="card-title">📋 Prerequisites</h3>
-            <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> Windows 10/11 Pro or Ubuntu 22.04+ server</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> 4 GB RAM minimum (8 GB recommended)</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> 20 GB free disk space</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> Docker Desktop (Windows) or Docker Engine (Linux)</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> Node.js 20 LTS (for mobile build only)</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> Domain name (optional, for TLS)</div>
-              <div style="display:flex;gap:8px"><span style="color:var(--green-500)">✓</span> SSL certificate (Let's Encrypt — free)</div>
-            </div>
-          </div>
-          <div class="card">
-            <h3 class="card-title">📦 What Gets Deployed</h3>
-            <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
-              <div style="display:flex;gap:8px"><span class="badge badge-indigo">API</span> Node.js Express server (Docker container)</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-teal">DB</span> PostgreSQL 16 (Docker container)</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-amber">Cache</span> Redis 7 (Docker container)</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-purple">Web</span> Nginx serving React web build + reverse proxy</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-green">Mobile</span> iOS/Android apps via Expo EAS (app store or MDM)</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mb-6">
-          <h3 class="card-title">🚀 Step-by-Step Deployment</h3>
-
-          <div class="deploy-step">
-            <div class="deploy-num">1</div>
-            <div class="deploy-content">
-              <h4>Install Docker</h4>
-              <p>Download and install Docker Desktop for Windows or Docker Engine for Linux.</p>
-              <div class="code-block"><code><span class="code-comment"># Windows: Download Docker Desktop from docker.com</span>
-<span class="code-comment"># Linux (Ubuntu):</span>
+<span class="code-keyword">200 OK</span> { success: <span class="code-string">true</span>, message: <span class="code-string">"Clocked in at 06:00"</span> }</code></div>
+  </div>
+</section>
+
+<!-- ===== AUTHENTICATION & SECURITY ===== -->
+<section id="auth" class="section">
+  <div class="section-header"><h1>Authentication &amp; Security</h1><p>Application-native authentication — email, phone, or trusted-device. No Active Directory, no Azure AD, no SSO required.</p></div>
+
+  <div class="card mb-6">
+    <h3 class="card-title">Sign-up &amp; Sign-in Flow</h3>
+    <p class="card-subtitle">Complete authentication journey — from first sign-up to authenticated session</p>
+    <div class="auth-flow-container">
+      <div class="auth-step"><div class="step-num">1</div><div class="step-icon" data-icon="mail"></div><div class="step-title">Register</div><div class="step-desc">Email or phone</div></div>
+      <div class="auth-arrow"><span data-icon="arrow"></span></div>
+      <div class="auth-step"><div class="step-num">2</div><div class="step-icon" data-icon="key"></div><div class="step-title">Verify</div><div class="step-desc">OTP via SMS/email</div></div>
+      <div class="auth-arrow"><span data-icon="arrow"></span></div>
+      <div class="auth-step"><div class="step-num">3</div><div class="step-icon" data-icon="lock"></div><div class="step-title">Set Password</div><div class="step-desc">bcrypt hash stored</div></div>
+      <div class="auth-arrow"><span data-icon="arrow"></span></div>
+      <div class="auth-step"><div class="step-num">4</div><div class="step-icon" data-icon="check"></div><div class="step-title">Admin Approves</div><div class="step-desc">Role assigned</div></div>
+      <div class="auth-arrow"><span data-icon="arrow"></span></div>
+      <div class="auth-step"><div class="step-num">5</div><div class="step-icon" data-icon="shield"></div><div class="step-title">JWT Issued</div><div class="step-desc">Access + Refresh</div></div>
+      <div class="auth-arrow"><span data-icon="arrow"></span></div>
+      <div class="auth-step"><div class="step-num">6</div><div class="step-icon" data-icon="smartphone"></div><div class="step-title">Device Trust</div><div class="step-desc">Optional biometric</div></div>
+    </div>
+  </div>
+
+  <div class="grid grid-2 mb-6">
+    <div class="card fade-in-left"><h3 class="card-title">Email-Based Authentication</h3><div style="font-size:13px;color:var(--navy-600);line-height:1.7"><p style="margin-bottom:10px">The primary sign-up method. User enters their email address and a password. The system sends a 6-digit verification code to confirm ownership.</p><div class="info-block info"><span class="info-icon" data-icon="info"></span><div class="info-content"><h4>Password Security</h4><p>Passwords are hashed with <strong>bcrypt</strong> (cost factor 12) — never stored in plain text. Minimum 8 characters, enforced by the API.</p></div></div></div></div>
+    <div class="card fade-in-right"><h3 class="card-title">Phone-Based Authentication</h3><div style="font-size:13px;color:var(--navy-600);line-height:1.7"><p style="margin-bottom:10px">For staff without email access (e.g., warehouse workers). Phone number + SMS OTP verification. Integrates with any SMS gateway (Twilio, Vonage, or local provider).</p><div class="info-block success"><span class="info-icon" data-icon="checkCircle"></span><div class="info-content"><h4>Works Offline Too</h4><p>Trusted devices can be pre-registered by an admin, allowing clock-in/out without re-authentication each shift.</p></div></div></div></div>
+    <div class="card fade-in-left"><h3 class="card-title">Device-Based Authentication</h3><div style="font-size:13px;color:var(--navy-600);line-height:1.7"><p style="margin-bottom:10px">For shared or dedicated devices (e.g., wall-mounted kiosks, tablets). Admin registers a device with a unique token. The device authenticates automatically on launch.</p><div class="info-block warning"><span class="info-icon" data-icon="info"></span><div class="info-content"><h4>Security Safeguard</h4><p>Device tokens are revocable by admin at any time. Lost device = instant revoke, no data exposure.</p></div></div></div></div>
+    <div class="card fade-in-right"><h3 class="card-title">Security Measures</h3><div style="display:flex;flex-direction:column;gap:8px;font-size:13px"><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> bcrypt password hashing (cost 12)</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> JWT access tokens (15-min TTL)</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> Refresh tokens (7-day, Redis-backed)</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> Rate limiting on auth endpoints</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> Account lockout after 5 failed attempts</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> Optional 2FA via TOTP</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> TLS 1.3 for all transport</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> CORS allowlist (no wildcard)</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> SQL injection protection (Prisma)</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> Audit log for all admin actions</div></div></div>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">Role &amp; Permission Matrix</h3>
+    <p class="card-subtitle">Three roles — plain English, no technical jargon. Administrators can customise permissions per role.</p>
+    <div style="overflow-x:auto">
+      <table class="permission-matrix">
+        <thead><tr><th>Capability</th><th>Admin</th><th>Manager</th><th>Employee</th></tr></thead>
+        <tbody>
+          <tr><td>View own schedule</td><td class="perm-yes" data-icon="check"></td><td class="perm-yes" data-icon="check"></td><td class="perm-yes" data-icon="check"></td></tr>
+          <tr><td>Clock in / out</td><td class="perm-yes" data-icon="check"></td><td class="perm-yes" data-icon="check"></td><td class="perm-yes" data-icon="check"></td></tr>
+          <tr><td>View own timesheet</td><td class="perm-yes" data-icon="check"></td><td class="perm-yes" data-icon="check"></td><td class="perm-yes" data-icon="check"></td></tr>
+          <tr><td>Submit leave request</td><td class="perm-yes" data-icon="check"></td><td class="perm-yes" data-icon="check"></td><td class="perm-yes" data-icon="check"></td></tr>
+          <tr><td>View team schedule</td><td class="perm-yes" data-icon="check"></td><td class="perm-own">Team</td><td class="perm-no">&times;</td></tr>
+          <tr><td>Assign shifts</td><td class="perm-yes" data-icon="check"></td><td class="perm-own">Team</td><td class="perm-no">&times;</td></tr>
+          <tr><td>Approve / reject leave</td><td class="perm-yes" data-icon="check"></td><td class="perm-own">Team</td><td class="perm-no">&times;</td></tr>
+          <tr><td>Create / assign tasks</td><td class="perm-yes" data-icon="check"></td><td class="perm-own">Team</td><td class="perm-no">&times;</td></tr>
+          <tr><td>View org chart</td><td class="perm-yes" data-icon="check"></td><td class="perm-yes" data-icon="check"></td><td class="perm-yes" data-icon="check"></td></tr>
+          <tr><td>Add / edit employees</td><td class="perm-yes" data-icon="check"></td><td class="perm-no">&times;</td><td class="perm-no">&times;</td></tr>
+          <tr><td>Manage roles &amp; permissions</td><td class="perm-yes" data-icon="check"></td><td class="perm-no">&times;</td><td class="perm-no">&times;</td></tr>
+          <tr><td>Configure system settings</td><td class="perm-yes" data-icon="check"></td><td class="perm-no">&times;</td><td class="perm-no">&times;</td></tr>
+          <tr><td>View reports &amp; analytics</td><td class="perm-yes" data-icon="check"></td><td class="perm-own">Team</td><td class="perm-own">Self</td></tr>
+          <tr><td>Export data (CSV/PDF)</td><td class="perm-yes" data-icon="check"></td><td class="perm-own">Team</td><td class="perm-no">&times;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="flex gap-3 mt-4" style="font-size:12px;color:var(--navy-500)"><span><span class="perm-yes" data-icon="check"></span> = Full access</span><span><span class="perm-own">Team</span> = Own team only</span><span><span class="perm-no">&times;</span> = No access</span></div>
+  </div>
+</section>
+
+<!-- ===== LOGIN ===== -->
+<section id="login" class="section">
+  <div class="section-header"><h1>Prototype: Login / Sign-up</h1><p>Application-native authentication screen — choose email, phone, or device-based sign-in.</p></div>
+  <div class="login-screen">
+    <div class="login-header"><div class="login-logo" data-icon="layers"></div><h3>WorkForce Pro</h3><p>Sign in to your workspace</p></div>
+    <div class="login-body">
+      <div class="login-tabs"><div class="login-tab active" data-tab="signin">Sign In</div><div class="login-tab" data-tab="signup">Sign Up</div></div>
+      <div class="login-panel active" data-panel="signin">
+        <div class="auth-method-toggle"><div class="auth-method-btn active"><span data-icon="mail"></span> Email</div><div class="auth-method-btn"><span data-icon="phone"></span> Phone</div><div class="auth-method-btn"><span data-icon="smartphone"></span> Device</div></div>
+        <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="you@company.local" value="sarah.chen@company.local"></div>
+        <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" placeholder="--------" value="demo1234"></div>
+        <div class="flex items-center justify-between mb-4"><label style="font-size:12px;display:flex;align-items:center;gap:6px;color:var(--navy-600)"><input type="checkbox" checked> Remember this device</label><a href="#" style="font-size:12px">Forgot password?</a></div>
+        <button class="btn btn-primary w-full" id="demo-login">Sign In <span data-icon="arrow"></span></button>
+        <div style="text-align:center;margin-top:16px;font-size:12px;color:var(--slate-400)">Protected by bcrypt + JWT · No password stored in plain text</div>
+      </div>
+      <div class="login-panel" data-panel="signup">
+        <div class="auth-method-toggle"><div class="auth-method-btn active"><span data-icon="mail"></span> Email</div><div class="auth-method-btn"><span data-icon="phone"></span> Phone</div></div>
+        <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" placeholder="John Smith"></div>
+        <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="you@company.local"></div>
+        <div class="form-group"><label class="form-label">Phone Number</label><input type="tel" class="form-input" placeholder="+65 8123 4567"></div>
+        <div class="form-group"><label class="form-label">Password (min 8 characters)</label><input type="password" class="form-input" placeholder="--------"></div>
+        <div class="info-block info" style="margin-bottom:16px"><span class="info-icon" data-icon="info"></span><div class="info-content"><h4>Admin Approval Required</h4><p>New accounts must be approved by an administrator before activation.</p></div></div>
+        <button class="btn btn-primary w-full" onclick="showToast('Verification code sent to your email/phone')">Create Account <span data-icon="arrow"></span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DASHBOARD ===== -->
+<section id="dashboard" class="section">
+  <div class="section-header"><h1>Prototype: Admin Dashboard</h1><p>Real-time overview — staff on duty, shift coverage, pending approvals, and task progress.</p></div>
+  <div class="grid grid-4 mb-6">
+    <div class="stat-card sc-green fade-in scale-in"><div class="stat-icon" style="background:var(--green-100);color:var(--green-500)"><span data-icon="users"></span></div><div class="stat-label">Currently On Duty</div><div class="stat-value" data-count="12">0</div><div class="stat-trend up"><span data-icon="trending"></span> 2 more than yesterday</div></div>
+    <div class="stat-card sc-amber fade-in scale-in stagger-1"><div class="stat-icon" style="background:var(--amber-100);color:var(--amber-500)"><span data-icon="calendar"></span></div><div class="stat-label">Shifts This Week</div><div class="stat-value" data-count="56">0</div><div class="stat-trend up">96% coverage</div></div>
+    <div class="stat-card sc-indigo fade-in scale-in stagger-2"><div class="stat-icon" style="background:var(--indigo-100);color:var(--indigo-600)"><span data-icon="check"></span></div><div class="stat-label">Open Tasks</div><div class="stat-value" data-count="10">0</div><div class="stat-trend up">3 completed this week</div></div>
+    <div class="stat-card sc-red fade-in scale-in stagger-3"><div class="stat-icon" style="background:var(--red-100);color:var(--red-500)"><span data-icon="bell"></span></div><div class="stat-label">Pending Leave Requests</div><div class="stat-value" data-count="4">0</div><div class="stat-trend down">Needs attention</div></div>
+  </div>
+  <div class="grid grid-2 mb-6">
+    <div class="card fade-in-left"><h3 class="card-title">Weekly Attendance Rate</h3><p class="card-subtitle">Percentage of scheduled staff who clocked in on time</p><div class="chart-bar-container" id="attendance-chart"></div><div style="margin-top:28px;display:flex;gap:16px;font-size:12px"><span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--indigo-500);margin-right:4px"></span>Weekdays</span><span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--teal-500);margin-right:4px"></span>Weekends</span></div></div>
+    <div class="card fade-in-right"><h3 class="card-title">Task Distribution</h3><p class="card-subtitle">Tasks by status</p><div style="display:flex;align-items:center;gap:24px;padding:10px 0"><div class="donut-chart" style="background:conic-gradient(var(--slate-400) 0% 23%, var(--blue-500) 23% 54%, var(--amber-500) 54% 77%, var(--green-500) 77% 100%)"><div class="donut-center"><div class="donut-value">13</div><div class="donut-label">Total Tasks</div></div></div><div style="flex:1;display:flex;flex-direction:column;gap:8px;font-size:13px"><div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:2px;background:var(--slate-400)"></span> To Do <span style="margin-left:auto;font-weight:600">3</span></div><div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:2px;background:var(--blue-500)"></span> In Progress <span style="margin-left:auto;font-weight:600">4</span></div><div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:2px;background:var(--amber-500)"></span> In Review <span style="margin-left:auto;font-weight:600">2</span></div><div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:2px;background:var(--green-500)"></span> Done <span style="margin-left:auto;font-weight:600">4</span></div></div></div></div>
+  </div>
+  <div class="grid grid-2">
+    <div class="card fade-in-left"><h3 class="card-title">Recent Activity</h3><div style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:12px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid var(--slate-100)"><div style="width:32px;height:32px;border-radius:50%;background:var(--green-100);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--green-500)" data-icon="users"></div><div><div style="font-size:13px;font-weight:600">David Kim clocked in</div><div class="text-xs text-muted">Morning shift · 06:02 AM · Zone B</div></div><span class="text-xs text-muted" style="margin-left:auto">2m ago</span></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid var(--slate-100)"><div style="width:32px;height:32px;border-radius:50%;background:var(--amber-100);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--amber-500)" data-icon="calendar"></div><div><div style="font-size:13px;font-weight:600">Priya Sharma requested leave</div><div class="text-xs text-muted">Medical leave · Aug 23-24 · 2 days</div></div><span class="text-xs text-muted" style="margin-left:auto">15m ago</span></div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid var(--slate-100)"><div style="width:32px;height:32px;border-radius:50%;background:var(--indigo-100);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--indigo-600)" data-icon="checkCircle"></div><div><div style="font-size:13px;font-weight:600">Safety inspection marked complete</div><div class="text-xs text-muted">By Mei Ling Tan · Warehouse zone</div></div><span class="text-xs text-muted" style="margin-left:auto">1h ago</span></div>
+      <div style="display:flex;gap:12px;align-items:flex-start"><div style="width:32px;height:32px;border-radius:50%;background:var(--blue-100);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--blue-500)" data-icon="refresh"></div><div><div style="font-size:13px;font-weight:600">Shift swapped: Tom to David</div><div class="text-xs text-muted">Saturday morning shift · Approved by James</div></div><span class="text-xs text-muted" style="margin-left:auto">3h ago</span></div>
+    </div></div>
+    <div class="card fade-in-right"><h3 class="card-title">Pending Approvals</h3><div style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--slate-200);border-radius:var(--radius-sm)"><div style="width:36px;height:36px;border-radius:50%;background:var(--pink-100);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#9D174D;flex-shrink:0">PS</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Priya Sharma</div><div class="text-xs text-muted">Medical Leave · Aug 23-24</div></div><button class="btn btn-sm btn-primary" onclick="showToast('Leave approved for Priya Sharma')">Approve</button><button class="btn btn-sm btn-secondary" onclick="showToast('Leave rejected','error')">Reject</button></div>
+      <div style="display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--slate-200);border-radius:var(--radius-sm)"><div style="width:36px;height:36px;border-radius:50%;background:var(--blue-100);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#1E40AF;flex-shrink:0">DK</div><div style="flex:1"><div style="font-size:13px;font-weight:600">David Kim</div><div class="text-xs text-muted">Annual Leave · Sep 2-6</div></div><button class="btn btn-sm btn-primary" onclick="showToast('Leave approved for David Kim')">Approve</button><button class="btn btn-sm btn-secondary" onclick="showToast('Leave rejected','error')">Reject</button></div>
+      <div style="display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--slate-200);border-radius:var(--radius-sm)"><div style="width:36px;height:36px;border-radius:50%;background:var(--blue-100);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#1E40AF;flex-shrink:0">LM</div><div style="flex:1"><div style="font-size:13px;font-weight:600">Lucas Muller</div><div class="text-xs text-muted">Compassionate · Aug 25-26</div></div><button class="btn btn-sm btn-primary" onclick="showToast('Leave approved for Lucas Muller')">Approve</button><button class="btn btn-sm btn-secondary" onclick="showToast('Leave rejected','error')">Reject</button></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ===== SCHEDULING ===== -->
+<section id="scheduling" class="section">
+  <div class="section-header"><h1>Prototype: Scheduling &amp; Roster</h1><p>Weekly roster grid — click any shift badge to cycle through Morning, Evening, Night, and Off.</p></div>
+  <div class="flex justify-between items-center mb-4"><div class="flex gap-3"><button class="btn btn-secondary btn-sm">Previous Week</button><button class="btn btn-primary btn-sm">Aug 18-24, 2026</button><button class="btn btn-secondary btn-sm">Next Week</button></div><div class="flex gap-3"><button class="btn btn-secondary btn-sm" onclick="showToast('Roster published — notifications sent to all staff')">Publish Roster</button><button class="btn btn-primary btn-sm"><span data-icon="plus"></span> Add Shift</button></div></div>
+  <div class="card" style="padding:12px"><div class="roster-grid" id="roster-grid"></div></div>
+  <div class="grid grid-4 mt-6">
+    <div class="card" style="text-align:center"><div style="font-size:24px;margin-bottom:4px;color:var(--amber-500)" data-icon="clock"></div><div style="font-weight:600;font-size:14px">Morning Shift</div><div class="text-sm text-muted">06:00 - 14:00</div><div class="badge badge-amber mt-4" id="morning-count">8 staff</div></div>
+    <div class="card" style="text-align:center"><div style="font-size:24px;margin-bottom:4px;color:var(--indigo-500)" data-icon="clock"></div><div style="font-weight:600;font-size:14px">Evening Shift</div><div class="text-sm text-muted">14:00 - 22:00</div><div class="badge badge-indigo mt-4" id="evening-count">6 staff</div></div>
+    <div class="card" style="text-align:center"><div style="font-size:24px;margin-bottom:4px;color:var(--navy-600)" data-icon="clock"></div><div style="font-weight:600;font-size:14px">Night Shift</div><div class="text-sm text-muted">22:00 - 06:00</div><div class="badge badge-slate mt-4">0 staff</div></div>
+    <div class="card" style="text-align:center"><div style="font-size:24px;margin-bottom:4px;color:var(--green-500)" data-icon="checkCircle"></div><div style="font-weight:600;font-size:14px">Coverage Rate</div><div class="text-sm text-muted">This week</div><div class="badge badge-green mt-4">96% covered</div></div>
+  </div>
+  <div class="info-block info mt-6"><span class="info-icon" data-icon="info"></span><div class="info-content"><h4>Interactive Prototype</h4><p>Click any shift badge in the roster grid above to cycle through shift types. This demonstrates the drag-and-drop roster editing capability.</p></div></div>
+</section>
+
+<!-- ===== TIME TRACKING ===== -->
+<section id="time-tracking" class="section">
+  <div class="section-header"><h1>Prototype: Time Tracking</h1><p>Digital clock-in/out with live timer, timesheet view, and exportable reports.</p></div>
+  <div class="grid grid-2 mb-6">
+    <div class="card fade-in-left"><h3 class="card-title">Live Clock</h3><p class="card-subtitle">Tap to clock in or out</p><div class="time-clock"><div class="clock-time" id="clock-time">--:--:--</div><div class="clock-date" id="clock-date">Loading...</div><button class="clock-btn clocked-out" id="clock-btn"><span data-icon="play"></span> Clock In</button><div style="margin-top:24px;font-size:13px;color:var(--navy-500)"><div class="flex justify-between" style="padding:4px 0"><span>Today's hours:</span><strong>0h 0m</strong></div><div class="flex justify-between" style="padding:4px 0"><span>This week:</span><strong>32h 15m</strong></div><div class="flex justify-between" style="padding:4px 0"><span>Overtime:</span><strong style="color:var(--amber-500)">2h 15m</strong></div></div></div></div>
+    <div class="card fade-in-right"><h3 class="card-title">Today's Clock-ins</h3><p class="card-subtitle">Live staff activity</p><div style="display:flex;flex-direction:column;gap:0">
+      <div class="timesheet-row"><div class="ts-emp"><span class="avatar-sm" style="background:linear-gradient(135deg,#3B82F6,#60A5FA)">DK</span>David Kim</span><span class="text-sm text-muted">06:02 AM</span><span class="ts-hours">2h 58m</span><span class="ts-status"><span class="badge badge-green">Active</span></span></div>
+      <div class="timesheet-row"><div class="ts-emp"><span class="avatar-sm" style="background:linear-gradient(135deg,#14B8A6,#2DD4BF)">JO</span>James Okafor</span><span class="text-sm text-muted">06:00 AM</span><span class="ts-hours">3h 00m</span><span class="ts-status"><span class="badge badge-green">Active</span></span></div>
+      <div class="timesheet-row"><div class="ts-emp"><span class="avatar-sm" style="background:linear-gradient(135deg,#8B5CF6,#A78BFA)">ML</span>Mei Ling Tan</span><span class="text-sm text-muted">06:15 AM</span><span class="ts-hours">2h 45m</span><span class="ts-status"><span class="badge badge-green">Active</span></span></div>
+      <div class="timesheet-row"><div class="ts-emp"><span class="avatar-sm" style="background:linear-gradient(135deg,#10B981,#34D399)">AR</span>Aisha Rahman</span><span class="text-sm text-muted">07:30 AM</span><span class="ts-hours">1h 30m</span><span class="ts-status"><span class="badge badge-green">Active</span></span></div>
+      <div class="timesheet-row"><div class="ts-emp"><span class="avatar-sm" style="background:linear-gradient(135deg,#EC4899,#F472B6)">PS</span>Priya Sharma</span><span class="text-sm text-muted">Scheduled 14:00</span><span class="ts-hours">--</span><span class="ts-status"><span class="badge badge-slate">Upcoming</span></span></div>
+    </div></div>
+  </div>
+  <div class="card"><h3 class="card-title">Weekly Timesheet</h3><p class="card-subtitle">All employees · Aug 18-24, 2026</p><div style="overflow-x:auto"><table class="data-table"><thead><tr><th>Employee</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th><th>Total</th></tr></thead><tbody>
+    <tr><td><strong>Sarah Chen</strong></td><td>8h 00m</td><td>8h 05m</td><td>7h 55m</td><td>8h 00m</td><td>8h 10m</td><td>--</td><td>--</td><td><strong>40h 10m</strong></td></tr>
+    <tr><td><strong>James Okafor</strong></td><td>8h 02m</td><td>8h 00m</td><td>7h 58m</td><td>8h 01m</td><td>8h 00m</td><td>--</td><td>--</td><td><strong>40h 01m</strong></td></tr>
+    <tr><td><strong>David Kim</strong></td><td>8h 00m</td><td>7h 45m</td><td>8h 15m</td><td>7h 50m</td><td>8h 05m</td><td>--</td><td>--</td><td><strong>39h 55m</strong></td></tr>
+    <tr><td><strong>Priya Sharma</strong></td><td>8h 00m</td><td>--</td><td>8h 00m</td><td>8h 00m</td><td>8h 00m</td><td>--</td><td>--</td><td><strong>32h 00m</strong></td></tr>
+    <tr><td><strong>Emma Rodriguez</strong></td><td>8h 00m</td><td>8h 00m</td><td>--</td><td>8h 00m</td><td>8h 00m</td><td>--</td><td>--</td><td><strong>32h 00m</strong></td></tr>
+  </tbody></table></div><div class="flex justify-between items-center mt-4"><div class="text-sm text-muted">Showing 5 of 15 employees</div><button class="btn btn-secondary btn-sm" onclick="showToast('Timesheet exported as CSV')"><span data-icon="download"></span> Export CSV</button></div></div>
+</section>
+
+<!-- ===== TASKS ===== -->
+<section id="tasks" class="section">
+  <div class="section-header"><h1>Prototype: Task Management</h1><p>Kanban board — drag cards between columns to update status. Filter by assignee, priority, or tag.</p></div>
+  <div class="flex justify-between items-center mb-4"><div class="flex gap-3"><button class="btn btn-secondary btn-sm">All Assignees</button><button class="btn btn-secondary btn-sm">All Priorities</button><button class="btn btn-secondary btn-sm">All Tags</button></div><button class="btn btn-primary btn-sm"><span data-icon="plus"></span> New Task</button></div>
+  <div class="card" style="padding:16px"><div class="kanban" id="kanban-board"></div></div>
+  <div class="info-block info mt-6"><span class="info-icon" data-icon="info"></span><div class="info-content"><h4>Interactive Prototype</h4><p>Drag any task card between the To Do, In Progress, In Review, and Done columns. The column counts update automatically.</p></div></div>
+</section>
+
+<!-- ===== ORG CHART ===== -->
+<section id="org-chart" class="section">
+  <div class="section-header"><h1>Prototype: Organisation Chart</h1><p>Visual hierarchy tree — click any node to view employee details. Auto-generated from manager_id relationships.</p></div>
+  <div class="card" style="overflow-x:auto"><div id="org-chart"></div></div>
+  <div class="grid grid-3 mt-6">
+    <div class="card fade-in-left"><h3 class="card-title">Departments</h3><div style="display:flex;flex-direction:column;gap:8px"><div class="flex items-center justify-between"><span class="badge badge-indigo">Management</span><span class="text-sm">1 person</span></div><div class="flex items-center justify-between"><span class="badge badge-teal">Operations</span><span class="text-sm">4 people</span></div><div class="flex items-center justify-between"><span class="badge badge-purple">Logistics</span><span class="text-sm">4 people</span></div><div class="flex items-center justify-between"><span class="badge badge-green">Human Resources</span><span class="text-sm">1 person</span></div><div class="flex items-center justify-between"><span class="badge badge-blue">Customer Care</span><span class="text-sm">1 person</span></div><div class="flex items-center justify-between"><span class="badge badge-amber">IT</span><span class="text-sm">1 person</span></div><div class="flex items-center justify-between"><span class="badge badge-purple">Finance</span><span class="text-sm">2 people</span></div><div class="flex items-center justify-between"><span class="badge badge-pink">Marketing</span><span class="text-sm">1 person</span></div></div></div>
+    <div class="card fade-in"><h3 class="card-title">Hierarchy Stats</h3><div style="display:flex;flex-direction:column;gap:10px"><div class="flex justify-between"><span class="text-sm text-muted">Total Employees</span><strong>15</strong></div><div class="flex justify-between"><span class="text-sm text-muted">Management Layer</span><strong>3 levels</strong></div><div class="flex justify-between"><span class="text-sm text-muted">Direct Reports (avg)</span><strong>3.0</strong></div><div class="flex justify-between"><span class="text-sm text-muted">Managers</span><strong>3</strong></div><div class="flex justify-between"><span class="text-sm text-muted">Frontline Staff</span><strong>11</strong></div><div class="flex justify-between"><span class="text-sm text-muted">Vacancies</span><strong>0</strong></div></div></div>
+    <div class="card fade-in-right"><h3 class="card-title">How It Works</h3><div style="font-size:13px;color:var(--navy-600);line-height:1.7"><p style="margin-bottom:8px">The org chart is dynamically generated from the <code style="background:var(--slate-100);padding:2px 6px;border-radius:4px;font-size:12px">manager_id</code> field on each employee record.</p><p style="margin-bottom:8px">When an admin changes someone's manager, the tree redraws instantly — no manual chart editing needed.</p><p>Click any node in the chart above to see a quick employee summary.</p></div></div>
+  </div>
+</section>
+
+<!-- ===== LEAVE ===== -->
+<section id="leave" class="section">
+  <div class="section-header"><h1>Prototype: Leave Management</h1><p>Calendar view with leave overlays, plus a sortable approval queue. Integrated with the roster for conflict detection.</p></div>
+  <div class="grid grid-2 mb-6">
+    <div class="card fade-in-left"><h3 class="card-title">Leave Calendar — August 2026</h3><p class="card-subtitle">Colour-coded by status</p><div class="leave-calendar" id="leave-calendar"></div><div class="flex gap-3 mt-4" style="font-size:11px"><span><span class="badge badge-green">Approved</span></span><span><span class="badge badge-amber">Pending</span></span><span><span class="badge badge-red">Rejected</span></span></div></div>
+    <div class="card fade-in-right"><h3 class="card-title">Leave Balances</h3><div style="display:flex;flex-direction:column;gap:12px">
+      <div><div class="flex justify-between mb-2"><span style="font-size:13px;font-weight:600">Sarah Chen</span><span class="text-sm">18 / 21 days</span></div><div class="progress-bar"><div class="progress-fill" style="width:86%;background:var(--green-500)"></div></div></div>
+      <div><div class="flex justify-between mb-2"><span style="font-size:13px;font-weight:600">James Okafor</span><span class="text-sm">14 / 21 days</span></div><div class="progress-bar"><div class="progress-fill" style="width:67%;background:var(--green-500)"></div></div></div>
+      <div><div class="flex justify-between mb-2"><span style="font-size:13px;font-weight:600">David Kim</span><span class="text-sm">10 / 21 days</span></div><div class="progress-bar"><div class="progress-fill" style="width:48%;background:var(--amber-500)"></div></div></div>
+      <div><div class="flex justify-between mb-2"><span style="font-size:13px;font-weight:600">Priya Sharma</span><span class="text-sm">8 / 14 days</span></div><div class="progress-bar"><div class="progress-fill" style="width:57%;background:var(--amber-500)"></div></div></div>
+      <div><div class="flex justify-between mb-2"><span style="font-size:13px;font-weight:600">Tom Walker</span><span class="text-sm">5 / 14 days</span></div><div class="progress-bar"><div class="progress-fill" style="width:36%;background:var(--red-500)"></div></div></div>
+    </div></div>
+  </div>
+  <div class="card"><h3 class="card-title">Leave Requests</h3><p class="card-subtitle">Approve or reject pending requests — roster conflicts are flagged automatically</p><div style="overflow-x:auto"><table class="data-table"><thead><tr><th>Employee</th><th>Type</th><th>Dates</th><th>Days</th><th>Reason</th><th>Status</th></tr></thead><tbody id="leave-list"></tbody></table></div></div>
+</section>
+
+<!-- ===== EMPLOYEES ===== -->
+<section id="employees" class="section">
+  <div class="section-header"><h1>Prototype: Employee Directory</h1><p>Full employee list with contact details, department, status, and role assignment.</p></div>
+  <div class="flex justify-between items-center mb-4"><div class="flex gap-3"><button class="btn btn-secondary btn-sm">All Departments</button><button class="btn btn-secondary btn-sm">All Status</button></div><div class="flex gap-3"><button class="btn btn-secondary btn-sm" onclick="showToast('Employee list exported as CSV')"><span data-icon="download"></span> Export</button><button class="btn btn-primary btn-sm"><span data-icon="plus"></span> Add Employee</button></div></div>
+  <div class="card" style="padding:0;overflow:hidden"><div style="overflow-x:auto"><table class="data-table"><thead><tr><th>Employee</th><th>Title</th><th>Department</th><th>Phone</th><th>Status</th><th>Role</th></tr></thead><tbody id="employee-tbody"></tbody></table></div></div>
+</section>
+
+<!-- ===== DATA MODEL ===== -->
+<section id="data-model" class="section">
+  <div class="section-header"><h1>Data Model (ERD)</h1><p>Relational schema covering employees, shifts, tasks, leave, time entries, and organisational hierarchy.</p></div>
+  <div class="card mb-6"><h3 class="card-title">Entity Relationship Diagram</h3><p class="card-subtitle">8 core tables with foreign key relationships</p><div class="erd-canvas">
+    <div class="erd-table fade-in scale-in"><div class="erd-header"><span data-icon="users"></span> employees</div><div class="erd-field"><span class="field-key"><span data-icon="key"></span></span><span class="field-name">id</span><span class="field-type">UUID PK</span></div><div class="erd-field"><span class="field-key"><span data-icon="key"></span></span><span class="field-name">manager_id</span><span class="field-type">FK->self</span></div><div class="erd-field"><span class="field-name">full_name</span><span class="field-type">VARCHAR</span></div><div class="erd-field"><span class="field-name">email</span><span class="field-type">VARCHAR U</span></div><div class="erd-field"><span class="field-name">phone</span><span class="field-type">VARCHAR</span></div><div class="erd-field"><span class="field-name">password_hash</span><span class="field-type">VARCHAR</span></div><div class="erd-field"><span class="field-name">title</span><span class="field-type">VARCHAR</span></div><div class="erd-field"><span class="field-name">department_id</span><span class="field-type">FK</span></div><div class="erd-field"><span class="field-name">role</span><span class="field-type">ENUM</span></div><div class="erd-field"><span class="field-name">device_token</span><span class="field-type">VARCHAR</span></div><div class="erd-field"><span class="field-name">status</span><span class="field-type">ENUM</span></div></div>
+    <div class="erd-table fade-in scale-in stagger-1"><div class="erd-header"><span data-icon="building"></span> departments</div><div class="erd-field"><span class="field-key"><span data-icon="key"></span></span><span class="field-name">id</span><span class="field-type">UUID PK</span></div><div class="erd-field"><span class="field-name">name</span><span class="field-type">VARCHAR</span></div><div class="erd-field"><span class="field-name">head_id</span><span class="field-type">FK->emp</span></div><div class="erd-field"><span class="field-name">parent_id</span><span class="field-type">FK->self</span></div><div class="erd-field"><span class="field-name">description</span><span class="field-type">TEXT</span></div></div>
+    <div class="erd-table fade-in scale-in stagger-2"><div class="erd-header"><span data-icon="calendar"></span> shifts</div><div class="erd-field"><span class="field-key"><span data-icon="key"></span></span><span class="field-name">id</span><span class="field-type">UUID PK</span></div><div class="erd-field"><span class="field-name">employee_id</span><span class="field-type">FK</span></div><div class="erd-field"><span class="field-name">date</span><span class="field-type">DATE</span></div><div class="erd-field"><span class="field-name">shift_type</span><span class="field-type">ENUM</span></div><div class="erd-field"><span class="field-name">start_time</span><span class="field-type">TIME</span></div><div class="erd-field"><span class="field-name">end_time</span><span class="field-type">TIME</span></div><div class="erd-field"><span class="field-name">published</span><span class="field-type">BOOLEAN</span></div></div>
+    <div class="erd-table fade-in scale-in stagger-3"><div class="erd-header"><span data-icon="clock"></span> time_entries</div><div class="erd-field"><span class="field-key"><span data-icon="key"></span></span><span class="field-name">id</span><span class="field-type">UUID PK</span></div><div class="erd-field"><span class="field-name">employee_id</span><span class="field-type">FK</span></div><div class="erd-field"><span class="field-name">shift_id</span><span class="field-type">FK</span></div><div class="erd-field"><span class="field-name">clock_in</span><span class="field-type">TIMESTAMPTZ</span></div><div class="erd-field"><span class="field-name">clock_out</span><span class="field-type">TIMESTAMPTZ</span></div><div class="erd-field"><span class="field-name">duration_min</span><span class="field-type">INT</span></div><div class="erd-field"><span class="field-name">device_id</span><span class="field-type">VARCHAR</span></div><div class="erd-field"><span class="field-name">geo_lat</span><span class="field-type">DECIMAL</span></div></div>
+    <div class="erd-table fade-in scale-in stagger-4"><div class="erd-header"><span data-icon="check"></span> tasks</div><div class="erd-field"><span class="field-key"><span data-icon="key"></span></span><span class="field-name">id</span><span class="field-type">UUID PK</span></div><div class="erd-field"><span class="field-name">assignee_id</span><span class="field-type">FK</span></div><div class="erd-field"><span class="field-name">created_by</span><span class="field-type">FK</span></div><div class="erd-field"><span class="field-name">title</span><span class="field-type">VARCHAR</span></div><div class="erd-field"><span class="field-name">status</span><span class="field-type">ENUM</span></div><div class="erd-field"><span class="field-name">priority</span><span class="field-type">ENUM</span></div><div class="erd-field"><span class="field-name">due_date</span><span class="field-type">DATE</span></div><div class="erd-field"><span class="field-name">tags</span><span class="field-type">TEXT[]</span></div></div>
+    <div class="erd-table fade-in scale-in stagger-5"><div class="erd-header"><span data-icon="calendar"></span> leave_requests</div><div class="erd-field"><span class="field-key"><span data-icon="key"></span></span><span class="field-name">id</span><span class="field-type">UUID PK</span></div><div class="erd-field"><span class="field-name">employee_id</span><span class="field-type">FK</span></div><div class="erd-field"><span class="field-name">approved_by</span><span class="field-type">FK</span></div><div class="erd-field"><span class="field-name">leave_type</span><span class="field-type">ENUM</span></div><div class="erd-field"><span class="field-name">start_date</span><span class="field-type">DATE</span></div><div class="erd-field"><span class="field-name">end_date</span><span class="field-type">DATE</span></div><div class="erd-field"><span class="field-name">status</span><span class="field-type">ENUM</span></div><div class="erd-field"><span class="field-name">conflict_flag</span><span class="field-type">BOOLEAN</span></div></div>
+    <div class="erd-table fade-in scale-in stagger-6"><div class="erd-header"><span data-icon="database"></span> leave_balances</div><div class="erd-field"><span class="field-key"><span data-icon="key"></span></span><span class="field-name">id</span><span class="field-type">UUID PK</span></div><div class="erd-field"><span class="field-name">employee_id</span><span class="field-type">FK</span></div><div class="erd-field"><span class="field-name">leave_type</span><span class="field-type">ENUM</span></div><div class="erd-field"><span class="field-name">entitled_days</span><span class="field-type">DECIMAL</span></div><div class="erd-field"><span class="field-name">used_days</span><span class="field-type">DECIMAL</span></div><div class="erd-field"><span class="field-name">year</span><span class="field-type">INT</span></div></div>
+    <div class="erd-table fade-in scale-in"><div class="erd-header"><span data-icon="smartphone"></span> trusted_devices</div><div class="erd-field"><span class="field-key"><span data-icon="key"></span></span><span class="field-name">id</span><span class="field-type">UUID PK</span></div><div class="erd-field"><span class="field-name">employee_id</span><span class="field-type">FK</span></div><div class="erd-field"><span class="field-name">device_token</span><span class="field-type">VARCHAR U</span></div><div class="erd-field"><span class="field-name">platform</span><span class="field-type">ENUM</span></div><div class="erd-field"><span class="field-name">last_seen</span><span class="field-type">TIMESTAMPTZ</span></div><div class="erd-field"><span class="field-name">revoked</span><span class="field-type">BOOLEAN</span></div></div>
+  </div></div>
+  <div class="card"><h3 class="card-title">Key Relationships</h3><div style="display:flex;flex-direction:column;gap:8px;font-size:13px"><div><strong>employees</strong> -> <strong>departments</strong>: Many-to-one (department_id FK)</div><div><strong>employees</strong> -> <strong>employees</strong>: Self-referential (manager_id FK — enables org chart)</div><div><strong>shifts</strong> -> <strong>employees</strong>: Many-to-one (employee_id FK)</div><div><strong>time_entries</strong> -> <strong>employees</strong> + <strong>shifts</strong>: Many-to-one (both FKs)</div><div><strong>tasks</strong> -> <strong>employees</strong>: Many-to-one (assignee_id, created_by — both FKs)</div><div><strong>leave_requests</strong> -> <strong>employees</strong>: Many-to-one (employee_id, approved_by — both FKs)</div><div><strong>leave_balances</strong> -> <strong>employees</strong>: Many-to-one (employee_id FK)</div><div><strong>trusted_devices</strong> -> <strong>employees</strong>: Many-to-one (employee_id FK)</div></div></div>
+</section>
+
+<!-- ===== BACKLOG ===== -->
+<section id="backlog" class="section">
+  <div class="section-header"><h1>Feature Backlog</h1><p>Prioritised milestones — development can start immediately after approval. Each milestone is independently deployable.</p></div>
+  <div class="flex gap-3 mb-6"><button class="btn btn-primary btn-sm backlog-filter active" data-filter="">All Milestones</button><button class="btn btn-secondary btn-sm backlog-filter" data-filter="m1">M1: Foundation</button><button class="btn btn-secondary btn-sm backlog-filter" data-filter="m2">M2: Core Features</button><button class="btn btn-secondary btn-sm backlog-filter" data-filter="m3">M3: Roster &amp; Leave</button><button class="btn btn-secondary btn-sm backlog-filter" data-filter="m4">M4: Polish &amp; Mobile</button></div>
+  <div class="grid grid-2">
+    <div class="milestone-card" data-milestone="m1"><div class="milestone-header"><div class="milestone-badge" style="background:var(--indigo-600)">M1</div><div><div class="milestone-title">Foundation</div><div class="milestone-desc">Weeks 1-2 · Infrastructure &amp; Auth</div></div><div style="margin-left:auto"><span class="badge badge-indigo">Priority: Critical</span></div></div><div class="milestone-body"><div class="backlog-item done"><span class="check-icon" data-icon="check"></span><div><div class="item-title">Project scaffolding — Expo + Express + Prisma</div><div class="item-meta">Est: 2 days · Dependency: None</div></div></div><div class="backlog-item done"><span class="check-icon" data-icon="check"></span><div><div class="item-title">Database schema &amp; migrations (PostgreSQL)</div><div class="item-meta">Est: 2 days · Dependency: Scaffolding</div></div></div><div class="backlog-item done"><span class="check-icon" data-icon="check"></span><div><div class="item-title">Auth: email/phone sign-up, OTP, JWT</div><div class="item-meta">Est: 3 days · Dependency: DB schema</div></div></div><div class="backlog-item done"><span class="check-icon" data-icon="check"></span><div><div class="item-title">Role-based access control (Admin/Manager/Employee)</div><div class="item-meta">Est: 2 days · Dependency: Auth</div></div></div><div class="backlog-item done"><span class="check-icon" data-icon="check"></span><div><div class="item-title">Login screen (web + mobile)</div><div class="item-meta">Est: 2 days · Dependency: Auth</div></div></div><div class="backlog-item done"><span class="check-icon" data-icon="check"></span><div><div class="item-title">Device registration &amp; trusted-device auth</div><div class="item-meta">Est: 2 days · Dependency: Auth</div></div></div></div></div>
+    <div class="milestone-card" data-milestone="m2"><div class="milestone-header"><div class="milestone-badge" style="background:var(--teal-600)">M2</div><div><div class="milestone-title">Core Features</div><div class="milestone-desc">Weeks 3-4 · Dashboard, Tasks, Employees</div></div><div style="margin-left:auto"><span class="badge badge-teal">Priority: High</span></div></div><div class="milestone-body"><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Admin dashboard with live stats &amp; charts</div><div class="item-meta">Est: 3 days · Dependency: M1</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Employee CRUD — add, edit, deactivate</div><div class="item-meta">Est: 2 days · Dependency: M1</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Employee directory with search &amp; filter</div><div class="item-meta">Est: 2 days · Dependency: Employee CRUD</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Task management — Kanban board with drag-drop</div><div class="item-meta">Est: 4 days · Dependency: M1</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Task assignment, priorities, tags, due dates</div><div class="item-meta">Est: 2 days · Dependency: Kanban</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Organisation chart — auto-generated from manager_id</div><div class="item-meta">Est: 3 days · Dependency: Employee CRUD</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Department management</div><div class="item-meta">Est: 1 day · Dependency: Org chart</div></div></div></div></div>
+    <div class="milestone-card" data-milestone="m3"><div class="milestone-header"><div class="milestone-badge" style="background:var(--amber-500)">M3</div><div><div class="milestone-title">Roster &amp; Leave</div><div class="milestone-desc">Weeks 5-6 · Scheduling, Time, Leave</div></div><div style="margin-left:auto"><span class="badge badge-amber">Priority: High</span></div></div><div class="milestone-body"><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Shift scheduling — weekly roster grid</div><div class="item-meta">Est: 4 days · Dependency: M2</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Drag-and-drop shift assignment</div><div class="item-meta">Est: 2 days · Dependency: Roster grid</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Roster publish &amp; push notifications</div><div class="item-meta">Est: 2 days · Dependency: Roster grid</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Time tracking — clock in/out with geo-location</div><div class="item-meta">Est: 3 days · Dependency: M1</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Timesheet view &amp; CSV/PDF export</div><div class="item-meta">Est: 2 days · Dependency: Time tracking</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Leave request submission (self-service)</div><div class="item-meta">Est: 2 days · Dependency: M1</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Leave approval workflow with conflict detection</div><div class="item-meta">Est: 3 days · Dependency: Leave + Roster</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Leave balance tracking &amp; auto-calculation</div><div class="item-meta">Est: 2 days · Dependency: Leave approval</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Leave calendar view (month/week)</div><div class="item-meta">Est: 2 days · Dependency: Leave approval</div></div></div></div></div>
+    <div class="milestone-card" data-milestone="m4"><div class="milestone-header"><div class="milestone-badge" style="background:var(--green-500)">M4</div><div><div class="milestone-title">Polish &amp; Mobile</div><div class="milestone-desc">Weeks 7-8 · Mobile apps, reports, deployment</div></div><div style="margin-left:auto"><span class="badge badge-green">Priority: Medium</span></div></div><div class="milestone-body"><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Native iOS build via Expo EAS</div><div class="item-meta">Est: 2 days · Dependency: M1-M3</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Native Android build via Expo EAS</div><div class="item-meta">Est: 1 day · Dependency: iOS build</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Offline mode — SQLite cache for clock-in/out</div><div class="item-meta">Est: 3 days · Dependency: Time tracking</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Push notifications (Expo Notifications)</div><div class="item-meta">Est: 2 days · Dependency: Mobile builds</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Reports &amp; analytics dashboard</div><div class="item-meta">Est: 3 days · Dependency: M2-M3</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Audit log for admin actions</div><div class="item-meta">Est: 2 days · Dependency: M1</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">2FA — TOTP via authenticator app</div><div class="item-meta">Est: 2 days · Dependency: M1</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">Docker Compose deployment package</div><div class="item-meta">Est: 1 day · Dependency: All</div></div></div><div class="backlog-item"><span class="check-icon"></span><div><div class="item-title">User acceptance testing &amp; handover docs</div><div class="item-meta">Est: 2 days · Dependency: All</div></div></div></div></div>
+  </div>
+  <div class="card mt-6"><h3 class="card-title">Milestone Summary</h3><div style="overflow-x:auto"><table class="data-table"><thead><tr><th>Milestone</th><th>Timeline</th><th>Features</th><th>Effort</th><th>Status</th></tr></thead><tbody><tr><td><strong>M1: Foundation</strong></td><td>Weeks 1-2</td><td>6 items</td><td>13 days</td><td><span class="badge badge-green">Complete (Prototype)</span></td></tr><tr><td><strong>M2: Core Features</strong></td><td>Weeks 3-4</td><td>7 items</td><td>17 days</td><td><span class="badge badge-blue">Ready to start</span></td></tr><tr><td><strong>M3: Roster &amp; Leave</strong></td><td>Weeks 5-6</td><td>9 items</td><td>20 days</td><td><span class="badge badge-slate">Blocked by M2</span></td></tr><tr><td><strong>M4: Polish &amp; Mobile</strong></td><td>Weeks 7-8</td><td>9 items</td><td>18 days</td><td><span class="badge badge-slate">Blocked by M3</span></td></tr></tbody></table></div><div class="info-block info mt-4"><span class="info-icon" data-icon="info"></span><div class="info-content"><h4>Total Estimated Effort</h4><p>68 person-days (~14 weeks at 1 developer, or 7 weeks with 2 developers). Each milestone is independently deployable — the system is usable after M1.</p></div></div></div>
+</section>
+
+<!-- ===== DEPLOYMENT ===== -->
+<section id="deployment" class="section">
+  <div class="section-header"><h1>Deployment Guide</h1><p>Step-by-step instructions to deploy WorkForce Pro on a single Windows or Linux server.</p></div>
+  <div class="grid grid-2 mb-6">
+    <div class="card fade-in-left"><h3 class="card-title">Prerequisites</h3><div style="display:flex;flex-direction:column;gap:8px;font-size:13px"><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> Windows 10/11 Pro or Ubuntu 22.04+</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> 4 GB RAM minimum (8 GB recommended)</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> 20 GB free disk space</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> Docker Desktop (Windows) or Docker Engine (Linux)</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> Node.js 20 LTS (for mobile build only)</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> Domain name (optional, for TLS)</div><div style="display:flex;gap:8px"><span style="color:var(--green-500)" data-icon="check"></span> SSL certificate (Let's Encrypt — free)</div></div></div>
+    <div class="card fade-in-right"><h3 class="card-title">What Gets Deployed</h3><div style="display:flex;flex-direction:column;gap:8px;font-size:13px"><div style="display:flex;gap:8px"><span class="badge badge-indigo">API</span> Node.js Express server (Docker container)</div><div style="display:flex;gap:8px"><span class="badge badge-teal">DB</span> PostgreSQL 16 (Docker container)</div><div style="display:flex;gap:8px"><span class="badge badge-amber">Cache</span> Redis 7 (Docker container)</div><div style="display:flex;gap:8px"><span class="badge badge-purple">Web</span> Nginx serving React web build + reverse proxy</div><div style="display:flex;gap:8px"><span class="badge badge-green">Mobile</span> iOS/Android apps via Expo EAS (app store or MDM)</div></div></div>
+  </div>
+  <div class="card mb-6"><h3 class="card-title">Step-by-Step Deployment</h3>
+    <div class="deploy-step"><div class="deploy-num">1</div><div class="deploy-content"><h4>Install Docker</h4><p>Download and install Docker Desktop for Windows or Docker Engine for Linux.</p><div class="code-block"><code><span class="code-comment"># Linux (Ubuntu):</span>
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
-sudo usermod -aG docker $USER</code></div>
-            </div>
-          </div>
-
-          <div class="deploy-step">
-            <div class="deploy-num">2</div>
-            <div class="deploy-content">
-              <h4>Clone the Repository</h4>
-              <p>Get the project source code onto your server.</p>
-              <div class="code-block"><code>git clone https://github.com/your-org/workforce-pro.git
-<span class="code-keyword">cd</span> workforce-pro</code></div>
-            </div>
-          </div>
-
-          <div class="deploy-step">
-            <div class="deploy-num">3</div>
-            <div class="deploy-content">
-              <h4>Configure Environment Variables</h4>
-              <p>Copy the example env file and set your secrets.</p>
-              <div class="code-block"><code><span class="code-keyword">cp</span> .env.example .env
+sudo usermod -aG docker $USER</code></div></div></div>
+    <div class="deploy-step"><div class="deploy-num">2</div><div class="deploy-content"><h4>Clone the Repository</h4><p>Get the project source code onto your server.</p><div class="code-block"><code>git clone https://github.com/your-org/workforce-pro.git
+<span class="code-keyword">cd</span> workforce-pro</code></div></div></div>
+    <div class="deploy-step"><div class="deploy-num">3</div><div class="deploy-content"><h4>Configure Environment Variables</h4><p>Copy the example env file and set your secrets.</p><div class="code-block"><code><span class="code-keyword">cp</span> .env.example .env
 
 <span class="code-comment"># .env</span>
 DATABASE_URL=postgresql://wfp:wfp_password@db:5432/workforce_pro
 REDIS_URL=redis://redis:6379
 JWT_SECRET=<span class="code-string">your-256-bit-secret-here</span>
 JWT_REFRESH_SECRET=<span class="code-string">your-different-256-bit-secret</span>
-SMS_API_KEY=<span class="code-string">your-sms-gateway-key</span>  <span class="code-comment"># Optional, for phone auth</span>
-APP_URL=https://wfp.yourcompany.com</code></div>
-            </div>
-          </div>
-
-          <div class="deploy-step">
-            <div class="deploy-num">4</div>
-            <div class="deploy-content">
-              <h4>Run Database Migrations</h4>
-              <p>Initialise the PostgreSQL schema using Prisma.</p>
-              <div class="code-block"><code>docker compose run --rm api npx prisma migrate deploy
-docker compose run --rm api npx prisma db seed  <span class="code-comment"># Creates admin user</span></code></div>
-            </div>
-          </div>
-
-          <div class="deploy-step">
-            <div class="deploy-num">5</div>
-            <div class="deploy-content">
-              <h4>Start All Services</h4>
-              <p>Launch the entire stack with a single command.</p>
-              <div class="code-block"><code>docker compose up -d
+APP_URL=https://wfp.yourcompany.com</code></div></div></div>
+    <div class="deploy-step"><div class="deploy-num">4</div><div class="deploy-content"><h4>Run Database Migrations</h4><p>Initialise the PostgreSQL schema using Prisma.</p><div class="code-block"><code>docker compose run --rm api npx prisma migrate deploy
+docker compose run --rm api npx prisma db seed  <span class="code-comment"># Creates admin user</span></code></div></div></div>
+    <div class="deploy-step"><div class="deploy-num">5</div><div class="deploy-content"><h4>Start All Services</h4><p>Launch the entire stack with a single command.</p><div class="code-block"><code>docker compose up -d
 
 <span class="code-comment"># Services running:</span>
 <span class="code-comment">#   - api      (Node.js Express, port 3000)</span>
@@ -1518,63 +489,18 @@ docker compose run --rm api npx prisma db seed  <span class="code-comment"># Cre
 <span class="code-comment">#   - redis    (Redis 7, port 6379)</span>
 <span class="code-comment">#   - web      (Nginx, port 80/443)</span>
 
-docker compose ps  <span class="code-comment"># Verify all containers are healthy</span></code></div>
-            </div>
-          </div>
-
-          <div class="deploy-step">
-            <div class="deploy-num">6</div>
-            <div class="deploy-content">
-              <h4>Configure TLS (HTTPS)</h4>
-              <p>Secure your deployment with a free Let's Encrypt certificate.</p>
-              <div class="code-block"><code><span class="code-comment"># Install Certbot</span>
-sudo apt install certbot python3-certbot-nginx  <span class="code-comment"># Linux</span>
-
-<span class="code-comment"># Obtain certificate</span>
-sudo certbot --nginx -d wfp.yourcompany.com
-
-<span class="code-comment"># Auto-renewal is set up automatically</span></code></div>
-            </div>
-          </div>
-
-          <div class="deploy-step">
-            <div class="deploy-num">7</div>
-            <div class="deploy-content">
-              <h4>Build Mobile Apps (Optional)</h4>
-              <p>Build iOS and Android apps using Expo EAS Build.</p>
-              <div class="code-block"><code><span class="code-comment"># Install Expo CLI</span>
-npm install -g eas-cli
-
-<span class="code-comment"># Login to Expo</span>
+docker compose ps  <span class="code-comment"># Verify all containers are healthy</span></code></div></div></div>
+    <div class="deploy-step"><div class="deploy-num">6</div><div class="deploy-content"><h4>Configure TLS (HTTPS)</h4><p>Secure your deployment with a free Let's Encrypt certificate.</p><div class="code-block"><code>sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d wfp.yourcompany.com</code></div></div></div>
+    <div class="deploy-step"><div class="deploy-num">7</div><div class="deploy-content"><h4>Build Mobile Apps (Optional)</h4><p>Build iOS and Android apps using Expo EAS Build.</p><div class="code-block"><code>npm install -g eas-cli
 eas login
-
-<span class="code-comment"># Build for both platforms</span>
-eas build --platform all --profile production
-
-<span class="code-comment"># Outputs downloadable .ipa (iOS) and .apk (Android)</span>
-<span class="code-comment"># Submit to App Store / Play Store, or distribute via MDM</span></code></div>
-            </div>
-          </div>
-
-          <div class="deploy-step">
-            <div class="deploy-num">8</div>
-            <div class="deploy-content">
-              <h4>First Admin Login</h4>
-              <p>The database seed creates a default admin account. Change the password immediately.</p>
-              <div class="code-block"><code><span class="code-comment"># Default admin credentials (CHANGE IMMEDIATELY):</span>
+eas build --platform all --profile production</code></div></div></div>
+    <div class="deploy-step"><div class="deploy-num">8</div><div class="deploy-content"><h4>First Admin Login</h4><p>The database seed creates a default admin account. Change the password immediately.</p><div class="code-block"><code><span class="code-comment"># Default admin credentials (CHANGE IMMEDIATELY):</span>
 Email:    admin@company.local
-Password: ChangeMe123!
-
-<span class="code-comment"># After first login, go to Settings → Change Password</span>
-<span class="code-comment"># Then add employees and assign roles</span></code></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-2">
-          <div class="card">
-            <h3 class="card-title">🔄 Docker Compose File</h3>
-            <div class="code-block"><code>version: <span class="code-string">'3.8'</span>
+Password: ChangeMe123!</code></div></div></div>
+  </div>
+  <div class="grid grid-2">
+    <div class="card"><h3 class="card-title">Docker Compose File</h3><div class="code-block"><code>version: <span class="code-string">'3.8'</span>
 
 services:
   api:
@@ -1601,118 +527,39 @@ services:
     restart: unless-stopped
 
 volumes:
-  pgdata:</code></div>
-          </div>
-
-          <div class="card">
-            <h3 class="card-title">🛡️ Post-Deployment Checklist</h3>
-            <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
-              <div style="display:flex;gap:8px"><span class="badge badge-green">✓</span> Change admin password</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-green">✓</span> Generate new JWT secrets in .env</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-green">✓</span> Configure SMS gateway (if using phone auth)</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-green">✓</span> Set up TLS certificate</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-green">✓</span> Configure firewall (allow 80/443 only)</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-green">✓</span> Set up database backups (pg_dump cron)</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-green">✓</span> Create employee accounts</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-green">✓</span> Assign managers &amp; set up org chart</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-green">✓</span> Configure shift types &amp; roster rules</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-green">✓</span> Test clock-in/out on mobile</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-green">✓</span> Test leave request workflow</div>
-              <div style="display:flex;gap:8px"><span class="badge badge-green">✓</span> Schedule Docker log rotation</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mt-6">
-          <h3 class="card-title">📦 Hand-Over Package Contents</h3>
-          <div class="grid grid-2">
-            <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
-              <div>📁 <code>architecture/</code> — Architecture diagrams (this blueprint)</div>
-              <div>📁 <code>prototype/</code> — Clickable HTML prototype (this file + assets)</div>
-              <div>📁 <code>server/</code> — Node.js API source code</div>
-              <div>📁 <code>client-web/</code> — React web build</div>
-              <div>📁 <code>client-mobile/</code> — Expo React Native app</div>
-              <div>📁 <code>database/</code> — Prisma schema &amp; migrations</div>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
-              <div>📁 <code>docker/</code> — Dockerfile &amp; docker-compose.yml</div>
-              <div>📁 <code>nginx/</code> — Nginx config files</div>
-              <div>📄 <code>.env.example</code> — Environment variable template</div>
-              <div>📄 <code>README.md</code> — Project overview &amp; quick start</div>
-              <div>📄 <code>DEPLOYMENT.md</code> — Detailed deployment guide</div>
-              <div>📄 <code>API.md</code> — API documentation (OpenAPI/Swagger)</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </main>
+  pgdata:</code></div></div>
+    <div class="card"><h3 class="card-title">Post-Deployment Checklist</h3><div style="display:flex;flex-direction:column;gap:8px;font-size:13px"><div style="display:flex;gap:8px"><span class="badge badge-green" data-icon="check"></span> Change admin password</div><div style="display:flex;gap:8px"><span class="badge badge-green" data-icon="check"></span> Generate new JWT secrets in .env</div><div style="display:flex;gap:8px"><span class="badge badge-green" data-icon="check"></span> Configure SMS gateway (if using phone auth)</div><div style="display:flex;gap:8px"><span class="badge badge-green" data-icon="check"></span> Set up TLS certificate</div><div style="display:flex;gap:8px"><span class="badge badge-green" data-icon="check"></span> Configure firewall (allow 80/443 only)</div><div style="display:flex;gap:8px"><span class="badge badge-green" data-icon="check"></span> Set up database backups (pg_dump cron)</div><div style="display:flex;gap:8px"><span class="badge badge-green" data-icon="check"></span> Create employee accounts</div><div style="display:flex;gap:8px"><span class="badge badge-green" data-icon="check"></span> Assign managers &amp; set up org chart</div><div style="display:flex;gap:8px"><span class="badge badge-green" data-icon="check"></span> Configure shift types &amp; roster rules</div><div style="display:flex;gap:8px"><span class="badge badge-green" data-icon="check"></span> Test clock-in/out on mobile</div><div style="display:flex;gap:8px"><span class="badge badge-green" data-icon="check"></span> Test leave request workflow</div><div style="display:flex;gap:8px"><span class="badge badge-green" data-icon="check"></span> Schedule Docker log rotation</div></div></div>
   </div>
+</section>
+
+</main>
+</div>
 </div>
 
-<!-- Mobile Preview Overlay -->
-<div class="mobile-overlay" id="mobile-overlay">
-  <div class="mobile-frame">
-    <div class="mobile-screen">
-      <div class="mobile-content">
-        <h4>📱 Mobile Preview</h4>
-        <div class="card" style="padding:14px">
-          <div style="font-size:12px;color:var(--navy-500);margin-bottom:8px">Admin Dashboard</div>
-          <div class="grid grid-2" style="gap:8px">
-            <div class="stat-card" style="padding:12px">
-              <div class="stat-icon" style="background:var(--green-100);width:32px;height:32px;font-size:14px">🟢</div>
-              <div class="stat-label" style="font-size:11px">On Duty</div>
-              <div class="stat-value" style="font-size:20px">6</div>
-            </div>
-            <div class="stat-card" style="padding:12px">
-              <div class="stat-icon" style="background:var(--amber-100);width:32px;height:32px;font-size:14px">📅</div>
-              <div class="stat-label" style="font-size:11px">Shifts</div>
-              <div class="stat-value" style="font-size:20px">42</div>
-            </div>
-            <div class="stat-card" style="padding:12px">
-              <div class="stat-icon" style="background:var(--indigo-100);width:32px;height:32px;font-size:14px">✅</div>
-              <div class="stat-label" style="font-size:11px">Tasks</div>
-              <div class="stat-value" style="font-size:20px">18</div>
-            </div>
-            <div class="stat-card" style="padding:12px">
-              <div class="stat-icon" style="background:var(--red-100);width:32px;height:32px;font-size:14px">🏖️</div>
-              <div class="stat-label" style="font-size:11px">Leave</div>
-              <div class="stat-value" style="font-size:20px">3</div>
-            </div>
-          </div>
-        </div>
-        <div class="card mt-4" style="padding:14px">
-          <div style="font-size:12px;font-weight:600;margin-bottom:10px">Today's Shifts</div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="display:flex;gap:8px;align-items:center"><span class="shift-badge shift-morning">06–14</span><span style="font-size:12px">David Kim</span></div>
-            <div style="display:flex;gap:8px;align-items:center"><span class="shift-badge shift-morning">06–14</span><span style="font-size:12px">James Okafor</span></div>
-            <div style="display:flex;gap:8px;align-items:center"><span class="shift-badge shift-evening">14–22</span><span style="font-size:12px">Mei Ling Tan</span></div>
-            <div style="display:flex;gap:8px;align-items:center"><span class="shift-badge shift-off">Off</span><span style="font-size:12px">Tom Walker</span></div>
-          </div>
-        </div>
-        <div class="card mt-4" style="padding:14px">
-          <div style="font-size:12px;font-weight:600;margin-bottom:10px">Pending Approvals</div>
-          <div style="display:flex;flex-direction:column;gap:6px">
-            <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--slate-100)"><span style="font-size:12px">Priya S. — Medical</span><span class="badge badge-amber" style="margin-left:auto">Pending</span></div>
-            <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--slate-100)"><span style="font-size:12px">David K. — Annual</span><span class="badge badge-amber" style="margin-left:auto">Pending</span></div>
-            <div style="display:flex;align-items:center;gap:8px;padding:6px 0"><span style="font-size:12px">Lucas M. — Compass.</span><span class="badge badge-amber" style="margin-left:auto">Pending</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="mobile-tab-bar">
-        <div class="mobile-tab active"><span class="tab-icon">🏠</span>Home</div>
-        <div class="mobile-tab"><span class="tab-icon">📅</span>Roster</div>
-        <div class="mobile-tab"><span class="tab-icon">⏰</span>Clock</div>
-        <div class="mobile-tab"><span class="tab-icon">✅</span>Tasks</div>
-        <div class="mobile-tab"><span class="tab-icon">👤</span>Profile</div>
-      </div>
-    </div>
-  </div>
+<!-- Mobile Preview -->
+<div class="mobile-overlay" id="mobile-overlay"><div class="mobile-frame"><div class="mobile-screen"><div class="mobile-content">
+  <h4>Mobile Preview</h4>
+  <div class="card" style="padding:14px"><div style="font-size:12px;color:var(--navy-500);margin-bottom:8px">Admin Dashboard</div><div class="grid grid-2" style="gap:8px">
+    <div class="stat-card" style="padding:12px"><div class="stat-icon" style="background:var(--green-100);color:var(--green-500);width:32px;height:32px" data-icon="users"></div><div class="stat-label" style="font-size:11px">On Duty</div><div class="stat-value" style="font-size:20px">12</div></div>
+    <div class="stat-card" style="padding:12px"><div class="stat-icon" style="background:var(--amber-100);color:var(--amber-500);width:32px;height:32px" data-icon="calendar"></div><div class="stat-label" style="font-size:11px">Shifts</div><div class="stat-value" style="font-size:20px">56</div></div>
+    <div class="stat-card" style="padding:12px"><div class="stat-icon" style="background:var(--indigo-100);color:var(--indigo-600);width:32px;height:32px" data-icon="check"></div><div class="stat-label" style="font-size:11px">Tasks</div><div class="stat-value" style="font-size:20px">10</div></div>
+    <div class="stat-card" style="padding:12px"><div class="stat-icon" style="background:var(--red-100);color:var(--red-500);width:32px;height:32px" data-icon="bell"></div><div class="stat-label" style="font-size:11px">Leave</div><div class="stat-value" style="font-size:20px">4</div></div>
+  </div></div>
+  <div class="card mt-4" style="padding:14px"><div style="font-size:12px;font-weight:600;margin-bottom:10px">Today's Shifts</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:8px;align-items:center"><span class="shift-badge shift-morning">06-14</span><span style="font-size:12px">David Kim</span></div><div style="display:flex;gap:8px;align-items:center"><span class="shift-badge shift-morning">06-14</span><span style="font-size:12px">James Okafor</span></div><div style="display:flex;gap:8px;align-items:center"><span class="shift-badge shift-evening">14-22</span><span style="font-size:12px">Mei Ling Tan</span></div><div style="display:flex;gap:8px;align-items:center"><span class="shift-badge shift-off">Off</span><span style="font-size:12px">Tom Walker</span></div></div></div>
+  <div class="card mt-4" style="padding:14px"><div style="font-size:12px;font-weight:600;margin-bottom:10px">Pending Approvals</div><div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--slate-100)"><span style="font-size:12px">Priya S. — Medical</span><span class="badge badge-amber" style="margin-left:auto">Pending</span></div><div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--slate-100)"><span style="font-size:12px">David K. — Annual</span><span class="badge badge-amber" style="margin-left:auto">Pending</span></div><div style="display:flex;align-items:center;gap:8px;padding:6px 0"><span style="font-size:12px">Lucas M. — Compass.</span><span class="badge badge-amber" style="margin-left:auto">Pending</span></div></div></div>
 </div>
+<div class="mobile-tab-bar">
+  <div class="mobile-tab active"><span data-icon="layout"></span>Home</div>
+  <div class="mobile-tab"><span data-icon="calendar"></span>Roster</div>
+  <div class="mobile-tab"><span data-icon="clock"></span>Clock</div>
+  <div class="mobile-tab"><span data-icon="check"></span>Tasks</div>
+  <div class="mobile-tab"><span data-icon="users"></span>Profile</div>
+</div></div></div></div>
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
+<script src="js/icons.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

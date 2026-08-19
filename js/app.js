@@ -1,87 +1,132 @@
-/* ============================================
-   SME Workforce Management — Prototype Logic
-   ============================================ */
+/* WorkForce Pro v2 — App Logic & Animations */
 
 // ---- Mock Data ----
 const employees = [
-  { id: 1, name: 'Sarah Chen',     title: 'Operations Director', dept: 'Management',    initials: 'SC', color: 'indigo', role: 'admin',    email: 'sarah.chen@company.local',    phone: '+65 8123 4567', status: 'active' },
-  { id: 2, name: 'James Okafor',   title: 'Shift Supervisor',    dept: 'Operations',    initials: 'JO', color: 'teal',   role: 'manager',  email: 'james.okafor@company.local',   phone: '+65 8234 5678', status: 'active' },
-  { id: 3, name: 'Mei Ling Tan',   title: 'Team Lead',            dept: 'Logistics',     initials: 'ML', color: 'purple', role: 'manager',  email: 'meiling.tan@company.local',    phone: '+65 8345 6789', status: 'active' },
-  { id: 4, name: 'David Kim',       title: 'Warehouse Operative', dept: 'Logistics',     initials: 'DK', color: 'blue',   role: 'employee', email: 'david.kim@company.local',      phone: '+65 8456 7890', status: 'active' },
-  { id: 5, name: 'Priya Sharma',   title: 'Customer Service Rep', dept: 'Customer Care', initials: 'PS', color: 'pink',   role: 'employee', email: 'priya.sharma@company.local',   phone: '+65 8567 8901', status: 'active' },
-  { id: 6, name: 'Tom Walker',     title: 'Delivery Driver',     dept: 'Logistics',     initials: 'TW', color: 'amber',  role: 'employee', email: 'tom.walker@company.local',     phone: '+65 8678 9012', status: 'leave'    },
-  { id: 7, name: 'Aisha Rahman',   title: 'HR Coordinator',      dept: 'Human Resources', initials: 'AR', color: 'green', role: 'manager', email: 'aisha.rahman@company.local',   phone: '+65 8789 0123', status: 'active' },
-  { id: 8, name: 'Lucas Müller',   title: 'IT Support Officer',  dept: 'IT',            initials: 'LM', color: 'blue',   role: 'employee', email: 'lucas.muller@company.local',   phone: '+65 8890 1234', status: 'active' },
+  { id:1, name:'Sarah Chen', title:'Operations Director', dept:'Management', initials:'SC', color:'indigo', role:'admin', email:'sarah.chen@company.local', phone:'+65 8123 4567', status:'active' },
+  { id:2, name:'James Okafor', title:'Shift Supervisor', dept:'Operations', initials:'JO', color:'teal', role:'manager', email:'james.okafor@company.local', phone:'+65 8234 5678', status:'active' },
+  { id:3, name:'Mei Ling Tan', title:'Team Lead', dept:'Logistics', initials:'ML', color:'purple', role:'manager', email:'meiling.tan@company.local', phone:'+65 8345 6789', status:'active' },
+  { id:4, name:'David Kim', title:'Warehouse Operative', dept:'Logistics', initials:'DK', color:'blue', role:'employee', email:'david.kim@company.local', phone:'+65 8456 7890', status:'active' },
+  { id:5, name:'Priya Sharma', title:'Customer Service Rep', dept:'Customer Care', initials:'PS', color:'pink', role:'employee', email:'priya.sharma@company.local', phone:'+65 8567 8901', status:'active' },
+  { id:6, name:'Tom Walker', title:'Delivery Driver', dept:'Logistics', initials:'TW', color:'amber', role:'employee', email:'tom.walker@company.local', phone:'+65 8678 9012', status:'leave' },
+  { id:7, name:'Aisha Rahman', title:'HR Coordinator', dept:'Human Resources', initials:'AR', color:'green', role:'manager', email:'aisha.rahman@company.local', phone:'+65 8789 0123', status:'active' },
+  { id:8, name:'Lucas Müller', title:'IT Support Officer', dept:'IT', initials:'LM', color:'blue', role:'employee', email:'lucas.muller@company.local', phone:'+65 8890 1234', status:'active' },
+  { id:9, name:'Emma Rodriguez', title:'Finance Officer', dept:'Finance', initials:'ER', color:'purple', role:'employee', email:'emma.rodriguez@company.local', phone:'+65 8901 2345', status:'active' },
+  { id:10, name:'Kenji Watanabe', title:'Quality Analyst', dept:'Operations', initials:'KW', color:'teal', role:'employee', email:'kenji.watanabe@company.local', phone:'+65 9012 3456', status:'active' },
+  { id:11, name:'Fatima Al-Zahra', title:'Procurement Officer', dept:'Operations', initials:'FA', color:'amber', role:'employee', email:'fatima.zahra@company.local', phone:'+65 9123 4567', status:'active' },
+  { id:12, name:'Daniel Park', title:'Warehouse Operative', dept:'Logistics', initials:'DP', color:'indigo', role:'employee', email:'daniel.park@company.local', phone:'+65 9234 5678', status:'active' },
+  { id:13, name:'Nadia Hassan', title:'Marketing Coordinator', dept:'Marketing', initials:'NH', color:'pink', role:'employee', email:'nadia.hassan@company.local', phone:'+65 9345 6789', status:'active' },
+  { id:14, name:'Oliver Schmidt', title:'Maintenance Tech', dept:'Operations', initials:'OS', color:'green', role:'employee', email:'oliver.schmidt@company.local', phone:'+65 9456 7890', status:'active' },
+  { id:15, name:'Yuki Tanaka', title:'Data Entry Clerk', dept:'Finance', initials:'YT', color:'blue', role:'employee', email:'yuki.tanaka@company.local', phone:'+65 9567 8901', status:'active' }
 ];
 
 const tasks = [
-  { id: 1, title: 'Review Q3 shift rosters',        priority: 'high',   assignee: 'Sarah Chen',   due: 'Aug 22', tags: ['Planning'],    status: 'todo' },
-  { id: 2, title: 'Stock count — Zone B',           priority: 'medium', assignee: 'David Kim',    due: 'Aug 21', tags: ['Warehouse'],   status: 'todo' },
-  { id: 3, title: 'Update employee handbook',       priority: 'low',    assignee: 'Aisha Rahman', due: 'Aug 28', tags: ['HR'],         status: 'todo' },
-  { id: 4, title: 'Onboard new driver',              priority: 'medium', assignee: 'James Okafor', due: 'Aug 20', tags: ['Onboarding'], status: 'progress' },
-  { id: 5, title: 'Fix time-clock terminal #2',      priority: 'high',   assignee: 'Lucas Müller', due: 'Aug 20', tags: ['IT'],         status: 'progress' },
-  { id: 6, title: 'Customer feedback report',       priority: 'low',    assignee: 'Priya Sharma', due: 'Aug 25', tags: ['Customer'],    status: 'progress' },
-  { id: 7, title: 'Safety inspection — Warehouse',   priority: 'high',   assignee: 'Mei Ling Tan',  due: 'Aug 19', tags: ['Safety'],     status: 'review' },
-  { id: 8, title: 'Monthly timesheet approval',      priority: 'medium', assignee: 'James Okafor', due: 'Aug 31', tags: ['Finance'],    status: 'review' },
-  { id: 9, title: 'Fire drill coordination',         priority: 'medium', assignee: 'Aisha Rahman', due: 'Aug 18', tags: ['Safety'],     status: 'done' },
-  { id: 10, title: 'Update delivery routes',         priority: 'low',    assignee: 'Tom Walker',   due: 'Aug 17', tags: ['Logistics'],  status: 'done' },
+  { id:1, title:'Review Q3 shift rosters', priority:'high', assignee:'Sarah Chen', initials:'SC', color:'indigo', due:'Aug 22', tags:['Planning'], status:'todo' },
+  { id:2, title:'Stock count — Zone B', priority:'medium', assignee:'David Kim', initials:'DK', color:'blue', due:'Aug 21', tags:['Warehouse'], status:'todo' },
+  { id:3, title:'Update employee handbook', priority:'low', assignee:'Aisha Rahman', initials:'AR', color:'green', due:'Aug 28', tags:['HR'], status:'todo' },
+  { id:4, title:'Procure safety equipment', priority:'high', assignee:'Fatima Al-Zahra', initials:'FA', color:'amber', due:'Aug 20', tags:['Procurement'], status:'todo' },
+  { id:5, title:'Onboard new driver', priority:'medium', assignee:'James Okafor', initials:'JO', color:'teal', due:'Aug 20', tags:['Onboarding'], status:'progress' },
+  { id:6, title:'Fix time-clock terminal #2', priority:'high', assignee:'Lucas Müller', initials:'LM', color:'blue', due:'Aug 20', tags:['IT'], status:'progress' },
+  { id:7, title:'Customer feedback report', priority:'low', assignee:'Priya Sharma', initials:'PS', color:'pink', due:'Aug 25', tags:['Customer'], status:'progress' },
+  { id:8, title:'Q3 budget reconciliation', priority:'medium', assignee:'Emma Rodriguez', initials:'ER', color:'purple', due:'Aug 30', tags:['Finance'], status:'progress' },
+  { id:9, title:'Safety inspection — Warehouse', priority:'high', assignee:'Mei Ling Tan', initials:'ML', color:'purple', due:'Aug 19', tags:['Safety'], status:'review' },
+  { id:10, title:'Monthly timesheet approval', priority:'medium', assignee:'James Okafor', initials:'JO', color:'teal', due:'Aug 31', tags:['Finance'], status:'review' },
+  { id:11, title:'Fire drill coordination', priority:'medium', assignee:'Aisha Rahman', initials:'AR', color:'green', due:'Aug 18', tags:['Safety'], status:'done' },
+  { id:12, title:'Update delivery routes', priority:'low', assignee:'Tom Walker', initials:'TW', color:'amber', due:'Aug 17', tags:['Logistics'], status:'done' },
+  { id:13, title:'Quality audit — Zone A', priority:'medium', assignee:'Kenji Watanabe', initials:'KW', color:'teal', due:'Aug 16', tags:['Quality'], status:'done' }
 ];
 
 const leaveRequests = [
-  { id: 1, emp: 'Tom Walker',     type: 'Annual Leave',    from: 'Aug 20', to: 'Aug 22', days: 3, status: 'approved', reason: 'Family trip' },
-  { id: 2, emp: 'Priya Sharma',   type: 'Medical Leave',   from: 'Aug 23', to: 'Aug 24', days: 2, status: 'pending',  reason: 'Dental surgery' },
-  { id: 3, emp: 'David Kim',      type: 'Annual Leave',    from: 'Sep 02', to: 'Sep 06', days: 5, status: 'pending',  reason: 'Holiday' },
-  { id: 4, emp: 'Lucas Müller',   type: 'Compassionate',   from: 'Aug 25', to: 'Aug 26', days: 2, status: 'pending',  reason: 'Family matter' },
-  { id: 5, emp: 'Mei Ling Tan',   type: 'Annual Leave',    from: 'Sep 10', to: 'Sep 12', days: 3, status: 'approved', reason: 'Personal' },
-  { id: 6, emp: 'James Okafor',  type: 'Training Leave',  from: 'Sep 15', to: 'Sep 17', days: 3, status: 'rejected', reason: 'Conflict with roster' },
+  { id:1, emp:'Tom Walker', type:'Annual Leave', from:'Aug 20', to:'Aug 22', days:3, status:'approved', reason:'Family trip' },
+  { id:2, emp:'Priya Sharma', type:'Medical Leave', from:'Aug 23', to:'Aug 24', days:2, status:'pending', reason:'Dental surgery' },
+  { id:3, emp:'David Kim', type:'Annual Leave', from:'Sep 02', to:'Sep 06', days:5, status:'pending', reason:'Holiday' },
+  { id:4, emp:'Lucas Müller', type:'Compassionate', from:'Aug 25', to:'Aug 26', days:2, status:'pending', reason:'Family matter' },
+  { id:5, emp:'Mei Ling Tan', type:'Annual Leave', from:'Sep 10', to:'Sep 12', days:3, status:'approved', reason:'Personal' },
+  { id:6, emp:'James Okafor', type:'Training Leave', from:'Sep 15', to:'Sep 17', days:3, status:'rejected', reason:'Conflict with roster' },
+  { id:7, emp:'Emma Rodriguez', type:'Medical Leave', from:'Aug 28', to:'Aug 28', days:1, status:'pending', reason:'Doctor appointment' }
 ];
 
 const shifts = {
-  // employeeId: { mon: 'morning', tue: 'evening', ... }
-  1: { mon: 'morning', tue: 'morning', wed: 'morning', thu: 'morning', fri: 'morning', sat: 'off',     sun: 'off' },
-  2: { mon: 'morning', tue: 'evening', wed: 'morning', thu: 'evening', fri: 'morning', sat: 'off',     sun: 'off' },
-  3: { mon: 'evening', tue: 'evening', wed: 'morning', thu: 'morning', fri: 'evening', sat: 'morning', sun: 'off' },
-  4: { mon: 'morning', tue: 'morning', wed: 'evening', thu: 'evening', fri: 'morning', sat: 'off',     sun: 'off' },
-  5: { mon: 'evening', tue: 'off',     wed: 'evening', thu: 'morning', fri: 'evening', sat: 'off',     sun: 'off' },
-  6: { mon: 'off',     tue: 'off',     wed: 'off',     thu: 'off',     fri: 'off',     sat: 'off',     sun: 'off' },
-  7: { mon: 'morning', tue: 'morning', wed: 'morning', thu: 'morning', fri: 'morning', sat: 'off',     sun: 'off' },
-  8: { mon: 'off',     tue: 'morning', wed: 'off',     thu: 'morning', fri: 'off',     sat: 'morning', sun: 'off' },
+  1:{mon:'morning',tue:'morning',wed:'morning',thu:'morning',fri:'morning',sat:'off',sun:'off'},
+  2:{mon:'morning',tue:'evening',wed:'morning',thu:'evening',fri:'morning',sat:'off',sun:'off'},
+  3:{mon:'evening',tue:'evening',wed:'morning',thu:'morning',fri:'evening',sat:'morning',sun:'off'},
+  4:{mon:'morning',tue:'morning',wed:'evening',thu:'evening',fri:'morning',sat:'off',sun:'off'},
+  5:{mon:'evening',tue:'off',wed:'evening',thu:'morning',fri:'evening',sat:'off',sun:'off'},
+  6:{mon:'off',tue:'off',wed:'off',thu:'off',fri:'off',sat:'off',sun:'off'},
+  7:{mon:'morning',tue:'morning',wed:'morning',thu:'morning',fri:'morning',sat:'off',sun:'off'},
+  8:{mon:'off',tue:'morning',wed:'off',thu:'morning',fri:'off',sat:'morning',sun:'off'},
+  9:{mon:'morning',tue:'morning',wed:'off',thu:'morning',fri:'morning',sat:'off',sun:'off'},
+  10:{mon:'evening',tue:'evening',wed:'morning',thu:'off',fri:'evening',sat:'off',sun:'off'},
+  11:{mon:'morning',tue:'off',wed:'morning',thu:'morning',fri:'off',sat:'morning',sun:'off'},
+  12:{mon:'morning',tue:'morning',wed:'morning',thu:'evening',fri:'morning',sat:'off',sun:'off'},
+  13:{mon:'off',tue:'morning',wed:'morning',thu:'morning',fri:'off',sat:'off',sun:'off'},
+  14:{mon:'evening',tue:'off',wed:'evening',thu:'off',fri:'evening',sat:'off',sun:'off'},
+  15:{mon:'morning',tue:'morning',wed:'off',thu:'off',fri:'morning',sat:'off',sun:'off'}
 };
 
 const shiftTypes = {
-  morning:  { label: '06:00–14:00', class: 'shift-morning', name: 'Morning'  },
-  evening:  { label: '14:00–22:00', class: 'shift-evening', name: 'Evening'  },
-  night:    { label: '22:00–06:00', class: 'shift-night',   name: 'Night'    },
-  off:      { label: 'Off',          class: 'shift-off',     name: 'Off'      },
+  morning:{label:'06:00-14:00',class:'shift-morning',name:'Morning'},
+  evening:{label:'14:00-22:00',class:'shift-evening',name:'Evening'},
+  night:{label:'22:00-06:00',class:'shift-night',name:'Night'},
+  off:{label:'Off',class:'shift-off',name:'Off'}
 };
+
+// ---- Helpers ----
+function avatarGradient(c) {
+  const g = {indigo:'linear-gradient(135deg,#6366F1,#818CF8)',teal:'linear-gradient(135deg,#14B8A6,#2DD4BF)',purple:'linear-gradient(135deg,#8B5CF6,#A78BFA)',blue:'linear-gradient(135deg,#3B82F6,#60A5FA)',pink:'linear-gradient(135deg,#EC4899,#F472B6)',amber:'linear-gradient(135deg,#F59E0B,#FBBF24)',green:'linear-gradient(135deg,#10B981,#34D399)'};
+  return g[c]||g.indigo;
+}
+
+function showToast(msg, type='success') {
+  const toast = document.getElementById('toast');
+  if(!toast) return;
+  const iconSvg = type==='success' ? icons.checkCircle : icons.x;
+  toast.innerHTML = `<span style="color:${type==='success'?'var(--green-500)':'var(--red-500)'}">${iconSvg}</span> ${msg}`;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),3000);
+}
+
+// ---- Animated Counter ----
+function animateCounter(el, target, duration=1200) {
+  const start = 0;
+  const startTime = performance.now();
+  function update(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed/duration, 1);
+    const eased = 1 - Math.pow(1-progress, 3);
+    el.textContent = Math.floor(start + (target-start)*eased);
+    if(progress<1) requestAnimationFrame(update);
+    else el.textContent = target;
+  }
+  requestAnimationFrame(update);
+}
+
+// ---- Scroll Animations ----
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.1});
+  document.querySelectorAll('.fade-in,.fade-in-left,.fade-in-right,.scale-in').forEach(el=>observer.observe(el));
+}
 
 // ---- Navigation ----
 function initNavigation() {
   const navItems = document.querySelectorAll('.nav-item');
   const sections = document.querySelectorAll('.section');
-
-  navItems.forEach(item => {
-    item.addEventListener('click', () => {
+  navItems.forEach(item=>{
+    item.addEventListener('click',()=>{
       const target = item.dataset.section;
-      if (!target) return;
-
-      navItems.forEach(n => n.classList.remove('active'));
+      if(!target) return;
+      navItems.forEach(n=>n.classList.remove('active'));
       item.classList.add('active');
-
-      sections.forEach(s => {
-        s.classList.toggle('active', s.id === target);
-      });
-
-      // Update breadcrumb
-      const breadcrumb = document.querySelector('.breadcrumb span');
-      if (breadcrumb) breadcrumb.textContent = item.querySelector('.nav-label-text, .nav-text')?.textContent || item.textContent.trim();
-
-      // Close mobile sidebar
+      sections.forEach(s=>s.classList.toggle('active', s.id===target));
+      const bc = document.querySelector('.breadcrumb span');
+      if(bc) bc.textContent = item.querySelector('.nav-text')?.textContent || item.textContent.trim();
       closeSidebar();
-
-      // Scroll to top
-      document.querySelector('.content')?.scrollTo(0, 0);
-      window.scrollTo(0, 0);
+      window.scrollTo({top:0,behavior:'smooth'});
+      // Trigger counter animations
+      setTimeout(()=>{ document.querySelectorAll('.section.active [data-count]').forEach(el=>{
+        animateCounter(el, parseInt(el.dataset.count));
+      });},200);
     });
   });
 }
@@ -91,227 +136,118 @@ function initMobileSidebar() {
   const toggle = document.querySelector('.menu-toggle');
   const sidebar = document.querySelector('.sidebar');
   const backdrop = document.querySelector('.sidebar-backdrop');
-
-  if (toggle) toggle.addEventListener('click', () => {
-    sidebar?.classList.toggle('open');
-    backdrop?.classList.toggle('show');
-  });
-
-  if (backdrop) backdrop.addEventListener('click', closeSidebar);
+  if(toggle) toggle.addEventListener('click',()=>{ sidebar.classList.toggle('open'); backdrop.classList.toggle('show'); });
+  if(backdrop) backdrop.addEventListener('click', closeSidebar);
 }
-
 function closeSidebar() {
   document.querySelector('.sidebar')?.classList.remove('open');
   document.querySelector('.sidebar-backdrop')?.classList.remove('show');
 }
 
-// ---- Toast ----
-function showToast(msg, icon = '✓') {
-  const toast = document.getElementById('toast');
-  if (!toast) return;
-  toast.innerHTML = `<span class="toast-icon">${icon}</span> ${msg}`;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 3000);
-}
-
 // ---- Dashboard Charts ----
 function renderDashboardCharts() {
-  // Weekly attendance bar chart
-  const chartContainer = document.getElementById('attendance-chart');
-  if (!chartContainer) return;
-
-  const data = [
-    { day: 'Mon', val: 92, color: 'var(--indigo-500)' },
-    { day: 'Tue', val: 88, color: 'var(--indigo-500)' },
-    { day: 'Wed', val: 95, color: 'var(--indigo-500)' },
-    { day: 'Thu', val: 90, color: 'var(--indigo-500)' },
-    { day: 'Fri', val: 85, color: 'var(--indigo-500)' },
-    { day: 'Sat', val: 60, color: 'var(--teal-500)' },
-    { day: 'Sun', val: 30, color: 'var(--teal-500)' },
-  ];
-
-  chartContainer.innerHTML = data.map(d => `
-    <div class="chart-bar" style="height:${d.val}%; background:${d.color};" title="${d.day}: ${d.val}%">
-      <span class="bar-value">${d.val}%</span>
-      <span class="bar-label">${d.day}</span>
-    </div>
-  `).join('');
+  const c = document.getElementById('attendance-chart');
+  if(!c) return;
+  const data = [{d:'Mon',v:92},{d:'Tue',v:88},{d:'Wed',v:95},{d:'Thu',v:90},{d:'Fri',v:85},{d:'Sat',v:60},{d:'Sun',v:30}];
+  c.innerHTML = data.map((b,i)=>`<div class="chart-bar" style="height:${b.v}%;background:${i<5?'var(--indigo-500)':'var(--teal-500)'};animation-delay:${i*.08}s" title="${b.d}: ${b.v}%"><span class="bar-value">${b.v}%</span><span class="bar-label">${b.d}</span></div>`).join('');
 }
 
 // ---- Time Clock ----
 let clockedIn = false;
-let clockInterval = null;
-
 function initTimeClock() {
-  const clockBtn = document.getElementById('clock-btn');
-  if (!clockBtn) return;
-
-  // Live clock display
+  const btn = document.getElementById('clock-btn');
+  if(!btn) return;
   updateClockDisplay();
   setInterval(updateClockDisplay, 1000);
-
-  clockBtn.addEventListener('click', () => {
+  btn.addEventListener('click',()=>{
     clockedIn = !clockedIn;
-    if (clockedIn) {
-      clockBtn.className = 'clock-btn clocked-in';
-      clockBtn.innerHTML = '<span class="clock-btn-icon">⏹</span> Clock Out';
-      showToast('Clocked in at ' + new Date().toLocaleTimeString());
-    } else {
-      clockBtn.className = 'clock-btn clocked-out';
-      clockBtn.innerHTML = '<span class="clock-btn-icon">▶</span> Clock In';
-      showToast('Clocked out at ' + new Date().toLocaleTimeString());
-    }
+    if(clockedIn) { btn.className='clock-btn clocked-in'; btn.innerHTML=icons.stop+' Clock Out'; showToast('Clocked in at '+new Date().toLocaleTimeString()); }
+    else { btn.className='clock-btn clocked-out'; btn.innerHTML=icons.play+' Clock In'; showToast('Clocked out at '+new Date().toLocaleTimeString()); }
   });
 }
-
 function updateClockDisplay() {
-  const timeEl = document.getElementById('clock-time');
-  const dateEl = document.getElementById('clock-date');
-  if (!timeEl) return;
+  const t = document.getElementById('clock-time'), d = document.getElementById('clock-date');
+  if(!t) return;
   const now = new Date();
-  timeEl.textContent = now.toLocaleTimeString('en-SG', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  if (dateEl) dateEl.textContent = now.toLocaleDateString('en-SG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  t.textContent = now.toLocaleTimeString('en-SG',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  if(d) d.textContent = now.toLocaleDateString('en-SG',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 }
 
-// ---- Kanban Board ----
+// ---- Kanban ----
 function renderKanban() {
   const board = document.getElementById('kanban-board');
-  if (!board) return;
-
-  const columns = [
-    { id: 'todo',     title: 'To Do',         color: 'var(--slate-400)', items: tasks.filter(t => t.status === 'todo') },
-    { id: 'progress', title: 'In Progress',   color: 'var(--blue-500)',  items: tasks.filter(t => t.status === 'progress') },
-    { id: 'review',   title: 'In Review',     color: 'var(--amber-500)', items: tasks.filter(t => t.status === 'review') },
-    { id: 'done',     title: 'Done',           color: 'var(--green-500)', items: tasks.filter(t => t.status === 'done') },
+  if(!board) return;
+  const cols = [
+    {id:'todo',title:'To Do',color:'var(--slate-400)',items:tasks.filter(t=>t.status==='todo')},
+    {id:'progress',title:'In Progress',color:'var(--blue-500)',items:tasks.filter(t=>t.status==='progress')},
+    {id:'review',title:'In Review',color:'var(--amber-500)',items:tasks.filter(t=>t.status==='review')},
+    {id:'done',title:'Done',color:'var(--green-500)',items:tasks.filter(t=>t.status==='done')}
   ];
-
-  board.innerHTML = columns.map(col => `
+  board.innerHTML = cols.map(col=>`
     <div class="kanban-col" data-col="${col.id}">
-      <div class="kanban-col-header">
-        <span class="col-dot" style="background:${col.color}"></span>
-        ${col.title}
-        <span class="col-count">${col.items.length}</span>
-      </div>
-      ${col.items.map(item => `
-        <div class="kanban-card" draggable="true" data-id="${item.id}" data-status="${col.id}">
+      <div class="kanban-col-header"><span class="col-dot" style="background:${col.color}"></span>${col.title}<span class="col-count">${col.items.length}</span></div>
+      ${col.items.map(item=>`
+        <div class="kanban-card" draggable="true" data-id="${item.id}">
           <div class="kc-title">${item.title}</div>
-          <div class="kc-meta">
-            ${renderPriority(item.priority)}
-            <span>📅 ${item.due}</span>
+          <div class="kc-meta">${renderPriority(item.priority)}<span>${icons.calendar}</span>${item.due}</div>
+          <div class="kc-meta" style="margin-top:6px">
+            ${item.tags.map(tag=>`<span class="kc-tag" style="background:var(--slate-100);color:var(--navy-600)">${tag}</span>`).join('')}
+            <span class="kc-assignee"><span class="avatar-xs" style="background:${avatarGradient(item.color)}">${item.initials}</span></span>
           </div>
-          <div class="kc-meta" style="margin-top:6px;">
-            ${item.tags.map(tag => `<span class="kc-tag" style="background:var(--slate-100);color:var(--navy-600)">${tag}</span>`).join('')}
-            <span style="margin-left:auto;font-size:11px;color:var(--navy-500)">${item.assignee.split(' ').map(w=>w[0]).join('')}</span>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `).join('');
-
+        </div>`).join('')}
+    </div>`).join('');
   initKanbanDrag();
 }
 
 function renderPriority(p) {
-  const colors = { high: 'var(--red-500)', medium: 'var(--amber-500)', low: 'var(--green-500)' };
-  const labels = { high: '● High', medium: '● Medium', low: '● Low' };
-  return `<span class="kc-priority" style="color:${colors[p]}">${labels[p]}</span>`;
+  const colors = {high:'var(--red-500)',medium:'var(--amber-500)',low:'var(--green-500)'};
+  return `<span class="kc-priority" style="color:${colors[p]}">${p==='high'?'●':p==='medium'?'●':'●'} ${p.charAt(0).toUpperCase()+p.slice(1)}</span>`;
 }
 
 function initKanbanDrag() {
-  let draggedCard = null;
-
-  document.querySelectorAll('.kanban-card').forEach(card => {
-    card.addEventListener('dragstart', (e) => {
-      draggedCard = card;
-      card.classList.add('dragging');
-      e.dataTransfer.effectAllowed = 'move';
-    });
-
-    card.addEventListener('dragend', () => {
-      card.classList.remove('dragging');
-      draggedCard = null;
-    });
+  let dragged = null;
+  document.querySelectorAll('.kanban-card').forEach(card=>{
+    card.addEventListener('dragstart',e=>{ dragged=card; card.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; });
+    card.addEventListener('dragend',()=>{ card.classList.remove('dragging'); dragged=null; });
   });
-
-  document.querySelectorAll('.kanban-col').forEach(col => {
-    col.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'move';
-    });
-
-    col.addEventListener('drop', (e) => {
-      e.preventDefault();
-      if (!draggedCard) return;
-      const targetCol = col.querySelector('.kanban-col-header');
-      const dropZone = col.querySelector('.kanban-col-header').nextElementSibling;
-      
-      // Append to column
-      col.appendChild(draggedCard);
-      
-      // Update count
-      const count = col.querySelectorAll('.kanban-card').length;
-      col.querySelector('.col-count').textContent = count;
-      
-      // Update old column count
-      document.querySelectorAll('.kanban-col').forEach(c => {
-        const n = c.querySelectorAll('.kanban-card').length;
-        c.querySelector('.col-count').textContent = n;
-      });
-
-      showToast('Task moved to ' + targetCol.textContent.trim().replace(/\d+$/, ''));
+  document.querySelectorAll('.kanban-col').forEach(col=>{
+    col.addEventListener('dragover',e=>{ e.preventDefault(); col.classList.add('drag-over'); });
+    col.addEventListener('dragleave',()=>col.classList.remove('drag-over'));
+    col.addEventListener('drop',e=>{
+      e.preventDefault(); col.classList.remove('drag-over');
+      if(!dragged) return;
+      col.appendChild(dragged);
+      document.querySelectorAll('.kanban-col').forEach(c=>{ c.querySelector('.col-count').textContent = c.querySelectorAll('.kanban-card').length; });
+      showToast('Task moved');
     });
   });
 }
 
-// ---- Roster Grid ----
+// ---- Roster ----
 function renderRoster() {
   const grid = document.getElementById('roster-grid');
-  if (!grid) return;
-
-  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  const dayKeys = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-
+  if(!grid) return;
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const keys = ['mon','tue','wed','thu','fri','sat','sun'];
   let html = '<div class="roster-header">Employee</div>';
-  days.forEach(d => { html += `<div class="roster-header">${d}</div>`; });
-
-  employees.forEach(emp => {
-    html += `
-      <div class="roster-cell roster-emp">
-        <div class="avatar-sm" style="background:${avatarGradient(emp.color)}">${emp.initials}</div>
-        <span>${emp.name.split(' ').slice(-2).join(' ')}</span>
-      </div>
-    `;
-    dayKeys.forEach(day => {
-      const shift = shifts[emp.id]?.[day] || 'off';
+  days.forEach(d=>html+=`<div class="roster-header">${d}</div>`);
+  employees.slice(0,12).forEach(emp=>{
+    html += `<div class="roster-cell roster-emp"><span class="avatar-sm" style="background:${avatarGradient(emp.color)}">${emp.initials}</span><span>${emp.name.split(' ').slice(-2).join(' ')}</span></div>`;
+    keys.forEach(day=>{
+      const shift = shifts[emp.id]?.[day]||'off';
       const st = shiftTypes[shift];
-      html += `<div class="roster-cell"><span class="shift-badge ${st.class}" onclick="cycleShift(${emp.id}, '${day}', this)">${st.label}</span></div>`;
+      html += `<div class="roster-cell"><span class="shift-badge ${st.class}" onclick="cycleShift(${emp.id},'${day}',this)">${st.label}</span></div>`;
     });
   });
-
   grid.innerHTML = html;
 }
 
-function avatarGradient(color) {
-  const gradients = {
-    indigo: 'linear-gradient(135deg, var(--indigo-500), var(--indigo-400))',
-    teal:   'linear-gradient(135deg, var(--teal-500), var(--teal-400))',
-    purple: 'linear-gradient(135deg, var(--purple-500), var(--indigo-400))',
-    blue:   'linear-gradient(135deg, var(--blue-500), var(--indigo-400))',
-    pink:   'linear-gradient(135deg, var(--pink-500), var(--purple-500))',
-    amber:  'linear-gradient(135deg, var(--amber-500), var(--pink-500))',
-    green:  'linear-gradient(135deg, var(--green-500), var(--teal-500))',
-  };
-  return gradients[color] || gradients.indigo;
-}
-
-// Cycle through shift types on click
-function cycleShift(empId, day, el) {
-  const order = ['morning', 'evening', 'night', 'off'];
-  const current = shifts[empId]?.[day] || 'off';
-  const nextIdx = (order.indexOf(current) + 1) % order.length;
-  const next = order[nextIdx];
+function cycleShift(empId,day,el) {
+  const order = ['morning','evening','night','off'];
+  const current = shifts[empId]?.[day]||'off';
+  const next = order[(order.indexOf(current)+1)%order.length];
+  if(!shifts[empId]) shifts[empId]={};
   shifts[empId][day] = next;
-  
   const st = shiftTypes[next];
   el.className = `shift-badge ${st.class}`;
   el.textContent = st.label;
@@ -320,260 +256,143 @@ function cycleShift(empId, day, el) {
 
 // ---- Org Chart ----
 function renderOrgChart() {
-  const container = document.getElementById('org-chart');
-  if (!container) return;
-
-  container.innerHTML = `
+  const c = document.getElementById('org-chart');
+  if(!c) return;
+  c.innerHTML = `
     <div class="org-tree">
-      <!-- CEO/Director Level -->
       <div class="org-node ceo" onclick="showOrgDetail(1)">
         <div class="org-avatar" style="background:${avatarGradient('indigo')}">SC</div>
-        <div class="org-name">Sarah Chen</div>
-        <div class="org-title">Operations Director</div>
+        <div class="org-name">Sarah Chen</div><div class="org-title">Operations Director</div>
       </div>
-
-      <!-- Managers Level -->
       <div class="org-children">
         <div class="org-branch">
           <div class="org-node manager" onclick="showOrgDetail(2)">
             <div class="org-avatar" style="background:${avatarGradient('teal')}">JO</div>
-            <div class="org-name">James Okafor</div>
-            <div class="org-title">Shift Supervisor</div>
-          </div>
-          <!-- Subordinates of James -->
-          <div class="org-children">
-            <div class="org-branch">
-              <div class="org-node" onclick="showOrgDetail(4)">
-                <div class="org-avatar" style="background:${avatarGradient('blue')}">DK</div>
-                <div class="org-name">David Kim</div>
-                <div class="org-title">Warehouse Operative</div>
-              </div>
-            </div>
-            <div class="org-branch">
-              <div class="org-node" onclick="showOrgDetail(6)">
-                <div class="org-avatar" style="background:${avatarGradient('amber')}">TW</div>
-                <div class="org-name">Tom Walker</div>
-                <div class="org-title">Delivery Driver</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="org-branch">
-          <div class="org-node manager" onclick="showOrgDetail(3)">
-            <div class="org-avatar" style="background:${avatarGradient('purple')}">ML</div>
-            <div class="org-name">Mei Ling Tan</div>
-            <div class="org-title">Team Lead — Logistics</div>
-          </div>
-        </div>
-
-        <div class="org-branch">
-          <div class="org-node manager" onclick="showOrgDetail(7)">
-            <div class="org-avatar" style="background:${avatarGradient('green')}">AR</div>
-            <div class="org-name">Aisha Rahman</div>
-            <div class="org-title">HR Coordinator</div>
+            <div class="org-name">James Okafor</div><div class="org-title">Shift Supervisor</div>
           </div>
           <div class="org-children">
-            <div class="org-branch">
-              <div class="org-node" onclick="showOrgDetail(5)">
-                <div class="org-avatar" style="background:${avatarGradient('pink')}">PS</div>
-                <div class="org-name">Priya Sharma</div>
-                <div class="org-title">Customer Service</div>
-              </div>
-            </div>
-            <div class="org-branch">
-              <div class="org-node" onclick="showOrgDetail(8)">
-                <div class="org-avatar" style="background:${avatarGradient('blue')}">LM</div>
-                <div class="org-name">Lucas Müller</div>
-                <div class="org-title">IT Support</div>
-              </div>
-            </div>
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(4)"><div class="org-avatar" style="background:${avatarGradient('blue')}">DK</div><div class="org-name">David Kim</div><div class="org-title">Warehouse Operative</div></div></div>
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(6)"><div class="org-avatar" style="background:${avatarGradient('amber')}">TW</div><div class="org-name">Tom Walker</div><div class="org-title">Delivery Driver</div></div></div>
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(12)"><div class="org-avatar" style="background:${avatarGradient('indigo')}">DP</div><div class="org-name">Daniel Park</div><div class="org-title">Warehouse Operative</div></div></div>
+          </div>
+        </div>
+        <div class="org-branch">
+          <div class="org-node manager" onclick="showOrgDetail(3)"><div class="org-avatar" style="background:${avatarGradient('purple')}">ML</div><div class="org-name">Mei Ling Tan</div><div class="org-title">Team Lead — Logistics</div></div>
+          <div class="org-children">
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(10)"><div class="org-avatar" style="background:${avatarGradient('teal')}">KW</div><div class="org-name">Kenji Watanabe</div><div class="org-title">Quality Analyst</div></div></div>
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(14)"><div class="org-avatar" style="background:${avatarGradient('green')}">OS</div><div class="org-name">Oliver Schmidt</div><div class="org-title">Maintenance Tech</div></div></div>
+          </div>
+        </div>
+        <div class="org-branch">
+          <div class="org-node manager" onclick="showOrgDetail(7)"><div class="org-avatar" style="background:${avatarGradient('green')}">AR</div><div class="org-name">Aisha Rahman</div><div class="org-title">HR Coordinator</div></div>
+          <div class="org-children">
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(5)"><div class="org-avatar" style="background:${avatarGradient('pink')}">PS</div><div class="org-name">Priya Sharma</div><div class="org-title">Customer Service</div></div></div>
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(8)"><div class="org-avatar" style="background:${avatarGradient('blue')}">LM</div><div class="org-name">Lucas Müller</div><div class="org-title">IT Support</div></div></div>
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(13)"><div class="org-avatar" style="background:${avatarGradient('pink')}">NH</div><div class="org-name">Nadia Hassan</div><div class="org-title">Marketing Coord.</div></div></div>
           </div>
         </div>
       </div>
-    </div>
-  `;
+    </div>`;
 }
 
-function showOrgDetail(empId) {
-  const emp = employees.find(e => e.id === empId);
-  if (!emp) return;
-  showToast(`${emp.name} — ${emp.title}`);
+function showOrgDetail(id) {
+  const emp = employees.find(e=>e.id===id);
+  if(emp) showToast(`${emp.name} — ${emp.title}`);
 }
 
-// ---- Leave Management ----
+// ---- Leave ----
 function renderLeaveList() {
-  const container = document.getElementById('leave-list');
-  if (!container) return;
-
-  container.innerHTML = leaveRequests.map(req => `
+  const c = document.getElementById('leave-list');
+  if(!c) return;
+  c.innerHTML = leaveRequests.map(r=>`
     <tr>
-      <td><strong>${req.emp}</strong></td>
-      <td>${req.type}</td>
-      <td>${req.from} → ${req.to}</td>
-      <td class="text-center">${req.days}</td>
-      <td>${req.reason}</td>
-      <td>
-        ${req.status === 'pending'
-          ? `<div class="flex gap-2">
-              <button class="btn btn-sm btn-primary" onclick="approveLeave(${req.id})">✓ Approve</button>
-              <button class="btn btn-sm btn-secondary" onclick="rejectLeave(${req.id})">✕ Reject</button>
-            </div>`
-          : `<span class="badge ${req.status === 'approved' ? 'badge-green' : 'badge-red'}">${req.status}</span>`
-        }
-      </td>
-    </tr>
-  `).join('');
+      <td><strong>${r.emp}</strong></td><td>${r.type}</td><td>${r.from} → ${r.to}</td>
+      <td class="text-center">${r.days}</td><td>${r.reason}</td>
+      <td>${r.status==='pending'
+        ? `<div class="flex gap-2"><button class="btn btn-sm btn-primary" onclick="approveLeave(${r.id})">Approve</button><button class="btn btn-sm btn-secondary" onclick="rejectLeave(${r.id})">Reject</button></div>`
+        : `<span class="badge ${r.status==='approved'?'badge-green':'badge-red'}">${r.status}</span>`}</td>
+    </tr>`).join('');
 }
 
-function approveLeave(id) {
-  const req = leaveRequests.find(r => r.id === id);
-  if (req) { req.status = 'approved'; renderLeaveList(); renderLeaveCalendar(); showToast(`Leave approved for ${req.emp}`); }
-}
-
-function rejectLeave(id) {
-  const req = leaveRequests.find(r => r.id === id);
-  if (req) { req.status = 'rejected'; renderLeaveList(); renderLeaveCalendar(); showToast(`Leave rejected for ${req.emp}`, '✕'); }
-}
+function approveLeave(id) { const r=leaveRequests.find(x=>x.id===id); if(r){r.status='approved';renderLeaveList();renderLeaveCalendar();showToast(`Leave approved for ${r.emp}`);} }
+function rejectLeave(id) { const r=leaveRequests.find(x=>x.id===id); if(r){r.status='rejected';renderLeaveList();renderLeaveCalendar();showToast(`Leave rejected for ${r.emp}`,'error');} }
 
 function renderLeaveCalendar() {
-  const container = document.getElementById('leave-calendar');
-  if (!container) return;
-
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  // August 2026 starts on Saturday
-  const firstDay = 6; // Saturday
-  const daysInMonth = 31;
-  const today = 20;
-
-  let html = days.map(d => `<div class="cal-day-header">${d}</div>`).join('');
-
-  // Empty cells before day 1
-  for (let i = 0; i < firstDay; i++) {
-    html += '<div class="cal-day other-month"></div>';
-  }
-
-  // Days of August
-  for (let d = 1; d <= daysInMonth; d++) {
-    const isToday = d === today;
-    let pills = '';
-    leaveRequests.forEach(req => {
-      const fromDay = parseInt(req.from.split(' ')[1]);
-      const toDay = parseInt(req.to.split(' ')[1]);
-      if (d >= fromDay && d <= toDay) {
-        const colorClass = req.status === 'approved' ? 'badge-green' : (req.status === 'pending' ? 'badge-amber' : 'badge-red');
-        pills += `<span class="leave-pill ${colorClass}">${req.emp.split(' ')[0]}</span>`;
-      }
+  const c = document.getElementById('leave-calendar');
+  if(!c) return;
+  const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const firstDay=6, daysInMonth=31, today=20;
+  let html = days.map(d=>`<div class="cal-day-header">${d}</div>`).join('');
+  for(let i=0;i<firstDay;i++) html+='<div class="cal-day other-month"></div>';
+  for(let d=1;d<=daysInMonth;d++){
+    let pills='';
+    leaveRequests.forEach(r=>{
+      const fd=parseInt(r.from.split(' ')[1]), td=parseInt(r.to.split(' ')[1]);
+      if(d>=fd&&d<=td){ const cls=r.status==='approved'?'badge-green':r.status==='pending'?'badge-amber':'badge-red'; pills+=`<span class="leave-pill ${cls}">${r.emp.split(' ')[0]}</span>`; }
     });
-    html += `<div class="cal-day ${isToday ? 'today' : ''}"><div class="cal-date">${d}</div>${pills}</div>`;
+    html+=`<div class="cal-day ${d===today?'today':''}"><div class="cal-date">${d}</div>${pills}</div>`;
   }
-
-  container.innerHTML = html;
+  c.innerHTML=html;
 }
 
 // ---- Employee Table ----
 function renderEmployeeTable() {
-  const tbody = document.getElementById('employee-tbody');
-  if (!tbody) return;
-
-  const roleLabels = { admin: 'Administrator', manager: 'Manager', employee: 'Employee' };
-  const statusBadges = { active: 'badge-green', leave: 'badge-amber' };
-  const statusLabels = { active: 'Active', leave: 'On Leave' };
-
-  tbody.innerHTML = employees.map(emp => `
+  const tb = document.getElementById('employee-tbody');
+  if(!tb) return;
+  const rl={admin:'Administrator',manager:'Manager',employee:'Employee'};
+  const sb={active:'badge-green',leave:'badge-amber'};
+  const sl={active:'Active',leave:'On Leave'};
+  tb.innerHTML = employees.map(emp=>`
     <tr>
-      <td>
-        <div class="flex items-center gap-2">
-          <div class="avatar-sm" style="width:32px;height:32px;border-radius:50%;background:${avatarGradient(emp.color)};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff">${emp.initials}</div>
-          <div>
-            <div style="font-weight:600">${emp.name}</div>
-            <div class="text-xs text-muted">${emp.email}</div>
-          </div>
-        </div>
-      </td>
-      <td>${emp.title}</td>
-      <td>${emp.dept}</td>
-      <td>${emp.phone}</td>
-      <td><span class="badge ${statusBadges[emp.status]}">${statusLabels[emp.status]}</span></td>
-      <td><span class="badge badge-indigo">${roleLabels[emp.role]}</span></td>
-    </tr>
-  `).join('');
+      <td><div class="flex items-center gap-2"><span class="avatar-sm" style="width:32px;height:32px;border-radius:50%;background:${avatarGradient(emp.color)};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff">${emp.initials}</span><div><div style="font-weight:600">${emp.name}</div><div class="text-xs text-muted">${emp.email}</div></div></div></td>
+      <td>${emp.title}</td><td>${emp.dept}</td><td>${emp.phone}</td>
+      <td><span class="badge ${sb[emp.status]}">${sl[emp.status]}</span></td>
+      <td><span class="badge badge-indigo">${rl[emp.role]}</span></td>
+    </tr>`).join('');
 }
 
 // ---- Login Tabs ----
 function initLoginTabs() {
   const tabs = document.querySelectorAll('.login-tab');
   const panels = document.querySelectorAll('.login-panel');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      panels.forEach(p => p.classList.toggle('active', p.dataset.panel === tab.dataset.tab));
-    });
-  });
-
-  // Auth method toggle
-  const methodBtns = document.querySelectorAll('.auth-method-btn');
-  methodBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      methodBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
-
-  // Demo login button
-  const loginBtn = document.getElementById('demo-login');
-  if (loginBtn) loginBtn.addEventListener('click', () => {
-    showToast('Demo mode: Navigating to dashboard…');
-    setTimeout(() => {
-      document.querySelector('[data-section="dashboard"]')?.click();
-    }, 800);
-  });
+  tabs.forEach(tab=>tab.addEventListener('click',()=>{
+    tabs.forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    panels.forEach(p=>p.classList.toggle('active', p.dataset.panel===tab.dataset.tab));
+  }));
+  document.querySelectorAll('.auth-method-btn').forEach(btn=>btn.addEventListener('click',()=>{
+    document.querySelectorAll('.auth-method-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  }));
+  const lb = document.getElementById('demo-login');
+  if(lb) lb.addEventListener('click',()=>{ showToast('Demo mode: Navigating to dashboard...'); setTimeout(()=>document.querySelector('[data-section="dashboard"]')?.click(),800); });
 }
 
-// ---- Backlog Milestones ----
+// ---- Backlog Filters ----
 function initBacklogFilters() {
-  const filters = document.querySelectorAll('.backlog-filter');
-  filters.forEach(f => {
-    f.addEventListener('click', () => {
-      filters.forEach(x => x.classList.remove('active'));
-      f.classList.add('active');
-      const target = f.dataset.filter;
-      document.querySelectorAll('.milestone-card').forEach(card => {
-        card.style.display = (!target || card.dataset.milestone === target) ? '' : 'none';
-      });
-    });
-  });
-}
-
-// ---- Tab System (for sub-tabs) ----
-function initTabs() {
-  document.querySelectorAll('[data-tabs]').forEach(tabGroup => {
-    const tabs = tabGroup.querySelectorAll('.tab');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const target = tab.dataset.tab;
-        const panels = tabGroup.parentElement.querySelectorAll('.tab-panel');
-        panels.forEach(p => p.classList.toggle('active', p.dataset.panel === target));
-      });
-    });
-  });
+  document.querySelectorAll('.backlog-filter').forEach(f=>f.addEventListener('click',()=>{
+    document.querySelectorAll('.backlog-filter').forEach(x=>x.classList.remove('active'));
+    f.classList.add('active');
+    const t=f.dataset.filter;
+    document.querySelectorAll('.milestone-card').forEach(card=>card.style.display=(!t||card.dataset.milestone===t)?'':'none');
+  }));
 }
 
 // ---- Mobile Preview ----
 function initMobilePreview() {
-  const btn = document.getElementById('show-mobile');
-  const overlay = document.getElementById('mobile-overlay');
-  if (btn) btn.addEventListener('click', () => overlay?.classList.add('show'));
-  if (overlay) overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) overlay.classList.remove('show');
-  });
+  const btn=document.getElementById('show-mobile'), ov=document.getElementById('mobile-overlay');
+  if(btn) btn.addEventListener('click',()=>ov?.classList.add('show'));
+  if(ov) ov.addEventListener('click',e=>{ if(e.target===ov) ov.classList.remove('show'); });
 }
 
-// ---- Initialize Everything ----
-document.addEventListener('DOMContentLoaded', () => {
+// ---- Inject Icons ----
+function injectIcons() {
+  document.querySelectorAll('[data-icon]').forEach(el=>{ const name=el.dataset.icon; if(icons[name]) el.innerHTML=icons[name]; });
+}
+
+// ---- Init ----
+document.addEventListener('DOMContentLoaded',()=>{
+  injectIcons();
   initNavigation();
   initMobileSidebar();
   initTimeClock();
@@ -586,17 +405,11 @@ document.addEventListener('DOMContentLoaded', () => {
   renderEmployeeTable();
   initLoginTabs();
   initBacklogFilters();
-  initTabs();
   initMobilePreview();
-
-  // Set current date in topbar
-  const dateEl = document.getElementById('current-date');
-  if (dateEl) dateEl.textContent = new Date().toLocaleDateString('en-SG', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
-
-  // Hash-based deep linking (for screenshots & sharing)
-  if (window.location.hash) {
-    const target = window.location.hash.substring(1);
-    const navItem = document.querySelector(`.nav-item[data-section="${target}"]`);
-    if (navItem) navItem.click();
+  initScrollAnimations();
+  setTimeout(()=>{ document.querySelectorAll('[data-count]').forEach(el=>animateCounter(el,parseInt(el.dataset.count))); },300);
+  if(window.location.hash) {
+    const target=window.location.hash.substring(1);
+    document.querySelector(`.nav-item[data-section="${target}"]`)?.click();
   }
 });
