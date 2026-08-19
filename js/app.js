@@ -149,7 +149,7 @@ function renderDashboardCharts() {
   const c = document.getElementById('attendance-chart');
   if(!c) return;
   const data = [{d:'Mon',v:92},{d:'Tue',v:88},{d:'Wed',v:95},{d:'Thu',v:90},{d:'Fri',v:85},{d:'Sat',v:60},{d:'Sun',v:30}];
-  c.innerHTML = data.map((b,i)=>`<div class="chart-bar" style="height:${b.v}%;background:${i<5?'var(--indigo-500)':'var(--teal-500)'};animation-delay:${i*.08}s" title="${b.d}: ${b.v}%"><span class="bar-value">${b.v}%</span><span class="bar-label">${b.d}</span></div>`).join('');
+  c.innerHTML = data.map((b,i)=>`<div class="chart-bar" style="height:${b.v}%;background:${i<5?'#6366F1':'#14B8A6'};animation-delay:${i*.08}s" title="${b.d}: ${b.v}%"><span class="bar-value">${b.v}%</span><span class="bar-label">${b.d}</span></div>`).join('');
 }
 
 // ---- Time Clock ----
