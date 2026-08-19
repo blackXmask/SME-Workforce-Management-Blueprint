@@ -36,7 +36,7 @@
     <div class="nav-item" data-section="backlog"><span class="nav-icon" data-icon="package"></span><span class="nav-text">Feature Backlog</span></div>
     <div class="nav-item" data-section="deployment"><span class="nav-icon" data-icon="rocket"></span><span class="nav-text">Deployment Guide</span></div>
   </nav>
-  <div class="sidebar-footer">WorkForce Pro v3.0<br>No AD/AAD Required · Self-Hosted</div>
+  <div class="sidebar-footer"><span class="sf-dot"></span> WorkForce Pro v3.0 · Self-Hosted</div>
 </aside>
 <div class="sidebar-backdrop"></div>
 <div class="main">
@@ -54,8 +54,8 @@
 <!-- ===== EXECUTIVE SUMMARY ===== -->
 <section id="summary" class="section active">
   <div class="page-hero">
-    <h1>WorkForce Pro</h1>
-    <p>Self-contained workforce management for SMEs. No Active Directory, no Azure AD, no domain infrastructure. One codebase for Web, iOS, and Android.</p>
+    <h1>Executive Summary</h1>
+    <p>Cross-platform workforce management for SMEs without directory services. Local-only authentication, single codebase deployment, self-hosted infrastructure.</p>
     <div class="hero-stats">
       <div class="hero-stat"><div class="hs-value">15</div><div class="hs-label">Employees</div></div>
       <div class="hero-stat"><div class="hs-value">3</div><div class="hs-label">Platforms</div></div>
@@ -72,21 +72,21 @@
   </div>
 
   <div class="grid grid-2 mb-6">
-    <div class="card fade-in-left">
-      <h3 class="card-title">Project Overview</h3>
-      <p class="card-subtitle">What we're building and why</p>
-      <p style="font-size:14px;line-height:1.7;color:var(--navy-600)">WorkForce Pro is a cross-platform workforce management solution designed for SMEs that operate entirely without directory services. Every user authenticates through an in-app local account system — by email, phone number, or trusted-device token — with no dependency on Active Directory, Azure AD, or domain-joined machines.</p>
-      <p style="font-size:14px;line-height:1.7;color:var(--navy-600);margin-top:12px">The system covers five core capabilities: <strong>employee scheduling</strong>, <strong>time tracking</strong>, <strong>task management</strong>, <strong>organisation chart</strong>, and <strong>integrated leave &amp; roster handling</strong>. A single React Native codebase compiles to iOS, Android, and a web app.</p>
+    <div class="card fade-in">
+      <h3 class="card-title">System Overview</h3>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.65">
+        <p style="margin-bottom:10px">WorkForce Pro is a cross-platform workforce management solution for SMEs that operate without directory services. Authentication is handled entirely in-app via email, phone number, or trusted-device token — no dependency on Active Directory, Azure AD, or domain-joined machines.</p>
+        <p>Five core capabilities: <strong>employee scheduling</strong>, <strong>time tracking</strong>, <strong>task management</strong>, <strong>organisation chart</strong>, and <strong>integrated leave &amp; roster handling</strong>. A single React Native codebase compiles to iOS, Android, and web.</p>
+      </div>
     </div>
-    <div class="card fade-in-right">
-      <h3 class="card-title">Key Design Decisions</h3>
-      <p class="card-subtitle">Rationale for technology choices</p>
+    <div class="card fade-in">
+      <h3 class="card-title">Technology Decisions</h3>
       <div style="display:flex;flex-direction:column;gap:10px">
-        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500)"><span data-icon="check"></span></span><div><strong style="font-size:13px">React Native + Expo</strong><br><span class="text-sm text-muted">One codebase to iOS, Android, Web. Reduces maintenance and ensures feature parity.</span></div></div>
-        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500)"><span data-icon="check"></span></span><div><strong style="font-size:13px">Node.js + Express + TypeScript</strong><br><span class="text-sm text-muted">RESTful API with typed safety. Runs on any Windows/Linux server with Node 20+.</span></div></div>
-        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500)"><span data-icon="check"></span></span><div><strong style="font-size:13px">PostgreSQL (or SQLite for &lt;50 staff)</strong><br><span class="text-sm text-muted">Relational integrity for hierarchical employee data. No licensing cost.</span></div></div>
-        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500)"><span data-icon="check"></span></span><div><strong style="font-size:13px">JWT + bcrypt + Device Tokens</strong><br><span class="text-sm text-muted">Industry-standard password hashing, stateless JWT sessions, optional device binding.</span></div></div>
-        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--green-500)"><span data-icon="check"></span></span><div><strong style="font-size:13px">Three-Tier Role System</strong><br><span class="text-sm text-muted">Admin, Manager, Employee — plain-English permissions, no technical jargon.</span></div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--success);margin-top:1px" data-icon="check"></span><div><strong style="font-size:12px">React Native + Expo</strong><br><span class="text-xs text-muted">Single codebase to iOS, Android, Web. Reduces maintenance overhead.</span></div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--success);margin-top:1px" data-icon="check"></span><div><strong style="font-size:12px">Node.js + Express + TypeScript</strong><br><span class="text-xs text-muted">RESTful API with compile-time type safety. Runs on Node 20+.</span></div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--success);margin-top:1px" data-icon="check"></span><div><strong style="font-size:12px">PostgreSQL (or SQLite for &lt;50 staff)</strong><br><span class="text-xs text-muted">Relational integrity for hierarchical employee data. No licensing cost.</span></div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--success);margin-top:1px" data-icon="check"></span><div><strong style="font-size:12px">JWT + bcrypt + Device Tokens</strong><br><span class="text-xs text-muted">Password hashing (cost 12), stateless JWT sessions, optional device binding.</span></div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--success);margin-top:1px" data-icon="check"></span><div><strong style="font-size:12px">Three-Tier Role System</strong><br><span class="text-xs text-muted">Admin, Manager, Employee — plain-English permission model.</span></div></div>
       </div>
     </div>
   </div>
@@ -111,8 +111,8 @@
         <span class="tech-pill"><span class="pill-dot" style="background:var(--purple-500)"></span>Expo EAS</span>
       </div>
     </div>
-    <div class="card fade-in stagger-1">
-      <h3 class="card-title">Deliverables Checklist</h3>
+    <div class="card fade-in">
+      <h3 class="card-title">Deliverables</h3>
       <div style="display:flex;flex-direction:column;gap:8px">
         <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--green-500)"><span data-icon="checkCircle"></span></span><span style="font-size:13px">High-level architecture diagram (backend, database, auth flow)</span></div>
         <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--green-500)"><span data-icon="checkCircle"></span></span><span style="font-size:13px">Clickable prototype demonstrating full user journey</span></div>
@@ -132,8 +132,8 @@
   <div class="section-header"><h1>System Architecture</h1><p>Three-tier architecture with a shared API backend, single-codebase frontend, and self-hosted database. No external identity providers.</p></div>
 
   <div class="card mb-6">
-    <h3 class="card-title">High-Level Architecture Diagram</h3>
-    <p class="card-subtitle">Client layer to API layer to Data layer — with animated flow connectors</p>
+    <h3 class="card-title">Architecture Diagram</h3>
+    <p class="card-subtitle">Client layer, API layer, data layer</p>
     <div class="arch-container">
       <div class="arch-layer">
         <div class="arch-box primary"><div class="arch-box-icon"><span data-icon="monitor"></span></div><div class="arch-box-title">Web App</div><div class="arch-box-desc">Chrome / Edge<br>Windows 10+</div></div>
