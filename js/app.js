@@ -86,7 +86,8 @@ function showToast(msg, type='success') {
 }
 
 // ---- Animated Counter ----
-function animateCounter(el, target, duration=1200) {
+function animateCounter(el, target, duration=1000) {
+  if(!el) return;
   const start = 0;
   const startTime = performance.now();
   function update(now) {
@@ -98,6 +99,12 @@ function animateCounter(el, target, duration=1200) {
     else el.textContent = target;
   }
   requestAnimationFrame(update);
+}
+
+function triggerCounters() {
+  document.querySelectorAll('.section.active [data-count]').forEach(el=>{
+    if(el.textContent === '0' || el.textContent === '') animateCounter(el, parseInt(el.dataset.count));
+  });
 }
 
 // ---- Scroll Animations ----
@@ -123,10 +130,7 @@ function initNavigation() {
       if(bc) bc.textContent = item.querySelector('.nav-text')?.textContent || item.textContent.trim();
       closeSidebar();
       window.scrollTo({top:0,behavior:'smooth'});
-      // Trigger counter animations
-      setTimeout(()=>{ document.querySelectorAll('.section.active [data-count]').forEach(el=>{
-        animateCounter(el, parseInt(el.dataset.count));
-      });},200);
+      setTimeout(triggerCounters, 150);
     });
   });
 }
@@ -200,8 +204,9 @@ function renderKanban() {
 }
 
 function renderPriority(p) {
-  const colors = {high:'var(--red-500)',medium:'var(--amber-500)',low:'var(--green-500)'};
-  return `<span class="kc-priority" style="color:${colors[p]}">${p==='high'?'●':p==='medium'?'●':'●'} ${p.charAt(0).toUpperCase()+p.slice(1)}</span>`;
+  const colors = {high:'#EF4444',medium:'#F59E0B',low:'#22C55E'};
+  const labels = {high:'High',medium:'Med',low:'Low'};
+  return `<span class="kc-priority" style="color:${colors[p]}"><span style="width:6px;height:6px;border-radius:50%;background:${colors[p]};display:inline-block"></span> ${labels[p]}</span>`;
 }
 
 function initKanbanDrag() {
@@ -407,7 +412,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   initBacklogFilters();
   initMobilePreview();
   initScrollAnimations();
-  setTimeout(()=>{ document.querySelectorAll('[data-count]').forEach(el=>animateCounter(el,parseInt(el.dataset.count))); },300);
+  setTimeout(triggerCounters, 200);
   if(window.location.hash) {
     const target=window.location.hash.substring(1);
     document.querySelector(`.nav-item[data-section="${target}"]`)?.click();

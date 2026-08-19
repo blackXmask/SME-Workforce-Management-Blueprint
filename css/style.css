@@ -219,7 +219,7 @@ a:hover { color: var(--accent-hover); }
   border:1px solid var(--border);
   border-radius:var(--r);
   padding:5px 10px;
-  width:220px;
+  width:280px;
   transition: all var(--t);
 }
 
@@ -246,7 +246,8 @@ a:hover { color: var(--accent-hover); }
 }
 
 .topbar .user-chip:hover { background:var(--bg-subtle); }
-.topbar .user-chip .avatar { width:28px; height:28px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; color:#fff; }
+.topbar .user-chip .avatar { width:28px; height:28px; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; color:#fff; border:1px solid var(--border); }
+.topbar .user-chip .avatar img { width:100%; height:100%; object-fit:cover; }
 .topbar .user-chip .user-name { font-size:13px; font-weight:500; color:var(--text-primary); }
 .topbar .user-chip .user-role { font-size:11px; color:var(--text-tertiary); }
 
@@ -294,11 +295,12 @@ a:hover { color: var(--accent-hover); }
 .stat-card:hover { border-color:var(--border-hover); }
 
 .stat-card .stat-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
-.stat-card .stat-icon { width:28px; height:28px; border-radius:var(--r-sm); display:flex; align-items:center; justify-content:center; color:var(--text-secondary); background:var(--bg-subtle); }
+.stat-card .stat-icon { width:28px; height:28px; border-radius:var(--r-sm); display:flex; align-items:center; justify-content:center; color:var(--text-secondary); background:var(--bg-subtle); border:1px solid var(--border-subtle); }
 .stat-card .stat-icon svg { width:14px; height:14px; }
-.stat-card .stat-label { font-size:12px; color:var(--text-tertiary); margin-bottom:4px; }
+.stat-card .stat-label { font-size:12px; color:var(--text-secondary); margin-bottom:4px; }
 .stat-card .stat-value { font-size:24px; font-weight:700; color:var(--text-primary); letter-spacing:-0.02em; line-height:1; }
 .stat-card .stat-trend { font-size:11px; margin-top:6px; display:flex; align-items:center; gap:3px; color:var(--text-tertiary); }
+.stat-card .stat-trend svg { width:12px; height:12px; }
 .stat-card .stat-trend.up { color:var(--success-text); }
 .stat-card .stat-trend.down { color:var(--danger-text); }
 
@@ -403,7 +405,7 @@ a:hover { color: var(--accent-hover); }
   border:1px solid var(--border-subtle);
   border-radius:var(--r);
   padding:10px;
-  min-height:180px;
+  min-height:120px;
   transition: all var(--t);
 }
 
@@ -429,7 +431,7 @@ a:hover { color: var(--accent-hover); }
 .kanban-card .kc-title { font-size:12px; font-weight:500; color:var(--text-primary); margin-bottom:6px; }
 .kanban-card .kc-meta { display:flex; align-items:center; gap:6px; font-size:10px; color:var(--text-tertiary); }
 .kanban-card .kc-meta svg { width:11px; height:11px; }
-.kanban-card .kc-tag { font-size:9px; font-weight:600; padding:1px 5px; border-radius:3px; background:var(--bg-subtle); color:var(--text-secondary); border:1px solid var(--border-subtle); }
+.kanban-card .kc-tag { font-size:9px; font-weight:600; padding:1px 5px; border-radius:3px; background:var(--bg-elevated); color:var(--text-secondary); border:1px solid var(--border); }
 .kanban-card .kc-priority { display:flex; align-items:center; gap:2px; font-size:10px; font-weight:600; }
 .kanban-card .kc-assignee { display:flex; align-items:center; gap:4px; margin-left:auto; }
 .kanban-card .kc-assignee .avatar-xs { width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:8px; font-weight:600; color:#fff; }
