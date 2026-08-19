@@ -103,7 +103,9 @@ function animateCounter(el, target, duration=1000) {
 
 function triggerCounters() {
   document.querySelectorAll('.section.active [data-count]').forEach(el=>{
-    if(el.textContent === '0' || el.textContent === '') animateCounter(el, parseInt(el.dataset.count));
+    const target = parseInt(el.dataset.count);
+    const current = parseInt(el.textContent) || 0;
+    if(current !== target) animateCounter(el, target, 600);
   });
 }
 
