@@ -243,7 +243,11 @@ function renderRoster() {
     keys.forEach(day=>{
       const shift = shifts[emp.id]?.[day]||'off';
       const st = shiftTypes[shift];
-      html += `<div class="roster-cell"><span class="shift-badge ${st.class}" onclick="cycleShift(${emp.id},'${day}',this)">${st.label}</span></div>`;
+      if(shift === 'off') {
+        html += `<div class="roster-cell" style="color:var(--text-quaternary);text-align:center;font-size:11px">—</div>`;
+      } else {
+        html += `<div class="roster-cell"><span class="shift-badge ${st.class}" onclick="cycleShift(${emp.id},'${day}',this)">${st.label}</span></div>`;
+      }
     });
   });
   grid.innerHTML = html;
@@ -277,25 +281,25 @@ function renderOrgChart() {
             <div class="org-avatar" style="background:${avatarGradient('teal')}">JO</div>
             <div class="org-name">James Okafor</div><div class="org-title">Shift Supervisor</div>
           </div>
-          <div class="org-children">
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(4)"><div class="org-avatar" style="background:${avatarGradient('blue')}">DK</div><div class="org-name">David Kim</div><div class="org-title">Warehouse Operative</div></div></div>
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(6)"><div class="org-avatar" style="background:${avatarGradient('amber')}">TW</div><div class="org-name">Tom Walker</div><div class="org-title">Delivery Driver</div></div></div>
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(12)"><div class="org-avatar" style="background:${avatarGradient('indigo')}">DP</div><div class="org-name">Daniel Park</div><div class="org-title">Warehouse Operative</div></div></div>
+          <div class="org-children" style="gap:8px">
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(4)"><div class="org-avatar" style="background:${avatarGradient('blue')}">DK</div><div class="org-name">David Kim</div><div class="org-title">Warehouse</div></div></div>
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(6)"><div class="org-avatar" style="background:${avatarGradient('amber')}">TW</div><div class="org-name">Tom Walker</div><div class="org-title">Driver</div></div></div>
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(12)"><div class="org-avatar" style="background:${avatarGradient('indigo')}">DP</div><div class="org-name">Daniel Park</div><div class="org-title">Warehouse</div></div></div>
           </div>
         </div>
         <div class="org-branch">
-          <div class="org-node manager" onclick="showOrgDetail(3)"><div class="org-avatar" style="background:${avatarGradient('purple')}">ML</div><div class="org-name">Mei Ling Tan</div><div class="org-title">Team Lead — Logistics</div></div>
-          <div class="org-children">
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(10)"><div class="org-avatar" style="background:${avatarGradient('teal')}">KW</div><div class="org-name">Kenji Watanabe</div><div class="org-title">Quality Analyst</div></div></div>
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(14)"><div class="org-avatar" style="background:${avatarGradient('green')}">OS</div><div class="org-name">Oliver Schmidt</div><div class="org-title">Maintenance Tech</div></div></div>
+          <div class="org-node manager" onclick="showOrgDetail(3)"><div class="org-avatar" style="background:${avatarGradient('purple')}">ML</div><div class="org-name">Mei Ling Tan</div><div class="org-title">Team Lead</div></div>
+          <div class="org-children" style="gap:8px">
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(10)"><div class="org-avatar" style="background:${avatarGradient('teal')}">KW</div><div class="org-name">Kenji W.</div><div class="org-title">Quality</div></div></div>
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(14)"><div class="org-avatar" style="background:${avatarGradient('green')}">OS</div><div class="org-name">Oliver S.</div><div class="org-title">Maintenance</div></div></div>
           </div>
         </div>
         <div class="org-branch">
           <div class="org-node manager" onclick="showOrgDetail(7)"><div class="org-avatar" style="background:${avatarGradient('green')}">AR</div><div class="org-name">Aisha Rahman</div><div class="org-title">HR Coordinator</div></div>
-          <div class="org-children">
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(5)"><div class="org-avatar" style="background:${avatarGradient('pink')}">PS</div><div class="org-name">Priya Sharma</div><div class="org-title">Customer Service</div></div></div>
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(8)"><div class="org-avatar" style="background:${avatarGradient('blue')}">LM</div><div class="org-name">Lucas Müller</div><div class="org-title">IT Support</div></div></div>
-            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(13)"><div class="org-avatar" style="background:${avatarGradient('pink')}">NH</div><div class="org-name">Nadia Hassan</div><div class="org-title">Marketing Coord.</div></div></div>
+          <div class="org-children" style="gap:8px">
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(5)"><div class="org-avatar" style="background:${avatarGradient('pink')}">PS</div><div class="org-name">Priya S.</div><div class="org-title">Customer Service</div></div></div>
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(8)"><div class="org-avatar" style="background:${avatarGradient('blue')}">LM</div><div class="org-name">Lucas M.</div><div class="org-title">IT Support</div></div></div>
+            <div class="org-branch"><div class="org-node" onclick="showOrgDetail(13)"><div class="org-avatar" style="background:${avatarGradient('pink')}">NH</div><div class="org-name">Nadia H.</div><div class="org-title">Marketing</div></div></div>
           </div>
         </div>
       </div>
@@ -311,9 +315,14 @@ function showOrgDetail(id) {
 function renderLeaveList() {
   const c = document.getElementById('leave-list');
   if(!c) return;
-  c.innerHTML = leaveRequests.map(r=>`
+  // Sort: pending first, then approved, then rejected
+  const sorted = [...leaveRequests].sort((a,b) => {
+    const order = {pending:0, approved:1, rejected:2};
+    return order[a.status] - order[b.status];
+  });
+  c.innerHTML = sorted.map(r=>`
     <tr>
-      <td><strong>${r.emp}</strong></td><td>${r.type}</td><td>${r.from} → ${r.to}</td>
+      <td><strong>${r.emp}</strong></td><td>${r.type}</td><td>${r.from} to ${r.to}</td>
       <td class="text-center">${r.days}</td><td>${r.reason}</td>
       <td>${r.status==='pending'
         ? `<div class="flex gap-2"><button class="btn btn-sm btn-primary" onclick="approveLeave(${r.id})">Approve</button><button class="btn btn-sm btn-secondary" onclick="rejectLeave(${r.id})">Reject</button></div>`
@@ -334,6 +343,7 @@ function renderLeaveCalendar() {
   for(let d=1;d<=daysInMonth;d++){
     let pills='';
     leaveRequests.forEach(r=>{
+      if(r.status === 'rejected') return; // Hide rejected from calendar
       const fd=parseInt(r.from.split(' ')[1]), td=parseInt(r.to.split(' ')[1]);
       if(d>=fd&&d<=td){ const cls=r.status==='approved'?'badge-green':r.status==='pending'?'badge-amber':'badge-red'; pills+=`<span class="leave-pill ${cls}">${r.emp.split(' ')[0]}</span>`; }
     });
