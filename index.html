@@ -7,7 +7,7 @@
 <meta name="description" content="Complete blueprint for a cross-platform SME Workforce Management system — architecture, prototype, data model, backlog, and deployment guide. No Active Directory dependency.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -36,7 +36,7 @@
     <div class="nav-item" data-section="backlog"><span class="nav-icon" data-icon="package"></span><span class="nav-text">Feature Backlog</span></div>
     <div class="nav-item" data-section="deployment"><span class="nav-icon" data-icon="rocket"></span><span class="nav-text">Deployment Guide</span></div>
   </nav>
-  <div class="sidebar-footer">WorkForce Pro v2.0<br>No AD/AAD Required · Self-Hosted</div>
+  <div class="sidebar-footer">WorkForce Pro v3.0<br>No AD/AAD Required · Self-Hosted</div>
 </aside>
 <div class="sidebar-backdrop"></div>
 <div class="main">
@@ -53,30 +53,22 @@
 
 <!-- ===== EXECUTIVE SUMMARY ===== -->
 <section id="summary" class="section active">
-  <div class="hero-banner">
-    <div class="hero-content">
-      <div class="hero-badge"><span class="live-dot"></span> Live Interactive Prototype</div>
-      <h1>WorkForce Pro — SME Workforce Management</h1>
-      <p>A complete, self-contained workforce management system for small-to-medium enterprises. No Active Directory, no Azure AD, no domain infrastructure required. One codebase for Web, iOS, and Android.</p>
-      <div class="hero-stats">
-        <div class="hero-stat"><div class="hs-value">15</div><div class="hs-label">Employees</div></div>
-        <div class="hero-stat"><div class="hs-value">3</div><div class="hs-label">Platforms</div></div>
-        <div class="hero-stat"><div class="hs-value">1</div><div class="hs-label">Codebase</div></div>
-        <div class="hero-stat"><div class="hs-value">0</div><div class="hs-label">AD/AAD Deps</div></div>
-      </div>
-    </div>
-    <div class="hero-decoration">
-      <div class="hero-float-card"><div class="hfc-icon" style="background:rgba(16,185,129,.2)"><span data-icon="users" style="color:var(--green-500)"></span></div><div><div class="hfc-text">On Duty Now</div><div class="hfc-value">12</div></div></div>
-      <div class="hero-float-card"><div class="hfc-icon" style="background:rgba(99,102,241,.2)"><span data-icon="check" style="color:var(--indigo-400)"></span></div><div><div class="hfc-text">Tasks Done</div><div class="hfc-value">18</div></div></div>
-      <div class="hero-float-card"><div class="hfc-icon" style="background:rgba(245,158,11,.2)"><span data-icon="calendar" style="color:var(--amber-500)"></span></div><div><div class="hfc-text">Shifts This Week</div><div class="hfc-value">56</div></div></div>
+  <div class="page-hero">
+    <h1>WorkForce Pro</h1>
+    <p>Self-contained workforce management for SMEs. No Active Directory, no Azure AD, no domain infrastructure. One codebase for Web, iOS, and Android.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hs-value">15</div><div class="hs-label">Employees</div></div>
+      <div class="hero-stat"><div class="hs-value">3</div><div class="hs-label">Platforms</div></div>
+      <div class="hero-stat"><div class="hs-value">1</div><div class="hs-label">Codebase</div></div>
+      <div class="hero-stat"><div class="hs-value">0</div><div class="hs-label">AD/AAD Deps</div></div>
     </div>
   </div>
 
   <div class="grid grid-4 mb-6">
-    <div class="stat-card sc-indigo fade-in scale-in"><div class="stat-icon" style="background:var(--indigo-100);color:var(--indigo-600)"><span data-icon="users"></span></div><div class="stat-label">Employees Managed</div><div class="stat-value" data-count="15">0</div><div class="stat-trend up"><span data-icon="trending"></span> Scalable to 500+</div></div>
-    <div class="stat-card sc-teal fade-in scale-in stagger-1"><div class="stat-icon" style="background:var(--teal-100);color:var(--teal-600)"><span data-icon="smartphone"></span></div><div class="stat-label">Platforms</div><div class="stat-value" data-count="3">0</div><div class="stat-trend up">Web · iOS · Android</div></div>
-    <div class="stat-card sc-purple fade-in scale-in stagger-2"><div class="stat-icon" style="background:var(--purple-100);color:var(--purple-500)"><span data-icon="layers"></span></div><div class="stat-label">Codebases</div><div class="stat-value" data-count="1">0</div><div class="stat-trend up">React Native + Web</div></div>
-    <div class="stat-card sc-green fade-in scale-in stagger-3"><div class="stat-icon" style="background:var(--green-100);color:var(--green-500)"><span data-icon="lock"></span></div><div class="stat-label">AD/AAD Dependency</div><div class="stat-value" data-count="0">0</div><div class="stat-trend up">Fully self-contained auth</div></div>
+    <div class="stat-card fade-in scale-in"><div class="stat-top"><div class="stat-icon" data-icon="users"></div></div><div class="stat-label">Employees Managed</div><div class="stat-value" data-count="15">0</div><div class="stat-trend up"><span data-icon="trending"></span> Scalable to 500+</div></div>
+    <div class="stat-card fade-in scale-in stagger-1"><div class="stat-top"><div class="stat-icon" data-icon="smartphone"></div></div><div class="stat-label">Platforms</div><div class="stat-value" data-count="3">0</div><div class="stat-trend up">Web · iOS · Android</div></div>
+    <div class="stat-card fade-in scale-in stagger-2"><div class="stat-top"><div class="stat-icon" data-icon="layers"></div></div><div class="stat-label">Codebases</div><div class="stat-value" data-count="1">0</div><div class="stat-trend up">React Native + Web</div></div>
+    <div class="stat-card fade-in scale-in stagger-3"><div class="stat-top"><div class="stat-icon" data-icon="lock"></div></div><div class="stat-label">AD/AAD Dependency</div><div class="stat-value" data-count="0">0</div><div class="stat-trend up">Self-contained auth</div></div>
   </div>
 
   <div class="grid grid-2 mb-6">
@@ -326,10 +318,10 @@ GET    <span class="code-func">/api/v1/org/tree</span>           <span class="co
 <section id="dashboard" class="section">
   <div class="section-header"><h1>Prototype: Admin Dashboard</h1><p>Real-time overview — staff on duty, shift coverage, pending approvals, and task progress.</p></div>
   <div class="grid grid-4 mb-6">
-    <div class="stat-card sc-green fade-in scale-in"><div class="stat-icon" style="background:var(--green-100);color:var(--green-500)"><span data-icon="users"></span></div><div class="stat-label">Currently On Duty</div><div class="stat-value" data-count="12">0</div><div class="stat-trend up"><span data-icon="trending"></span> 2 more than yesterday</div></div>
-    <div class="stat-card sc-amber fade-in scale-in stagger-1"><div class="stat-icon" style="background:var(--amber-100);color:var(--amber-500)"><span data-icon="calendar"></span></div><div class="stat-label">Shifts This Week</div><div class="stat-value" data-count="56">0</div><div class="stat-trend up">96% coverage</div></div>
-    <div class="stat-card sc-indigo fade-in scale-in stagger-2"><div class="stat-icon" style="background:var(--indigo-100);color:var(--indigo-600)"><span data-icon="check"></span></div><div class="stat-label">Open Tasks</div><div class="stat-value" data-count="10">0</div><div class="stat-trend up">3 completed this week</div></div>
-    <div class="stat-card sc-red fade-in scale-in stagger-3"><div class="stat-icon" style="background:var(--red-100);color:var(--red-500)"><span data-icon="bell"></span></div><div class="stat-label">Pending Leave Requests</div><div class="stat-value" data-count="4">0</div><div class="stat-trend down">Needs attention</div></div>
+    <div class="stat-card fade-in scale-in"><div class="stat-top"><div class="stat-icon" data-icon="users"></div></div><div class="stat-label">Currently On Duty</div><div class="stat-value" data-count="12">0</div><div class="stat-trend up"><span data-icon="trending"></span> 2 more than yesterday</div></div>
+    <div class="stat-card fade-in scale-in stagger-1"><div class="stat-top"><div class="stat-icon" data-icon="calendar"></div></div><div class="stat-label">Shifts This Week</div><div class="stat-value" data-count="56">0</div><div class="stat-trend up">96% coverage</div></div>
+    <div class="stat-card fade-in scale-in stagger-2"><div class="stat-top"><div class="stat-icon" data-icon="check"></div></div><div class="stat-label">Open Tasks</div><div class="stat-value" data-count="10">0</div><div class="stat-trend up">3 completed this week</div></div>
+    <div class="stat-card fade-in scale-in stagger-3"><div class="stat-top"><div class="stat-icon" data-icon="bell"></div></div><div class="stat-label">Pending Leave Requests</div><div class="stat-value" data-count="4">0</div><div class="stat-trend down">Needs attention</div></div>
   </div>
   <div class="grid grid-2 mb-6">
     <div class="card fade-in-left"><h3 class="card-title">Weekly Attendance Rate</h3><p class="card-subtitle">Percentage of scheduled staff who clocked in on time</p><div class="chart-bar-container" id="attendance-chart"></div><div style="margin-top:28px;display:flex;gap:16px;font-size:12px"><span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--indigo-500);margin-right:4px"></span>Weekdays</span><span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--teal-500);margin-right:4px"></span>Weekends</span></div></div>
@@ -540,10 +532,10 @@ volumes:
 <div class="mobile-overlay" id="mobile-overlay"><div class="mobile-frame"><div class="mobile-screen"><div class="mobile-content">
   <h4>Mobile Preview</h4>
   <div class="card" style="padding:14px"><div style="font-size:12px;color:var(--navy-500);margin-bottom:8px">Admin Dashboard</div><div class="grid grid-2" style="gap:8px">
-    <div class="stat-card" style="padding:12px"><div class="stat-icon" style="background:var(--green-100);color:var(--green-500);width:32px;height:32px" data-icon="users"></div><div class="stat-label" style="font-size:11px">On Duty</div><div class="stat-value" style="font-size:20px">12</div></div>
-    <div class="stat-card" style="padding:12px"><div class="stat-icon" style="background:var(--amber-100);color:var(--amber-500);width:32px;height:32px" data-icon="calendar"></div><div class="stat-label" style="font-size:11px">Shifts</div><div class="stat-value" style="font-size:20px">56</div></div>
-    <div class="stat-card" style="padding:12px"><div class="stat-icon" style="background:var(--indigo-100);color:var(--indigo-600);width:32px;height:32px" data-icon="check"></div><div class="stat-label" style="font-size:11px">Tasks</div><div class="stat-value" style="font-size:20px">10</div></div>
-    <div class="stat-card" style="padding:12px"><div class="stat-icon" style="background:var(--red-100);color:var(--red-500);width:32px;height:32px" data-icon="bell"></div><div class="stat-label" style="font-size:11px">Leave</div><div class="stat-value" style="font-size:20px">4</div></div>
+    <div class="stat-card" style="padding:10px"><div class="stat-top"><div class="stat-icon" data-icon="users"></div></div><div class="stat-label" style="font-size:10px">On Duty</div><div class="stat-value" style="font-size:18px">12</div></div>
+    <div class="stat-card" style="padding:10px"><div class="stat-top"><div class="stat-icon" data-icon="calendar"></div></div><div class="stat-label" style="font-size:10px">Shifts</div><div class="stat-value" style="font-size:18px">56</div></div>
+    <div class="stat-card" style="padding:10px"><div class="stat-top"><div class="stat-icon" data-icon="check"></div></div><div class="stat-label" style="font-size:10px">Tasks</div><div class="stat-value" style="font-size:18px">10</div></div>
+    <div class="stat-card" style="padding:10px"><div class="stat-top"><div class="stat-icon" data-icon="bell"></div></div><div class="stat-label" style="font-size:10px">Leave</div><div class="stat-value" style="font-size:18px">4</div></div>
   </div></div>
   <div class="card mt-4" style="padding:14px"><div style="font-size:12px;font-weight:600;margin-bottom:10px">Today's Shifts</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:8px;align-items:center"><span class="shift-badge shift-morning">06-14</span><span style="font-size:12px">David Kim</span></div><div style="display:flex;gap:8px;align-items:center"><span class="shift-badge shift-morning">06-14</span><span style="font-size:12px">James Okafor</span></div><div style="display:flex;gap:8px;align-items:center"><span class="shift-badge shift-evening">14-22</span><span style="font-size:12px">Mei Ling Tan</span></div><div style="display:flex;gap:8px;align-items:center"><span class="shift-badge shift-off">Off</span><span style="font-size:12px">Tom Walker</span></div></div></div>
   <div class="card mt-4" style="padding:14px"><div style="font-size:12px;font-weight:600;margin-bottom:10px">Pending Approvals</div><div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--slate-100)"><span style="font-size:12px">Priya S. — Medical</span><span class="badge badge-amber" style="margin-left:auto">Pending</span></div><div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--slate-100)"><span style="font-size:12px">David K. — Annual</span><span class="badge badge-amber" style="margin-left:auto">Pending</span></div><div style="display:flex;align-items:center;gap:8px;padding:6px 0"><span style="font-size:12px">Lucas M. — Compass.</span><span class="badge badge-amber" style="margin-left:auto">Pending</span></div></div></div>
